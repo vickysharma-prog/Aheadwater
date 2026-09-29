@@ -3,6 +3,29 @@
 One entry per working session, newest at the top. Date, what got done, what
 broke, what is next.
 
+## 2026-09-29 (night): Live risk, One Health in FHIR, Bengaluru
+
+The console shows today's risk for Ghent from the Open-Meteo forecast.
+
+A review of the FHIR data found the One Health link missing: public health was
+only told on escalation, vets never, and the cohorts on the health page did not
+exist as resources. Now public health and vets hear when a case opens, the
+three district cohorts are `Group`s on the OAH profile, and demo actors carry
+the HL7 test-data tag. Validating a mid-incident Bundle as well as the finished
+one caught an empty `mitigation` array, which FHIR forbids.
+
+Bengaluru first went in as a made-up scenario. Vicky pushed for a real event,
+as with Ghent, and he was right. It now replays the Varthur Lake froth of
+16 August 2017, after record rain, with CPCB's 2017 monitoring as the lab
+evidence. CPCB publishes a yearly range, not dated samples, so the app shows
+it as a range over the year and says so. The other lakes carry a standing
+warning from the same data instead of "No warning".
+
+What broke: Docker does not run on this laptop, so the local HAPI server check
+is dropped; the HL7 validator is the conformance check.
+
+Next: the video.
+
 ## 2026-09-29 (later): Model, FHIR and the app, live
 
 Trained the bacteria model on 150,734 samples. On sites it never saw, one

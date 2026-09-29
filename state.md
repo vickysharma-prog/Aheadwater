@@ -18,14 +18,14 @@ deployed from `web/` with `npx vercel deploy --prod`).
 | `web/lib/` | Model scorer, features, live risk (Open-Meteo), escalation ladder, scenario, FHIR bundle, browser store. 14 tests (`npm test`) |
 | `/console` | Map, risk table, backtest chart, the seven steps. Whole flow clicked through on the live site: report, confirm, escalate, open to claim, claim from `/responder`, lab result, close, learn |
 | `/public`, `/responder`, `/health`, `/fhir-explorer` | Built, load, share one incident across tabs |
+| Bengaluru | Second demo city on the same code (city picker in the clock bar): the real Varthur Lake froth of 16 Aug 2017, CPCB 2017 monitoring, no risk score. Clicked through end to end |
 | `/api/risk` + live panel | Today's Open-Meteo forecast scored for the four Ghent sites, shown on `/console` |
 | `/fhir/*` | Read-only FHIR R4: metadata, read, search by `_id` and `status`, the transaction Bundle, our CodeSystem |
-| FHIR validation | HL7 validator against the OAH profiles (built with SUSHI), on the resolved incident and a mid-incident snapshot: 0 errors, 30 warnings. `fhir/README.md` |
+| FHIR validation | HL7 validator against the OAH profiles (built with SUSHI), on three Bundles (Ghent resolved, Ghent mid-incident, Bengaluru): 0 errors, 43 warnings. `fhir/README.md` |
 
 ## Next
 
-1. The 30-second India scale proof for the video (decision 18: workflow and FHIR, no risk number).
-2. Devpost text and the video storyboard. The rules ask for no AI-use disclosure (checked 29 Sep).
+1. Record the video from `docs/video.md` (local). Devpost text is in `docs/devpost.md` (local). The rules ask for no AI-use disclosure (checked 29 Sep).
 
 ## Model results (29 Sep)
 
