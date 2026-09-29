@@ -16,18 +16,17 @@ deployed from `web/` with `npx vercel deploy --prod`).
 | `ml/train.py` | LightGBM, about a minute on the laptop CPU. Writes model, metrics and a parity fixture to `web/data/` |
 | `ml/export.py` | Ghent sites and samples, usual risk per site, the May 2021 backtest, a features fixture |
 | `web/lib/` | Model scorer, features, live risk (Open-Meteo), escalation ladder, scenario, FHIR bundle, browser store. 14 tests (`npm test`) |
-| `/console` | Map, risk table, backtest chart, the seven steps. Checked in the browser end to end up to Mobilise |
+| `/console` | Map, risk table, backtest chart, the seven steps. Whole flow clicked through on the live site: report, confirm, escalate, open to claim, claim from `/responder`, lab result, close, learn |
 | `/public`, `/responder`, `/health`, `/fhir-explorer` | Built, load, share one incident across tabs |
 | `/fhir/*` | Read-only FHIR R4: metadata, read, search by `_id` and `status`, the transaction Bundle, our CodeSystem |
-| FHIR validation | HL7 validator against the OAH profiles (built with SUSHI): 0 errors, 18 warnings. `fhir/README.md` |
+| FHIR validation | HL7 validator against the OAH profiles (built with SUSHI), on the resolved incident and a mid-incident snapshot: 0 errors, 30 warnings. `fhir/README.md` |
 
 ## Next
 
-1. Click through the whole flow on the live site (escalation by waiting, claim from the responder view, resolve, learn).
-2. Live mode on the console: today's Open-Meteo risk for the Ghent sites (`liveRisk` exists, not shown yet).
-3. The 30-second India scale proof for the video.
-4. Post the Bundle to a local HAPI server to show a real FHIR server accepts it.
-5. Devpost text and the video storyboard.
+1. Live mode on the console: today's Open-Meteo risk for the Ghent sites (`liveRisk` exists, not shown yet).
+2. The 30-second India scale proof for the video (decision 18: workflow and FHIR, no risk number).
+3. Post the Bundle to a local HAPI server to show a real FHIR server accepts it.
+4. Devpost text and the video storyboard. The rules ask for no AI-use disclosure (checked 29 Sep).
 
 ## Model results (29 Sep)
 
