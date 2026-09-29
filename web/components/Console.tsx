@@ -54,7 +54,7 @@ export function Console() {
   const evidence = trust({
     risk: cfg.risk,
     prior: cfg.prior,
-    citizen: demo.reported ? { ...cfg.citizen, text: demo.reportText ?? cfg.citizen.text } : undefined,
+    citizen: demo.reported ? { ...cfg.citizen, text: demo.reportText ?? cfg.citizen.text, photo: demo.reportPhoto } : undefined,
     lab: inc?.lab ?? [],
   });
 
@@ -146,6 +146,10 @@ export function Console() {
           <Step n={2} title="Detect" done={demo.reported}>
             {demo.reported ? (
               <blockquote className="rounded-md border-l-4 border-water bg-water-soft px-3 py-2 text-slate-800">
+                {demo.reportPhoto && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={demo.reportPhoto.thumb} alt="Photo sent with the report" className="float-right ml-2 h-16 w-24 rounded object-cover" />
+                )}
                 <p>&ldquo;{demo.reportText ?? cfg.citizen.text}&rdquo;</p>
                 <footer className="mt-1 text-xs text-slate-500">Citizen report from the public page, {time(cfg.citizen.at, cfg.tz)}, pinned at {cfg.focus.name}</footer>
               </blockquote>

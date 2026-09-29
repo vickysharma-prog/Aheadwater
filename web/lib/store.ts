@@ -11,6 +11,7 @@ export type Demo = {
   clock: string;
   reported: boolean; // citizen report has arrived
   reportText?: string; // what the visitor typed on the public page, if they did
+  reportPhoto?: { thumb: string; water?: { label: string; p: number } }; // a photo that passed the checks
   incident?: Incident;
   learned: boolean; // closed incident added to the training set
 };
@@ -75,12 +76,12 @@ export const actions = {
   reset: () => write(start(read().city)),
   setCity: (city: CityId) => write(start(city)),
   advance: (min: number) => write({ ...read(), clock: addMinutes(read().clock, min) }),
-  citizenReport: (text?: string) =>
-    write({ ...read(), reported: true, reportText: text?.trim() || undefined, clock: maxIso(read().clock, cfg().citizen.at) }),
+  citizenReport: (text?: string, photo?: Demo["reportPhoto"]) =>
+    write({ ...read(), reported: true, reportText: text?.trim() || undefined, reportPhoto: photo, clock: maxIso(read().clock, cfg().citizen.at) }),
   openIncident: () => {
     const d = read();
     const inc = newIncident(cfg(), d.clock);
-    write({ ...d, incident: { ...inc, advisory: cfg().advisory, citizen: { ...inc.citizen!, text: d.reportText ?? inc.citizen!.text } } });
+    write({ ...d, incident: { ...inc, advisory: cfg().advisory, citizen: { ...inc.citizen!, text: d.reportText ?? inc.citizen!.text, photo: d.reportPhoto && { water: d.reportPhoto.water } } } });
   },
   acknowledge: () => log("acknowledged", "Water officer"),
   dispatch: (id: string) => {

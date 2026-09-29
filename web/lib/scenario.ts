@@ -52,7 +52,7 @@ export type Incident = {
   site: Site;
   severity: Severity;
   risk?: { day: string; value: number; usual: number };
-  citizen?: { at: string; text: string };
+  citizen?: { at: string; text: string; photo?: { water?: { label: string; p: number } } };
   prior?: LabResult;
   lab: LabResult[];
   events: IncidentEvent[];
@@ -177,6 +177,8 @@ export function trust(inc: Pick<Incident, "risk" | "citizen" | "lab" | "prior">)
   if (ratio >= 5) reasons.push({ source: `Model risk ${ratio.toFixed(1)}x the site's usual`, weight: 0.35 });
   if (inc.prior?.bad) reasons.push({ source: `Official monitoring above the limit (${inc.prior.source?.split(",")[0]})`, weight: 0.35 });
   if (inc.citizen) reasons.push({ source: "Citizen report with location", weight: 0.25 });
+  if (inc.citizen?.photo)
+    reasons.push({ source: `Citizen photo in focus and well lit${inc.citizen.photo.water ? ", water in frame" : ""}`, weight: 0.1 });
   if (inc.lab.some((l) => l.bad)) reasons.push({ source: "Lab result above the limit", weight: 0.6 });
   return { score: Math.min(1, reasons.reduce((a, r) => a + r.weight, 0)), reasons };
 }

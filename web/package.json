@@ -11,6 +11,10 @@
     "validate-fhir": "node scripts/validate-fhir.ts"
   },
   "dependencies": {
+    "@tensorflow-models/mobilenet": "^2.1.1",
+    "@tensorflow/tfjs-backend-webgl": "^4.22.0",
+    "@tensorflow/tfjs-converter": "^4.22.0",
+    "@tensorflow/tfjs-core": "^4.22.0",
     "leaflet": "^1.9.4",
     "next": "16.3.7",
     "react": "19.2.8",

@@ -2,6 +2,7 @@
 import { useState } from "react";
 
 import { DemoClock } from "@/components/DemoClock";
+import { PhotoInput, type CheckedPhoto } from "@/components/PhotoInput";
 import { time } from "@/lib/format";
 import { incidentState } from "@/lib/incident";
 import { actions, useDemo } from "@/lib/store";
@@ -18,6 +19,7 @@ export function PublicPage() {
   const inc = demo.incident;
   const state = inc && incidentState(inc.severity, inc.events, now);
   const [text, setText] = useState("");
+  const [photo, setPhoto] = useState<CheckedPhoto>();
   const [site, setSite] = useState(demo.cfg.focus.id);
 
   const stepAt = (step: string) => {
@@ -91,7 +93,7 @@ export function PublicPage() {
               className="mt-3 space-y-3"
               onSubmit={(e) => {
                 e.preventDefault();
-                actions.citizenReport(text);
+                actions.citizenReport(text, photo && { thumb: photo.thumb, water: photo.water });
               }}
             >
               <label className="block text-sm">
@@ -116,7 +118,9 @@ export function PublicPage() {
               </label>
               <label className="block text-sm">
                 <span className="text-slate-600">Photo (optional)</span>
-                <input type="file" accept="image/*" capture="environment" className="mt-1 block text-sm" />
+                <div className="mt-1">
+                  <PhotoInput onChange={setPhoto} />
+                </div>
               </label>
               <button className="rounded-md bg-water px-3 py-1.5 text-sm font-medium text-white hover:bg-cyan-800">Send report</button>
               <p className="text-xs text-slate-500">
