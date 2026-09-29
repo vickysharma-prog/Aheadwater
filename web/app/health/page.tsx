@@ -1,6 +1,8 @@
 // The One Health step: who lives near the incident, and the same cohort query run on real data.
-import { COHORTS } from "@/lib/fhir";
-import { SITE } from "@/lib/scenario";
+import { cohorts } from "@/lib/fhir";
+import { CITIES } from "@/lib/scenario";
+
+const SITE = CITIES.ghent.focus;
 
 export const metadata = { title: "Health cohorts · Aheadwater" };
 export const revalidate = 86400;
@@ -50,7 +52,7 @@ export default async function Page() {
           The OneAquaHealth sandbox holds no Ghent cohorts yet, so these three are defined by us to show the link. They carry no counts and no real health data.
         </p>
         <ul className="grid gap-2 sm:grid-cols-3">
-          {COHORTS.map((g) => (
+          {cohorts(CITIES.ghent).map((g) => (
             <li key={g.id} className="rounded-md border border-slate-200 p-3 text-sm">
               <div className="font-medium">{g.label}</div>
               <a href={`/fhir/Group/${g.id}`} className="mt-1 block font-mono text-xs text-water underline">Group/{g.id}</a>

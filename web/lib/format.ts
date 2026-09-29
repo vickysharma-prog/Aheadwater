@@ -1,7 +1,5 @@
-const TZ = "Europe/Brussels";
-
-export const time = (iso: string | Date) =>
-  new Date(iso).toLocaleString("en-GB", { timeZone: TZ, day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+export const time = (iso: string | Date, tz = "Europe/Brussels") =>
+  new Date(iso).toLocaleString("en-GB", { timeZone: tz, day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
 
 export const pct = (x: number) => `${(x * 100).toFixed(x < 0.1 ? 1 : 0)}%`;
 

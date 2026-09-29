@@ -1,7 +1,7 @@
 // Turns an incident into a FHIR R4 transaction Bundle.
 // Location and Observation follow the OneAquaHealth profiles; the rest is base R4.
 import { incidentState, LIMITS } from "./incident.ts";
-import type { Incident } from "./scenario.ts";
+import { CITIES, type City, type Incident } from "./scenario.ts";
 
 const OAH = "http://hl7.eu/fhir/ig/oah/StructureDefinition";
 export const BASE = "https://aheadwater.vercel.app/fhir";
@@ -18,21 +18,25 @@ const code = (c: string, display: string) => ({ coding: [{ system: CODES, code: 
 // Marks demo actors and simulated workflow; the site, the risk score and the lab results are real.
 const SYNTHETIC = { system: "http://terminology.hl7.org/CodeSystem/v3-ActReason", code: "HTEST", display: "test health data" };
 
-/** The synthetic Ghent cohorts: people living near the site, by age. */
-export const COHORTS = [
-  { id: "ghent-blaarmeersen-2km-all", label: "Everyone living within 2 km of Blaarmeersen" },
-  { id: "ghent-blaarmeersen-2km-age-0-12", label: "Children aged 0 to 12 within 2 km", age: [0, 12] },
-  { id: "ghent-blaarmeersen-2km-age-70-plus", label: "People aged 70 and over within 2 km", age: [70] },
-] as const;
+/** The synthetic cohorts for a district: people living near the site, by age. */
+export const cohorts = (city: City) => {
+  const slug = `${city.id}-${fhirId(city.district)}-2km`;
+  return [
+    { id: `${slug}-all`, label: `Everyone living within 2 km of ${city.district}`, age: undefined as number[] | undefined },
+    { id: `${slug}-age-0-12`, label: "Children aged 0 to 12 within 2 km", age: [0, 12] as number[] },
+    { id: `${slug}-age-70-plus`, label: "People aged 70 and over within 2 km", age: [70] as number[] },
+  ];
+};
 
 const category = (c: string) => [{ coding: [{ system: "http://terminology.hl7.org/CodeSystem/observation-category", code: c }] }];
 
 export function incidentBundle(inc: Incident, now: Date) {
   const state = incidentState(inc.severity, inc.events, now);
-  const city: Resource = { resourceType: "Organization", id: "ghent-water", name: "City of Ghent, water and environment" };
+  const cfg = CITIES[inc.city];
+  const city: Resource = { resourceType: "Organization", id: `${cfg.id}-water`, name: cfg.owner };
   const officer: Resource = {
     resourceType: "PractitionerRole",
-    id: "ghent-water-officer",
+    id: `${cfg.id}-water-officer`,
     organization: ref(city),
     code: [{ text: "Water officer, incident owner" }],
   };
@@ -41,10 +45,10 @@ export function incidentBundle(inc: Incident, now: Date) {
     resourceType: "Location",
     id: fhirId(inc.site.id),
     meta: { profile: [`${OAH}/location-oah`] },
-    identifier: [{ system: "https://www.eea.europa.eu/bathing-water-id", value: inc.site.id }],
+    identifier: [{ system: cfg.id === "ghent" ? "https://www.eea.europa.eu/bathing-water-id" : `${BASE}/site`, value: inc.site.id }],
     name: inc.site.name,
     mode: "instance",
-    type: [{ text: inc.site.zone === "riverBathingWater" ? "River bathing water" : "Lake bathing water" }],
+    type: [{ text: { riverBathingWater: "River bathing water", lakeBathingWater: "Lake bathing water" }[inc.site.zone] ?? "Urban lake" }],
     position: { latitude: inc.site.lat, longitude: inc.site.lon },
   };
 
@@ -57,7 +61,7 @@ export function incidentBundle(inc: Incident, now: Date) {
     ...extra,
   });
 
-  const risk = obs(`${inc.id}-risk`, {
+  const risk = inc.risk && obs(`${inc.id}-risk`, {
     category: category("survey"),
     code: code("bacteria-risk", "Probability the next bathing-water sample breaks the limit"),
     effectiveDateTime: inc.risk.day,
@@ -98,15 +102,15 @@ export function incidentBundle(inc: Incident, now: Date) {
 
   const district: Resource = {
     resourceType: "Location",
-    id: "ghent-blaarmeersen-2km",
+    id: `${cfg.id}-${fhirId(cfg.district)}-2km`,
     meta: { profile: [`${OAH}/location-oah`] },
-    identifier: [{ system: `${BASE}/district`, value: "ghent-blaarmeersen-2km" }],
-    name: "Residential area within 2 km of Blaarmeersen",
+    identifier: [{ system: `${BASE}/district`, value: `${cfg.id}-${fhirId(cfg.district)}-2km` }],
+    name: `Residential area within 2 km of ${cfg.district}`,
     mode: "instance",
     position: { latitude: inc.site.lat, longitude: inc.site.lon },
   };
   const years = (value: number) => ({ value, unit: "years", system: UCUM, code: "a" });
-  const groups: Resource[] = COHORTS.map((c) => ({
+  const groups: Resource[] = cohorts(cfg).map((c) => ({
     resourceType: "Group",
     id: c.id,
     meta: { profile: [`${OAH}/group-oah`] },
@@ -114,7 +118,7 @@ export function incidentBundle(inc: Incident, now: Date) {
     type: "person",
     actual: false,
     characteristic: [
-      ...("age" in c
+      ...(c.age
         ? [{
             code: { coding: [{ system: "http://loinc.org", code: "30525-0", display: "Age" }] },
             valueRange: { low: years(c.age[0]), ...(c.age[1] !== undefined && { high: years(c.age[1]) }) },
@@ -208,7 +212,7 @@ export function incidentBundle(inc: Incident, now: Date) {
     about: [ref(issue), ...(who === "public_health" ? groups.map((g) => ref(g)) : [])],
     sent: new Date(sentAt[who]).toISOString(),
     recipient: [{ display: recipients[who] }],
-    payload: [{ contentString: `${inc.site.name}: ${message[who]} Risk ${(inc.risk.value * 100).toFixed(1)}%.` }],
+    payload: [{ contentString: `${inc.site.name}: ${message[who]}${inc.risk ? ` Risk ${(inc.risk.value * 100).toFixed(1)}%.` : ""}` }],
   }));
   if (inc.advisory) {
     communications.push({
@@ -223,7 +227,8 @@ export function incidentBundle(inc: Incident, now: Date) {
   }
 
   const resources = [city, officer, location, ...evidence, issue, ...(responder && responderRole ? [responder, responderRole] : []), careTeam, task, district, ...groups, ...communications];
-  const real = new Set([location, risk, ...labs]);
+  // An illustrative city is test data throughout.
+  const real = new Set<Resource | undefined>(cfg.kind === "replay" ? [location, risk, ...labs] : []);
   return {
     resourceType: "Bundle",
     type: "transaction",

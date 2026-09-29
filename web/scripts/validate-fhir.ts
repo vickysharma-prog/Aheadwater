@@ -6,7 +6,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath as path } from "node:url";
 
 import { incidentBundle } from "../lib/fhir.ts";
-import { RESOLVED_AT, resolvedIncident, newIncident } from "../lib/scenario.ts";
+import { CITIES, RESOLVED_AT, resolvedIncident, newIncident } from "../lib/scenario.ts";
 
 const fhir = new URL("../../fhir/", import.meta.url);
 mkdirSync(new URL("out/", fhir), { recursive: true });
@@ -14,7 +14,7 @@ const out = new URL("out/ghent-incident.json", fhir);
 writeFileSync(out, JSON.stringify(incidentBundle(resolvedIncident(), RESOLVED_AT), null, 2));
 // Also mid-incident: nobody acted, so it is open to claim and has no owner.
 const open = new URL("out/ghent-incident-open.json", fhir);
-writeFileSync(open, JSON.stringify(incidentBundle(newIncident("2021-05-17T08:05:00+02:00"), new Date("2021-05-17T10:30:00+02:00")), null, 2));
+writeFileSync(open, JSON.stringify(incidentBundle(newIncident(CITIES.ghent, "2021-05-17T08:05:00+02:00"), new Date("2021-05-17T10:30:00+02:00")), null, 2));
 
 execFileSync("java", [
   "-jar", path(new URL("validator_cli.jar", fhir)),

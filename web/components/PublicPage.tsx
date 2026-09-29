@@ -4,8 +4,6 @@ import { useState } from "react";
 import { DemoClock } from "@/components/DemoClock";
 import { time } from "@/lib/format";
 import { incidentState } from "@/lib/incident";
-import { SITES } from "@/lib/risk";
-import { SITE } from "@/lib/scenario";
 import { actions, useDemo } from "@/lib/store";
 
 const STEPS = [
@@ -20,7 +18,7 @@ export function PublicPage() {
   const inc = demo.incident;
   const state = inc && incidentState(inc.severity, inc.events, now);
   const [text, setText] = useState("");
-  const [site, setSite] = useState(SITE.id);
+  const [site, setSite] = useState(demo.cfg.focus.id);
 
   const stepAt = (step: string) => {
     if (!inc) return undefined;
@@ -34,11 +32,11 @@ export function PublicPage() {
       <div className="mx-auto max-w-3xl space-y-6 px-4 py-6">
         <header>
           <h1 className="text-2xl font-semibold tracking-tight">Is the water safe today?</h1>
-          <p className="text-slate-600">Bathing sites in and around Ghent. Updated by the city&apos;s water team.</p>
+          <p className="text-slate-600">{demo.cfg.intro}</p>
         </header>
 
         <ul className="space-y-3">
-          {SITES.map((s) => {
+          {demo.cfg.sites.map((s) => {
             const active = inc?.site.id === s.id && state;
             const unsafe = active && state.publicStep !== "resolved";
             return (
@@ -60,7 +58,7 @@ export function PublicPage() {
                         return (
                           <li key={key} className={`rounded-md border px-2 py-1.5 ${at ? "border-water bg-water-soft text-water" : "border-slate-200 text-slate-400"}`}>
                             <div className="font-semibold">{label}</div>
-                            <div>{at ? time(at) : "not yet"}</div>
+                            <div>{at ? time(at, demo.cfg.tz) : "not yet"}</div>
                           </li>
                         );
                       })}
@@ -81,7 +79,7 @@ export function PublicPage() {
           <h2 className="font-semibold">Report something</h2>
           {demo.reported ? (
             <p className="mt-2 text-sm text-ok">
-              Thank you. Your report went to the city&apos;s water officer at {time(demo.clock)}. If it leads to a warning, you will see it above.
+              Thank you. Your report went to the city&apos;s water officer at {time(demo.clock, demo.cfg.tz)}. If it leads to a warning, you will see it above.
             </p>
           ) : (
             <form
@@ -94,7 +92,7 @@ export function PublicPage() {
               <label className="block text-sm">
                 <span className="text-slate-600">Where</span>
                 <select value={site} onChange={(e) => setSite(e.target.value)} className="mt-1 block w-full rounded-md border border-slate-300 px-2 py-1.5">
-                  {SITES.map((s) => (
+                  {demo.cfg.sites.map((s) => (
                     <option key={s.id} value={s.id}>
                       {s.name}
                     </option>
@@ -117,7 +115,7 @@ export function PublicPage() {
               </label>
               <button className="rounded-md bg-water px-3 py-1.5 text-sm font-medium text-white hover:bg-cyan-800">Send report</button>
               <p className="text-xs text-slate-500">
-                In this demo the report joins the Blaarmeersen replay. Leave the box empty to send the written example.
+                In this demo the report joins the {demo.cfg.district} scenario. Leave the box empty to send the written example.
               </p>
             </form>
           )}

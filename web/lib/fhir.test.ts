@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import { incidentBundle } from "./fhir.ts";
-import { newIncident, RESOLVED_AT, resolvedIncident } from "./scenario.ts";
+import { CITIES, newIncident, RESOLVED_AT, resolvedIncident } from "./scenario.ts";
 
 export const fullScenario = () => ({ bundle: incidentBundle(resolvedIncident(), RESOLVED_AT) });
 
@@ -43,6 +43,6 @@ test("public health is told at once, about the cohorts near the site", () => {
 });
 
 test("no empty arrays, even before anyone has acted", () => {
-  const open = incidentBundle(newIncident("2021-05-17T08:05:00+02:00"), new Date("2021-05-17T10:30:00+02:00"));
+  const open = incidentBundle(newIncident(CITIES.ghent, "2021-05-17T08:05:00+02:00"), new Date("2021-05-17T10:30:00+02:00"));
   assert.ok(!JSON.stringify(open).includes("[]"));
 });

@@ -2,16 +2,16 @@
 import { useEffect, useRef } from "react";
 import type { LayerGroup, Map as LeafletMap } from "leaflet";
 
-export type MapSite = { id: string; name: string; lat: number; lon: number; level: "alert" | "watch" | "normal" | "incident"; label: string };
+export type MapSite = { id: string; name: string; lat: number; lon: number; level: "alert" | "watch" | "normal" | "incident" | "unscored"; label: string };
 type Leaflet = typeof import("leaflet");
 
-const COLOR = { incident: "#b91c1c", alert: "#b91c1c", watch: "#b45309", normal: "#047857" };
+const COLOR = { incident: "#b91c1c", alert: "#b91c1c", watch: "#b45309", normal: "#047857", unscored: "#64748b" };
 
 function draw(L: Leaflet, layer: LayerGroup, sites: MapSite[], onSelect?: (id: string) => void) {
   layer.clearLayers();
   for (const s of sites) {
     const c = COLOR[s.level];
-    if (s.level !== "normal") L.circle([s.lat, s.lon], { radius: 260, color: c, weight: 1, fillOpacity: 0.12 }).addTo(layer);
+    if (s.level !== "normal" && s.level !== "unscored") L.circle([s.lat, s.lon], { radius: 260, color: c, weight: 1, fillOpacity: 0.12 }).addTo(layer);
     L.circleMarker([s.lat, s.lon], { radius: 9, color: "white", weight: 2, fillColor: c, fillOpacity: 1 })
       .bindTooltip(`<b>${s.name}</b><br>${s.label}`, { direction: "top" })
       .on("click", () => onSelect?.(s.id))

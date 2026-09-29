@@ -1,11 +1,12 @@
 "use client";
-// One visitor's run of the Ghent scenario, kept in their browser and shared across tabs.
+// One visitor's run of a demo city, kept in their browser and shared across tabs.
 import { useSyncExternalStore } from "react";
 
 import type { EventType } from "./incident.ts";
-import { ADVISORY, LAB, newIncident, REPLAY_START, RESPONDERS, type Incident } from "./scenario.ts";
+import { CITIES, newIncident, type City, type CityId, type Incident } from "./scenario.ts";
 
 export type Demo = {
+  city: CityId;
   /** Scenario time: the clock the incident runs on, which the visitor can speed up. */
   clock: string;
   reported: boolean; // citizen report has arrived
@@ -14,8 +15,9 @@ export type Demo = {
   learned: boolean; // closed incident added to the training set
 };
 
-const KEY = "aheadwater-demo-v1";
-const START: Demo = { clock: REPLAY_START, reported: false, learned: false };
+const KEY = "aheadwater-demo-v2";
+const start = (city: CityId): Demo => ({ city, clock: CITIES[city].start, reported: false, learned: false });
+const START = start("ghent");
 let cached: Demo | null = null;
 const listeners = new Set<() => void>();
 
@@ -45,57 +47,57 @@ if (typeof window !== "undefined") {
   });
 }
 
-export function useDemo(): Demo {
-  return useSyncExternalStore(
+export function useDemo(): Demo & { cfg: City } {
+  const demo = useSyncExternalStore(
     (l) => (listeners.add(l), () => listeners.delete(l)),
     read,
     () => START,
   );
+  return { ...demo, cfg: CITIES[demo.city] };
 }
 
 const addMinutes = (iso: string, min: number) => new Date(new Date(iso).getTime() + min * 60_000).toISOString();
+const maxIso = (a: string, b: string) => (new Date(a) > new Date(b) ? a : b);
+const cfg = () => CITIES[read().city];
 
-function withIncident(fn: (inc: Incident, d: Demo) => Incident) {
+function withIncident(fn: (inc: Incident) => Incident) {
   const d = read();
-  if (d.incident) write({ ...d, incident: fn(d.incident, d) });
+  if (d.incident) write({ ...d, incident: fn(d.incident) });
 }
 
 function log(type: EventType, by: string) {
-  withIncident((inc, d) => ({ ...inc, events: [...inc.events, { type, at: d.clock, by }] }));
+  withIncident((inc) => ({ ...inc, events: [...inc.events, { type, at: read().clock, by }] }));
 }
 
+const responder = (id: string) => cfg().responders.find((r) => r.id === id)!;
+
 export const actions = {
-  reset: () => write(START),
+  reset: () => write(start(read().city)),
+  setCity: (city: CityId) => write(start(city)),
   advance: (min: number) => write({ ...read(), clock: addMinutes(read().clock, min) }),
   citizenReport: (text?: string) =>
-    write({ ...read(), reported: true, reportText: text?.trim() || undefined, clock: maxIso(read().clock, "2021-05-17T07:40:00+02:00") }),
+    write({ ...read(), reported: true, reportText: text?.trim() || undefined, clock: maxIso(read().clock, cfg().citizen.at) }),
   openIncident: () => {
     const d = read();
-    const inc = newIncident(d.clock);
-    write({ ...d, incident: { ...inc, advisory: ADVISORY, citizen: { ...inc.citizen!, text: d.reportText ?? inc.citizen!.text } } });
+    const inc = newIncident(cfg(), d.clock);
+    write({ ...d, incident: { ...inc, advisory: cfg().advisory, citizen: { ...inc.citizen!, text: d.reportText ?? inc.citizen!.text } } });
   },
   acknowledge: () => log("acknowledged", "Water officer"),
-  dispatch: (responderId: string) => {
-    withIncident((inc) => ({ ...inc, responder: RESPONDERS.find((r) => r.id === responderId) }));
+  dispatch: (id: string) => {
+    withIncident((inc) => ({ ...inc, responder: responder(id) }));
     log("dispatched", "Water officer");
   },
-  claim: (responderId: string) => {
-    withIncident((inc) => ({ ...inc, responder: RESPONDERS.find((r) => r.id === responderId) }));
-    log("claimed", RESPONDERS.find((r) => r.id === responderId)!.name);
+  claim: (id: string) => {
+    withIncident((inc) => ({ ...inc, responder: responder(id) }));
+    log("claimed", responder(id).name);
   },
-  /** The real lab result for the day's sample, which came back above the limit. */
-  labResult: () => {
-    withIncident((inc) => ({ ...inc, lab: LAB.filter((l) => l.date === "2021-05-17") }));
-  },
-  /** The real follow-up sample on 31 May came back clean. */
+  /** The confirming lab result. */
+  labResult: () => withIncident((inc) => ({ ...inc, lab: cfg().lab.slice(0, 1) })),
+  /** The follow-up sample comes back clean and the case closes. */
   resolve: () => {
-    write({ ...read(), clock: maxIso(read().clock, "2021-05-31T15:00:00+02:00") });
-    withIncident((inc) => ({ ...inc, lab: LAB.filter((l) => l.date >= "2021-05-17") }));
+    write({ ...read(), clock: maxIso(read().clock, cfg().closeAt) });
+    withIncident((inc) => ({ ...inc, lab: cfg().lab }));
     log("resolved", read().incident?.responder?.name ?? "Water officer");
   },
   learn: () => write({ ...read(), learned: true }),
 };
-
-function maxIso(a: string, b: string) {
-  return new Date(a) > new Date(b) ? a : b;
-}

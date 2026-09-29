@@ -10,7 +10,7 @@ import { incidentBundle } from "@/lib/fhir";
 import { pct, relative, time } from "@/lib/format";
 import { incidentState, type IncidentState } from "@/lib/incident";
 import { ALERT_LEVEL, level, SITES, WATCH_MULTIPLE } from "@/lib/risk";
-import { CITIZEN_REPORT, RESPONDERS, trust } from "@/lib/scenario";
+import { trust } from "@/lib/scenario";
 import { actions, useDemo } from "@/lib/store";
 
 const STAGE_LABEL: Record<IncidentState["stage"], [string, string]> = {
@@ -31,23 +31,28 @@ export function Console() {
   const state = inc && incidentState(inc.severity, inc.events, now);
   const [selected, setSelected] = useState(backtest.site);
 
+  const cfg = demo.cfg;
+  const ghent = cfg.id === "ghent";
   const risks = SITES.map((s) => {
     const r = eventDay.find((e) => e.id === s.id)!;
     return { site: s, ...r, level: level(r.risk, r.usual) };
   });
-  const mapSites: MapSite[] = risks.map((r) => ({
-    id: r.site.id,
-    name: r.site.name,
-    lat: r.site.lat,
-    lon: r.site.lon,
-    level: inc && inc.site.id === r.site.id && state?.stage !== "resolved" ? "incident" : r.level,
-    label: `Risk ${pct(r.risk)}, ${(r.risk / r.usual).toFixed(1)}x usual`,
-  }));
+  const mapSites: MapSite[] = cfg.sites.map((s) => {
+    const r = ghent ? risks.find((x) => x.site.id === s.id) : undefined;
+    return {
+      id: s.id,
+      name: s.name,
+      lat: s.lat,
+      lon: s.lon,
+      level: inc && inc.site.id === s.id && state?.stage !== "resolved" ? "incident" : (r?.level ?? "unscored"),
+      label: r ? `Risk ${pct(r.risk)}, ${(r.risk / r.usual).toFixed(1)}x usual` : "No risk score yet: needs local samples",
+    };
+  });
   const east = risks.find((r) => r.site.id === "BEVL_BW_GNT03")!;
   const west = risks.find((r) => r.site.id === "BEVL_BW_GNT02")!;
   const evidence = trust({
-    risk: { day: backtest.event_day, value: east.risk, usual: east.usual },
-    citizen: demo.reported ? { ...CITIZEN_REPORT, text: demo.reportText ?? CITIZEN_REPORT.text } : undefined,
+    risk: cfg.risk,
+    citizen: demo.reported ? { ...cfg.citizen, text: demo.reportText ?? cfg.citizen.text } : undefined,
     lab: inc?.lab ?? [],
   });
 
@@ -59,7 +64,7 @@ export function Console() {
     URL.revokeObjectURL(a.href);
   }
 
-  const selectedDays = selected === backtest.site ? backtest.days : null;
+  const selectedDays = ghent && selected === backtest.site ? backtest.days : null;
 
   return (
     <>
@@ -67,8 +72,9 @@ export function Console() {
       <div className="mx-auto grid max-w-7xl gap-4 px-4 py-4 lg:grid-cols-[1fr_440px]">
         <section className="space-y-4">
           <div className="h-[380px] overflow-hidden rounded-lg border border-slate-200 bg-white">
-            <SiteMap sites={mapSites} onSelect={setSelected} />
+            <SiteMap key={cfg.id} sites={mapSites} onSelect={setSelected} />
           </div>
+          {ghent ? (
           <div className="rounded-lg border border-slate-200 bg-white">
             <h2 className="border-b border-slate-100 px-4 py-2.5 text-sm font-semibold">Next-day risk, Ghent bathing sites, {time(backtest.event_day + "T06:00:00+02:00").split(",")[0]}</h2>
             <table className="w-full text-sm">
@@ -99,7 +105,17 @@ export function Console() {
               Alert at {pct(ALERT_LEVEL)} risk (1 alert in 5 is a real exceedance across Europe). Watch at {WATCH_MULTIPLE}x a site&apos;s usual risk. Scores use weather up to the day before.
             </p>
           </div>
-          <LiveRisk />
+          ) : (
+            <div className="rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-700">
+              <h2 className="mb-1 font-semibold">Prediction switches on with local samples</h2>
+              <p>
+                The risk model learned from European bathing sites: their latitudes, their seasons, their sewers. Here it starts from zero local samples, so {cfg.name}{" "}
+                runs on reports and lab results first. Every closed case adds a labelled local sample, and the model is retrained on them. The rest of the
+                workflow, the escalation ladder and the FHIR records are the same code as in Ghent.
+              </p>
+            </div>
+          )}
+          {ghent && <LiveRisk />}
           {selectedDays && (
             <div className="rounded-lg border border-slate-200 bg-white p-4">
               <h2 className="text-sm font-semibold">Backtest: {backtest.name}, May 2021</h2>
@@ -110,16 +126,22 @@ export function Console() {
         </section>
 
         <section className="space-y-3">
-          <Step n={1} title="Predict" done>
+          <Step n={1} title="Predict" done={ghent}>
+            {ghent ? (
+            <>
             Two beaches at Blaarmeersen are on <b>Watch</b>: GNT03 at {(east.risk / east.usual).toFixed(1)}x its usual risk, and GNT02 at{" "}
             {(west.risk / west.usual).toFixed(1)}x, after 22 mm of rain in three days. Watch raises nothing on its own. It asks the officer to look.
+            </>
+            ) : (
+              <>No risk score for {cfg.name} yet. The model needs local samples to learn these lakes; until then a case opens from reports and lab results.</>
+            )}
           </Step>
 
           <Step n={2} title="Detect" done={demo.reported}>
             {demo.reported ? (
               <blockquote className="rounded-md border-l-4 border-water bg-water-soft px-3 py-2 text-slate-800">
-                <p>&ldquo;{demo.reportText ?? CITIZEN_REPORT.text}&rdquo;</p>
-                <footer className="mt-1 text-xs text-slate-500">Citizen report from the public page, {time(CITIZEN_REPORT.at)}, pinned at GNT03</footer>
+                <p>&ldquo;{demo.reportText ?? cfg.citizen.text}&rdquo;</p>
+                <footer className="mt-1 text-xs text-slate-500">Citizen report from the public page, {time(cfg.citizen.at, cfg.tz)}, pinned at {cfg.focus.name}</footer>
               </blockquote>
             ) : (
               <div className="flex flex-wrap items-center gap-2">
@@ -167,7 +189,7 @@ export function Console() {
                   <div>
                     <p className="mb-1 text-xs font-medium text-slate-500">Suggested responders, nearest first</p>
                     <ul className="divide-y divide-slate-100 rounded-md border border-slate-200">
-                      {[...RESPONDERS].sort((a, b) => a.km - b.km).map((r) => (
+                      {[...cfg.responders].sort((a, b) => a.km - b.km).map((r) => (
                         <li key={r.id} className="flex items-center gap-2 px-3 py-1.5 text-xs">
                           <span className="flex-1">
                             {r.name} <span className="text-slate-400">{r.km} km</span>
@@ -200,9 +222,11 @@ export function Console() {
                 ) : (
                   <p className="rounded-md bg-alert-soft px-3 py-2 font-medium text-alert">{inc.advisory}</p>
                 )}
-                <a href="/health" className="text-xs font-medium text-water underline">
-                  Check the health cohorts for this district &rarr;
-                </a>
+                {ghent && (
+                  <a href="/health" className="text-xs font-medium text-water underline">
+                    Check the health cohorts for this district &rarr;
+                  </a>
+                )}
               </div>
             )}
           </Step>
@@ -211,7 +235,7 @@ export function Console() {
             {inc && (
               <div className="space-y-2">
                 {inc.lab.length === 0 ? (
-                  <Button onClick={actions.labResult}>The lab result for the 17 May sample arrives</Button>
+                  <Button onClick={actions.labResult}>The lab result for the {cfg.lab[0].date} sample arrives</Button>
                 ) : (
                   <ul className="space-y-1 text-xs">
                     {inc.lab.map((l) => (
@@ -222,7 +246,7 @@ export function Console() {
                   </ul>
                 )}
                 {state?.stage === "in_progress" && inc.lab.length > 0 && (
-                  <Button onClick={actions.resolve}>Close with the 31 May follow-up sample</Button>
+                  <Button onClick={actions.resolve}>Close with the {cfg.lab.at(-1)!.date} follow-up sample</Button>
                 )}
               </div>
             )}
@@ -232,7 +256,7 @@ export function Console() {
             {state?.stage === "resolved" &&
               (demo.learned ? (
                 <p>
-                  Added to the next training run: <span className="font-mono text-xs">GNT03, 2021-05-17, unsafe=1</span>, with the weather before it. Every closed incident is a new labelled example.
+                  Added to the next training run: <span className="font-mono text-xs">{cfg.focus.id}, {cfg.lab[0].date}, unsafe=1</span>, with the weather before it. Every closed incident is a new labelled example.
                 </p>
               ) : (
                 <Button onClick={actions.learn}>Add the closed incident to the training set</Button>
