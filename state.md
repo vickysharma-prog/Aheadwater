@@ -33,7 +33,7 @@ adds the rest.
 Model trained without the Ghent sites, then scored on Ghent's 314 samples.
 Ghent has four exceedances. One followed rain: Blaarmeersen GNT03 on
 17 May 2021, after 22 mm in three days. The model ranked it 7th of 314 (risk
-0.086, eight times the Ghent median of 0.011). The other three came in dry
+0.086, eight times the Ghent median of 0.011). In the daily replay (`web/data/backtest.json`) risk sat near 0.003 on 1 to 2 May, climbed to about 0.03 on 13 to 16 May after rain, and peaked at 0.086 on the 17th, when the lab found enterococci at 489. Each day's score uses weather up to the day before. The other three came in dry
 weather, so weather cannot explain them; in the product those are what the
 citizen reports and lab results in the Detect stage are for.
 
@@ -41,8 +41,7 @@ Demo event: **GNT03, 17 May 2021.**
 
 ## Open questions
 
-- Alert level: one Europe-wide level (0.10) or a level relative to each
-  site's normal risk. GNT03 sat just under the Europe-wide level.
+- None. Alert level settled as decision 13 in `project.md`.
 
 ## Facts that are easy to forget
 

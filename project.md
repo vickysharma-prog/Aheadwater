@@ -27,7 +27,7 @@ Six stages, each stored as a standard HL7 FHIR resource:
 
 | Stage | What happens |
 |---|---|
-| **Predict** | A model trained on bacteria samples from bathing sites across Europe, plus the weather before each sample, gives each site a risk score for the next 48 hours |
+| **Predict** | A model trained on bacteria samples from bathing sites across Europe, plus the weather before each sample, gives each site a risk score for the next day |
 | **Detect** | Risk crosses the alert level, a lab result breaks a limit, a rule fires (algae, low oxygen, flood), or a citizen sends a report with a photo |
 | **Verify** | Each alert gets a trust score from how many sources agree. The officer confirms before anything goes public |
 | **Mobilise** | The city officer owns the incident. The system suggests nearby verified responders (labs, NGOs, trained volunteers) by distance and skill. They accept or decline |
@@ -71,8 +71,10 @@ its date and reason.
    the sample date. Cross-validation is grouped by site. We report PR-AUC and
    recall at the alert threshold.
 5. **Alert label.** A sample counts as unsafe when E. coli exceeds 1000 cfu/100
-   ml or intestinal enterococci exceed 400 cfu/100 ml, the "good quality"
-   values for inland waters in Annex I of Directive 2006/7/EC.
+   ml or intestinal enterococci exceed 400 cfu/100 ml. Annex I of Directive
+   2006/7/EC uses these values for inland waters to classify a site as "good"
+   on the 95th percentile of four seasons of samples; we apply them to single
+   samples as the alert level.
 6. **Scope of the model.** Tuned for recreational contact during the bathing
    season, which is when the samples are taken.
 7. **Other hazards.** Algae bloom, low oxygen and flash flood run as rules on
@@ -89,11 +91,32 @@ its date and reason.
     synthetic cohort, labelled as synthetic, built on the OAH `Group` profile.
     The same query runs against the real Oslo cohorts in the sandbox.
 11. **Stack.** Next.js on Vercel for the app. Python for data and training only;
-    the trained model is exported and scored inside the Next.js server. HAPI
-    FHIR on an always-on host, with cached bundles if it is slow to answer.
+    the trained model is exported and scored inside the Next.js server.
+    *Revised 29 Sep:* no hosted HAPI server. HAPI is a Java server, it cannot
+    run on Vercel, and free hosts put it to sleep, so a judge's first click
+    would hang. The app serves its own FHIR endpoint (`/fhir/metadata`, read by
+    id, a few searches, one transaction Bundle per incident). A test validates
+    every resource against the OAH profiles with the HL7 validator, and a script
+    posts the Bundle to a local HAPI server to show a real FHIR server accepts
+    it.
 12. **Screens.** Officer console, responder view, public page with a citizen
     report form. Every incident has a "download as FHIR" button for
     researchers.
+13. **Two alert levels (29 Sep).** *Alert*: risk of 0.10 or more, the level at
+    which one alert in five is a real exceedance across Europe. It opens an
+    incident and starts the escalation clock. *Watch*: risk at least five times
+    the site's usual level. It highlights the site on the map for the officer
+    and escalates nothing. Tested across Europe, a rule relative to each site
+    alone gave more false alarms than the fixed level, so it only drives Watch.
+14. **No shared database for the demo (29 Sep).** Each visitor runs the Ghent
+    scenario in their own browser, with a reset button, so two judges never
+    see each other's half-finished incident. The incident state comes from the
+    event log and the demo clock (`web/lib/incident.ts`).
+15. **Which resources use OAH profiles.** Location, Observation (indicators and
+    health measures) and Group follow the OAH profiles. DetectedIssue, Task,
+    CareTeam and Communication are base FHIR R4, because the OAH guide does not
+    profile them. DetectedIssue is FHIR's resource for "a problem found that
+    needs action", which is what an unsafe river is.
 
 ## Rules we have to meet
 
