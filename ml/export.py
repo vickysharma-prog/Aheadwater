@@ -62,12 +62,22 @@ def main():
                           "is_river": 0, "lat": site.lat} for d in window])
     risk = blind.predict_proba(rows[FEATURES])[:, 1]
     lab = past[past.date.isin(window)]
+    # Every Ghent site on the event day, for the map. They share one weather cell.
+    event = pd.Timestamp(EVENT_DAY)
+    others = []
+    for sid, srow in ghent_sites.set_index("id").iterrows():
+        f = {**w.loc[event].to_dict(), **history_on(event, ghent[ghent.id == sid]),
+             "doy": event.dayofyear, "is_river": int(srow.zone == "riverBathingWater"), "lat": srow.lat}
+        usual_blind = np.median(blind.predict_proba(df[df.id == sid][FEATURES])[:, 1])
+        others.append({"id": sid, "risk": round(float(blind.predict_proba(pd.DataFrame([f])[FEATURES])[0, 1]), 4),
+                       "usual": round(float(usual_blind), 5)})
     (MODEL_DIR / "backtest.json").write_text(json.dumps({
         "site": EVENT_SITE, "name": site["name"], "event_day": EVENT_DAY,
         "note": "Model trained without any Ghent sample. Observed rain stands in for the forecast.",
         "usual": round(float(np.median(blind.predict_proba(df[df.id == EVENT_SITE][FEATURES])[:, 1])), 5),
         "days": [{"date": d.strftime("%Y-%m-%d"), "risk": round(float(r), 4),
                   "rain_mm": round(float(rr[days.get_loc(d), 0]), 1)} for d, r in zip(window, risk)],
+        "sites_on_event_day": others,
         "lab": lab.assign(date=lab.date.dt.strftime("%Y-%m-%d"))[["date", "ecoli", "ie", "bad"]].to_dict("records"),
     }, indent=1))
 

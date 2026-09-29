@@ -10,7 +10,8 @@ export const ALERT_LEVEL = 0.1; // decision 13 in project.md
 export const WATCH_MULTIPLE = 5;
 
 export type Site = { id: string; name: string; lat: number; lon: number; zone: string };
-export const SITES = ghent.sites as Site[];
+const titleCase = (s: string) => s.toLowerCase().replace(/(^|[\s-])\p{L}/gu, (m) => m.toUpperCase());
+export const SITES = (ghent.sites as Site[]).map((s) => ({ ...s, name: titleCase(s.name) }));
 export const SAMPLES = ghent.samples as Sample[];
 
 export type SiteRisk = { site: Site; day: string; risk: number; usual: number; level: "alert" | "watch" | "normal" };

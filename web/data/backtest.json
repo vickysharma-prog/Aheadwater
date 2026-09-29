@@ -161,6 +161,28 @@
    "rain_mm": 0.0
   }
  ],
+ "sites_on_event_day": [
+  {
+   "id": "BEVL_BW_GNT03",
+   "risk": 0.0862,
+   "usual": 0.01574
+  },
+  {
+   "id": "BEVL_BW_GNT02",
+   "risk": 0.0847,
+   "usual": 0.009
+  },
+  {
+   "id": "BEVL_BW_GNT01",
+   "risk": 0.0257,
+   "usual": 0.00948
+  },
+  {
+   "id": "BEVL_BW_DEI01",
+   "risk": 0.0185,
+   "usual": 0.01129
+  }
+ ],
  "lab": [
   {
    "date": "2021-05-03",

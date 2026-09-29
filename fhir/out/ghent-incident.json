@@ -8,11 +8,38 @@
       "resource": {
         "resourceType": "Organization",
         "id": "ghent-water",
-        "name": "City of Ghent, water and environment"
+        "name": "City of Ghent, water and environment",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organization: City of Ghent, water and environment</div>"
+        }
       },
       "request": {
         "method": "PUT",
         "url": "Organization/ghent-water"
+      }
+    },
+    {
+      "fullUrl": "https://aheadwater.vercel.app/fhir/PractitionerRole/ghent-water-officer",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "ghent-water-officer",
+        "organization": {
+          "reference": "Organization/ghent-water"
+        },
+        "code": [
+          {
+            "text": "Water officer, incident owner"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">PractitionerRole: ghent-water-officer</div>"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/ghent-water-officer"
       }
     },
     {
@@ -35,18 +62,16 @@
         "mode": "instance",
         "type": [
           {
-            "coding": [
-              {
-                "system": "http://snomed.info/sct",
-                "code": "39576001",
-                "display": "Lake"
-              }
-            ]
+            "text": "Lake bathing water"
           }
         ],
         "position": {
           "latitude": 51.04394,
           "longitude": 3.68918
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Location: GENT BLAARMEERSEN PEUTERSPEELKREEK</div>"
         }
       },
       "request": {
@@ -112,7 +137,11 @@
             },
             "text": "Watch level: 5x the site's usual risk"
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Probability the next bathing-water sample breaks the limit</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -161,6 +190,10 @@
         ],
         "valueCodeableConcept": {
           "text": "Water at the east beach is cloudy and smells of sewage after the weekend rain. A dog was sick after swimming."
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Citizen water report</div>"
         }
       },
       "request": {
@@ -223,7 +256,11 @@
               "code": "[CFU]/(100.mL)"
             }
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Escherichia coli in bathing water</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -285,7 +322,11 @@
               "code": "[CFU]/(100.mL)"
             }
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Intestinal enterococci in bathing water</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -347,7 +388,11 @@
               "code": "[CFU]/(100.mL)"
             }
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Escherichia coli in bathing water</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -409,7 +454,11 @@
               "code": "[CFU]/(100.mL)"
             }
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Intestinal enterococci in bathing water</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -471,7 +520,11 @@
               "code": "[CFU]/(100.mL)"
             }
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Escherichia coli in bathing water</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -533,7 +586,11 @@
               "code": "[CFU]/(100.mL)"
             }
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Intestinal enterococci in bathing water</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -595,7 +652,11 @@
               "code": "[CFU]/(100.mL)"
             }
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Escherichia coli in bathing water</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -657,7 +718,11 @@
               "code": "[CFU]/(100.mL)"
             }
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Intestinal enterococci in bathing water</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -683,7 +748,7 @@
         "severity": "high",
         "identifiedDateTime": "2021-05-17T08:05:00+02:00",
         "author": {
-          "reference": "Organization/ghent-water"
+          "reference": "PractitionerRole/ghent-water-officer"
         },
         "implicated": [
           {
@@ -741,7 +806,7 @@
             },
             "date": "2021-05-17T08:12:00+02:00",
             "author": {
-              "reference": "Organization/ghent-water",
+              "reference": "PractitionerRole/ghent-water-officer",
               "display": "Water officer"
             }
           },
@@ -758,7 +823,7 @@
             },
             "date": "2021-05-17T08:30:00+02:00",
             "author": {
-              "reference": "Organization/ghent-water",
+              "reference": "PractitionerRole/ghent-water-officer",
               "display": "Water officer"
             }
           },
@@ -775,11 +840,15 @@
             },
             "date": "2021-05-31T15:00:00+02:00",
             "author": {
-              "reference": "Organization/ghent-water",
+              "reference": "PractitionerRole/responder-lab-role",
               "display": "City water quality lab"
             }
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">DetectedIssue: Bathing water likely unsafe for contact</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -791,11 +860,38 @@
       "resource": {
         "resourceType": "Organization",
         "id": "responder-lab",
-        "name": "City water quality lab"
+        "name": "City water quality lab",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organization: City water quality lab</div>"
+        }
       },
       "request": {
         "method": "PUT",
         "url": "Organization/responder-lab"
+      }
+    },
+    {
+      "fullUrl": "https://aheadwater.vercel.app/fhir/PractitionerRole/responder-lab-role",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "responder-lab-role",
+        "organization": {
+          "reference": "Organization/responder-lab"
+        },
+        "code": [
+          {
+            "text": "Responder"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">PractitionerRole: responder-lab-role</div>"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/responder-lab-role"
       }
     },
     {
@@ -825,7 +921,7 @@
               }
             ],
             "member": {
-              "reference": "Organization/ghent-water",
+              "reference": "PractitionerRole/ghent-water-officer",
               "display": "Water officer"
             }
           },
@@ -846,7 +942,11 @@
               "reference": "Organization/responder-lab"
             }
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">CareTeam: Response team for GENT BLAARMEERSEN PEUTERSPEELKREEK</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -896,7 +996,11 @@
           {
             "text": "Acknowledge by 2021-05-17T06:35:00.000Z; act by 2021-05-17T08:05:00.000Z (30 and 120 minutes)."
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Task: Respond to an unsafe water incident</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -924,7 +1028,11 @@
           {
             "contentString": "GENT BLAARMEERSEN PEUTERSPEELKREEK: bathing water likely unsafe. Risk 8.6%."
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Communication: inc-gnt03-20210517-to-owner</div>"
+        }
       },
       "request": {
         "method": "PUT",
@@ -952,7 +1060,11 @@
           {
             "contentString": "Avoid contact with the water at Blaarmeersen. Keep dogs out. Do not swim until the all-clear."
           }
-        ]
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Communication: inc-gnt03-20210517-public-advisory</div>"
+        }
       },
       "request": {
         "method": "PUT",

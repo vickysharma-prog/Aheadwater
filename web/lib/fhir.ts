@@ -20,6 +20,12 @@ const category = (c: string) => [{ coding: [{ system: "http://terminology.hl7.or
 export function incidentBundle(inc: Incident, now: Date) {
   const state = incidentState(inc.severity, inc.events, now);
   const city: Resource = { resourceType: "Organization", id: "ghent-water", name: "City of Ghent, water and environment" };
+  const officer: Resource = {
+    resourceType: "PractitionerRole",
+    id: "ghent-water-officer",
+    organization: ref(city),
+    code: [{ text: "Water officer, incident owner" }],
+  };
 
   const location: Resource = {
     resourceType: "Location",
@@ -28,7 +34,7 @@ export function incidentBundle(inc: Incident, now: Date) {
     identifier: [{ system: "https://www.eea.europa.eu/bathing-water-id", value: inc.site.id }],
     name: inc.site.name,
     mode: "instance",
-    type: [{ coding: [{ system: "http://snomed.info/sct", code: "39576001", display: "Lake" }] }],
+    type: [{ text: inc.site.zone === "riverBathingWater" ? "River bathing water" : "Lake bathing water" }],
     position: { latitude: inc.site.lat, longitude: inc.site.lon },
   };
 
@@ -81,6 +87,19 @@ export function incidentBundle(inc: Incident, now: Date) {
   const evidence = [risk, citizen, ...labs].filter(Boolean) as Resource[];
   const byType = (t: string) => inc.events.find((e) => e.type === t && new Date(e.at) <= now);
 
+  const responder: Resource | undefined = inc.responder && {
+    resourceType: "Organization",
+    id: `responder-${inc.responder.id}`,
+    name: inc.responder.name,
+  };
+
+  const responderRole: Resource | undefined = responder && {
+    resourceType: "PractitionerRole",
+    id: `${responder.id}-role`,
+    organization: ref(responder),
+    code: [{ text: "Responder" }],
+  };
+
   const issue: Resource = {
     resourceType: "DetectedIssue",
     id: inc.id,
@@ -88,19 +107,13 @@ export function incidentBundle(inc: Incident, now: Date) {
     code: code("unsafe-bathing-water", "Bathing water likely unsafe for contact"),
     severity: inc.severity === "high" ? "high" : "moderate",
     identifiedDateTime: inc.events[0].at,
-    author: ref(city),
+    author: ref(officer),
     implicated: [ref(location)],
     evidence: [{ detail: evidence.map((r) => ref(r)) }],
     detail: inc.advisory,
     mitigation: inc.events
       .filter((e) => e.type !== "opened" && new Date(e.at) <= now)
-      .map((e) => ({ action: code(e.type, e.type), date: e.at, author: ref(city, e.by) })),
-  };
-
-  const responder: Resource | undefined = inc.responder && {
-    resourceType: "Organization",
-    id: `responder-${inc.responder.id}`,
-    name: inc.responder.name,
+      .map((e) => ({ action: code(e.type, e.type), date: e.at, author: ref(e.by === "Water officer" || !responderRole ? officer : responderRole, e.by) })),
   };
 
   const careTeam: Resource = {
@@ -110,7 +123,7 @@ export function incidentBundle(inc: Incident, now: Date) {
     name: `Response team for ${inc.site.name}`,
     managingOrganization: [ref(city)],
     participant: [
-      { role: [code("owner", "Incident owner")], member: ref(city, "Water officer") },
+      { role: [code("owner", "Incident owner")], member: ref(officer, "Water officer") },
       ...(responder ? [{ role: [code("responder", "Responder")], member: ref(responder) }] : []),
     ],
   };
@@ -132,7 +145,7 @@ export function incidentBundle(inc: Incident, now: Date) {
     for: ref(location),
     authoredOn: inc.events[0].at,
     requester: ref(city),
-    owner: responder ? ref(responder) : state.stage === "open_to_claim" ? undefined : ref(city, "Water officer"),
+    owner: responder ? ref(responder) : state.stage === "open_to_claim" ? undefined : ref(officer, "Water officer"),
     restriction: { period: { end: state.actionDue.toISOString() } },
     note: [{ text: `Acknowledge by ${state.ackDue.toISOString()}; act by ${state.actionDue.toISOString()} (${LIMITS[inc.severity].ackMin} and ${LIMITS[inc.severity].actionMin} minutes).` }],
   };
@@ -163,15 +176,22 @@ export function incidentBundle(inc: Incident, now: Date) {
     });
   }
 
-  const resources = [city, location, ...evidence, issue, ...(responder ? [responder] : []), careTeam, task, ...communications];
+  const resources = [city, officer, location, ...evidence, issue, ...(responder && responderRole ? [responder, responderRole] : []), careTeam, task, ...communications];
   return {
     resourceType: "Bundle",
     type: "transaction",
     timestamp: now.toISOString(),
     entry: resources.map((r) => ({
       fullUrl: `${BASE}/${r.resourceType}/${r.id}`,
-      resource: JSON.parse(JSON.stringify(r)), // drops undefined fields
+      resource: JSON.parse(JSON.stringify({ ...r, text: narrative(r) })), // stringify drops undefined fields
       request: { method: "PUT", url: `${r.resourceType}/${r.id}` },
     })),
   };
+}
+
+/** A one-line human-readable summary, which FHIR asks every resource to carry. */
+function narrative(r: Resource) {
+  const label = (r.name ?? (r.code as { text?: string })?.text ?? r.id) as string;
+  const esc = label.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  return { status: "generated", div: `<div xmlns="http://www.w3.org/1999/xhtml">${r.resourceType}: ${esc}</div>` };
 }
