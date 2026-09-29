@@ -1,6 +1,8 @@
 """Write the data the app needs into web/data/.
 
 - ghent.json: Ghent's bathing sites and their sample history.
+- features_fixture.json: weather and the features Python computes from it.
+- usual.json: each Ghent site's usual risk.
 - backtest.json: daily risk at Blaarmeersen GNT03 in May 2021, from a model that
   never saw a Ghent sample, next to the rain and the lab results.
 """
@@ -41,6 +43,11 @@ def main():
     }, indent=1))
 
     df = pd.read_parquet(TRAIN)
+    # Each Ghent site's usual risk (median over its own samples), the base for Watch.
+    full = fit(df[FEATURES], df.bad)
+    g = df[df.id.str.startswith(GHENT)]
+    usual = pd.Series(full.predict_proba(g[FEATURES])[:, 1], index=g.id).groupby(level=0).median()
+    (MODEL_DIR / "usual.json").write_text(json.dumps(usual.round(5).to_dict(), indent=1))
     blind = fit(*(lambda d: (d[FEATURES], d.bad))(df[~df.id.str.startswith(GHENT)]))
 
     site = ghent_sites.set_index("id").loc[EVENT_SITE]
@@ -58,9 +65,18 @@ def main():
     (MODEL_DIR / "backtest.json").write_text(json.dumps({
         "site": EVENT_SITE, "name": site["name"], "event_day": EVENT_DAY,
         "note": "Model trained without any Ghent sample. Observed rain stands in for the forecast.",
+        "usual": round(float(np.median(blind.predict_proba(df[df.id == EVENT_SITE][FEATURES])[:, 1])), 5),
         "days": [{"date": d.strftime("%Y-%m-%d"), "risk": round(float(r), 4),
                   "rain_mm": round(float(rr[days.get_loc(d), 0]), 1)} for d, r in zip(window, risk)],
         "lab": lab.assign(date=lab.date.dt.strftime("%Y-%m-%d"))[["date", "ecoli", "ie", "bad"]].to_dict("records"),
+    }, indent=1))
+
+    # Weather in, features out: the app's feature code is tested against this.
+    span = pd.date_range("2021-04-26", "2021-05-17")
+    (MODEL_DIR / "features_fixture.json").write_text(json.dumps({
+        "rain": [round(float(rr[days.get_loc(d), 0]), 3) for d in span],
+        "temp": [round(float(tg[days.get_loc(d), 0]), 3) for d in span],
+        "expected": {k: (None if pd.isna(v) else round(float(v), 4)) for k, v in w.loc[span[-1]].items()},
     }, indent=1))
 
     print(pd.DataFrame({"day": window.strftime("%m-%d"), "risk": risk.round(3), "rain": rr[[days.get_loc(d) for d in window], 0].round(1)}).to_string(index=False))

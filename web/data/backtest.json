@@ -3,6 +3,7 @@
  "name": "GENT BLAARMEERSEN PEUTERSPEELKREEK",
  "event_day": "2021-05-17",
  "note": "Model trained without any Ghent sample. Observed rain stands in for the forecast.",
+ "usual": 0.01574,
  "days": [
   {
    "date": "2021-05-01",
