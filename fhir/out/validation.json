@@ -1,759 +1,1462 @@
 {
-  "resourceType" : "OperationOutcome",
-  "text" : {
-    "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>OperationOutcome </b></p><table class=\"grid\"><tr><td><b>Severity</b></td><td><b>Location</b></td><td><b>Code</b></td><td><b>Details</b></td><td><b>Diagnostics</b></td><td><b>Source</b></td></tr><tr><td>Warning</td><td>Bundle.entry[2].resource/*Location/bevl-bw-gnt03*/.type[0]</td><td>Invalid Code</td><td>No code provided, and a code should be provided from the value set 'ServiceDeliveryLocationRoleType' (http://terminology.hl7.org/ValueSet/v3-ServiceDeliveryLocationRoleType|3.0.0)</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code.coding[0].system</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#bacteria-risk)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#citizen-report)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[5].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ecoli*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[5].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ecoli*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[6].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ie*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[6].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ie*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[7].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ecoli*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[7].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ecoli*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[8].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ie*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[8].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ie*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[9].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ecoli*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[9].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ecoli*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[10].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ie*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[10].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ie*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[11].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ecoli*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[11].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ecoli*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[12].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ie*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[12].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ie*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[0].action.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[1].action.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[2].action.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[16].resource/*CareTeam/inc-gnt03-20210517-team*/.participant[0].role[0].coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[16].resource/*CareTeam/inc-gnt03-20210517-team*/.participant[1].role[0].coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.businessStatus</td><td>Invalid Code</td><td>Binding for path Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.businessStatus in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Task|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr></table></div>"
-  },
-  "extension" : [{
-    "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-file",
-    "valueString" : "C:\\Users\\admin\\aheadwater\\fhir\\out\\ghent-incident.json"
-  }],
-  "issue" : [{
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 64
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 12
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "InstanceValidator"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_Code_ValueSet_Ext"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Location|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "No code provided, and a code should be provided from the value set 'ServiceDeliveryLocationRoleType' (http://terminology.hl7.org/ValueSet/v3-ServiceDeliveryLocationRoleType|3.0.0)"
-    },
-    "expression" : ["Bundle.entry[2].resource/*Location/bevl-bw-gnt03*/.type[0]"]
+  "resourceType" : "Bundle",
+  "type" : "collection",
+  "entry" : [{
+    "resource" : {
+      "resourceType" : "OperationOutcome",
+      "text" : {
+        "status" : "generated",
+        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>OperationOutcome </b></p><table class=\"grid\"><tr><td><b>Severity</b></td><td><b>Location</b></td><td><b>Code</b></td><td><b>Details</b></td><td><b>Diagnostics</b></td><td><b>Source</b></td></tr><tr><td>Warning</td><td>Bundle.entry[2].resource/*Location/bevl-bw-gnt03*/.type[0]</td><td>Invalid Code</td><td>No code provided, and a code should be provided from the value set 'ServiceDeliveryLocationRoleType' (http://terminology.hl7.org/ValueSet/v3-ServiceDeliveryLocationRoleType|3.0.0)</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code.coding[0].system</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#bacteria-risk)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#citizen-report)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[5].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ecoli*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[5].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ecoli*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[6].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ie*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[6].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ie*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[7].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ecoli*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[7].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ecoli*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[8].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ie*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[8].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ie*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[9].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ecoli*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[9].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ecoli*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[10].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ie*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[10].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ie*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[11].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ecoli*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[11].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ecoli*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[12].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ie*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[12].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ie*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[0].action.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[1].action.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[2].action.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[16].resource/*CareTeam/inc-gnt03-20210517-team*/.participant[0].role[0].coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[16].resource/*CareTeam/inc-gnt03-20210517-team*/.participant[1].role[0].coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.businessStatus</td><td>Invalid Code</td><td>Binding for path Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.businessStatus in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Task|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[19].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code</td><td>Invalid Code</td><td>Binding for path Bundle.entry[19].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[19].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[20].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[0].code</td><td>Invalid Code</td><td>Binding for path Bundle.entry[20].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Information</td><td>Bundle.entry[20].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code</td><td>Invalid Code</td><td>Binding for path Bundle.entry[20].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[20].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[21].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[0].code</td><td>Invalid Code</td><td>Binding for path Bundle.entry[21].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Information</td><td>Bundle.entry[21].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code</td><td>Invalid Code</td><td>Binding for path Bundle.entry[21].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[21].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)</td><td/><td>TerminologyEngine</td></tr></table></div>"
+      },
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-file",
+        "valueString" : "C:\\Users\\admin\\aheadwater\\fhir\\out\\ghent-incident.json"
+      }],
+      "issue" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 82
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 12
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Code_ValueSet_Ext"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Location|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "No code provided, and a code should be provided from the value set 'ServiceDeliveryLocationRoleType' (http://terminology.hl7.org/ValueSet/v3-ServiceDeliveryLocationRoleType|3.0.0)"
+        },
+        "expression" : ["Bundle.entry[2].resource/*Location/bevl-bw-gnt03*/.type[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 124
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "UNKNOWN_CODESYSTEM"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code.coding[0].system"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 124
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#bacteria-risk)"
+        },
+        "expression" : ["Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 200
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 200
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#citizen-report)"
+        },
+        "expression" : ["Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 253
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[5].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ecoli*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 253
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)"
+        },
+        "expression" : ["Bundle.entry[5].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ecoli*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 319
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[6].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ie*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 319
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)"
+        },
+        "expression" : ["Bundle.entry[6].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ie*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 385
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[7].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ecoli*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 385
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)"
+        },
+        "expression" : ["Bundle.entry[7].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ecoli*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 451
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[8].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ie*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 451
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)"
+        },
+        "expression" : ["Bundle.entry[8].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ie*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 517
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[9].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ecoli*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 517
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)"
+        },
+        "expression" : ["Bundle.entry[9].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ecoli*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 583
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[10].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ie*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 583
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)"
+        },
+        "expression" : ["Bundle.entry[10].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ie*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 649
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[11].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ecoli*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 649
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)"
+        },
+        "expression" : ["Bundle.entry[11].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ecoli*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 715
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[12].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ie*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 715
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)"
+        },
+        "expression" : ["Bundle.entry[12].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ie*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 763
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/DetectedIssue|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 822
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/PractitionerRole|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[0].action.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 839
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/PractitionerRole|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[1].action.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 856
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/PractitionerRole|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[2].action.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 964
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 16
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/CareTeam|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[16].resource/*CareTeam/inc-gnt03-20210517-team*/.participant[0].role[0].coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 982
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 16
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/PractitionerRole|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[16].resource/*CareTeam/inc-gnt03-20210517-team*/.participant[1].role[0].coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 1023
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Task|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.businessStatus in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Task|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.businessStatus"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 1028
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Task|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 1141
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Group|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[19].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[19].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 1141
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_2_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/group-oah"
+        }],
+        "severity" : "warning",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)"
+        },
+        "expression" : ["Bundle.entry[19].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 1188
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Group|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[20].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[20].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[0].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 1214
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Group|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[20].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[20].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 1214
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_2_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/group-oah"
+        }],
+        "severity" : "warning",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)"
+        },
+        "expression" : ["Bundle.entry[20].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 1261
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Group|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[21].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[21].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[0].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 1281
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Group|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[21].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[21].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 1281
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_2_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/group-oah"
+        }],
+        "severity" : "warning",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)"
+        },
+        "expression" : ["Bundle.entry[21].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code"]
+      }]
+    }
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 106
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "UNKNOWN_CODESYSTEM"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code.coding[0].system"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 106
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_NoValid_3_CC"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-    }],
-    "severity" : "information",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#bacteria-risk)"
-    },
-    "expression" : ["Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 175
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 175
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_NoValid_3_CC"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-    }],
-    "severity" : "information",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#citizen-report)"
-    },
-    "expression" : ["Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 228
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[5].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ecoli*/.code.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 228
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_NoValid_3_CC"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-    }],
-    "severity" : "information",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)"
-    },
-    "expression" : ["Bundle.entry[5].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ecoli*/.code"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 294
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[6].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ie*/.code.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 294
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_NoValid_3_CC"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-    }],
-    "severity" : "information",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)"
-    },
-    "expression" : ["Bundle.entry[6].resource/*Observation/inc-gnt03-20210517-lab-2021-05-03-ie*/.code"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 360
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[7].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ecoli*/.code.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 360
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_NoValid_3_CC"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-    }],
-    "severity" : "information",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)"
-    },
-    "expression" : ["Bundle.entry[7].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ecoli*/.code"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 426
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[8].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ie*/.code.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 426
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_NoValid_3_CC"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-    }],
-    "severity" : "information",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)"
-    },
-    "expression" : ["Bundle.entry[8].resource/*Observation/inc-gnt03-20210517-lab-2021-05-11-ie*/.code"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 492
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[9].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ecoli*/.code.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 492
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_NoValid_3_CC"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-    }],
-    "severity" : "information",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)"
-    },
-    "expression" : ["Bundle.entry[9].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ecoli*/.code"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 558
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[10].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ie*/.code.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 558
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_NoValid_3_CC"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-    }],
-    "severity" : "information",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)"
-    },
-    "expression" : ["Bundle.entry[10].resource/*Observation/inc-gnt03-20210517-lab-2021-05-17-ie*/.code"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 624
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[11].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ecoli*/.code.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 624
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_NoValid_3_CC"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-    }],
-    "severity" : "information",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#escherichia-coli)"
-    },
-    "expression" : ["Bundle.entry[11].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ecoli*/.code"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 690
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[12].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ie*/.code.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 690
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_NoValid_3_CC"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-    }],
-    "severity" : "information",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#intestinal-enterococci)"
-    },
-    "expression" : ["Bundle.entry[12].resource/*Observation/inc-gnt03-20210517-lab-2021-05-31-ie*/.code"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 738
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/DetectedIssue|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.code.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 797
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 14
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/PractitionerRole|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[0].action.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 814
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 14
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/PractitionerRole|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[1].action.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 831
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 14
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/PractitionerRole|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[13].resource/*DetectedIssue/inc-gnt03-20210517*/.mitigation[2].action.coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 912
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 16
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/CareTeam|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[16].resource/*CareTeam/inc-gnt03-20210517-team*/.participant[0].role[0].coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 930
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 16
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/PractitionerRole|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[16].resource/*CareTeam/inc-gnt03-20210517-team*/.participant[1].role[0].coding[0]"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 962
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "InstanceValidator"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
-      "valueCode" : "Terminology_TX_Binding_NoSource"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Task|4.0.1"
-    }],
-    "severity" : "information",
-    "code" : "code-invalid",
-    "details" : {
-      "text" : "Binding for path Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.businessStatus in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Task|4.0.1] has no source, so can't be checked"
-    },
-    "expression" : ["Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.businessStatus"]
-  },
-  {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
-      "valueInteger" : 967
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
-      "valueInteger" : 10
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
-      "valueString" : "TerminologyEngine"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
-      "valueString" : "http://hl7.org/fhir/StructureDefinition/Task|4.0.1"
-    }],
-    "severity" : "warning",
-    "code" : "not-found",
-    "details" : {
-      "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
-    },
-    "expression" : ["Bundle.entry[17].resource/*Task/inc-gnt03-20210517-task*/.code.coding[0]"]
+    "resource" : {
+      "resourceType" : "OperationOutcome",
+      "text" : {
+        "status" : "generated",
+        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>OperationOutcome </b></p><table class=\"grid\"><tr><td><b>Severity</b></td><td><b>Location</b></td><td><b>Code</b></td><td><b>Details</b></td><td><b>Diagnostics</b></td><td><b>Source</b></td></tr><tr><td>Warning</td><td>Bundle.entry[2].resource/*Location/bevl-bw-gnt03*/.type[0]</td><td>Invalid Code</td><td>No code provided, and a code should be provided from the value set 'ServiceDeliveryLocationRoleType' (http://terminology.hl7.org/ValueSet/v3-ServiceDeliveryLocationRoleType|3.0.0)</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code.coding[0].system</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#bacteria-risk)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#citizen-report)</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[5].resource/*DetectedIssue/inc-gnt03-20210517*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[6].resource/*CareTeam/inc-gnt03-20210517-team*/.participant[0].role[0].coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[7].resource/*Task/inc-gnt03-20210517-task*/.businessStatus</td><td>Invalid Code</td><td>Binding for path Bundle.entry[7].resource/*Task/inc-gnt03-20210517-task*/.businessStatus in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Task|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[7].resource/*Task/inc-gnt03-20210517-task*/.code.coding[0]</td><td>Not Found</td><td>A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[9].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code</td><td>Invalid Code</td><td>Binding for path Bundle.entry[9].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[9].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[10].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[0].code</td><td>Invalid Code</td><td>Binding for path Bundle.entry[10].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Information</td><td>Bundle.entry[10].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code</td><td>Invalid Code</td><td>Binding for path Bundle.entry[10].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[10].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)</td><td/><td>TerminologyEngine</td></tr><tr><td>Information</td><td>Bundle.entry[11].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[0].code</td><td>Invalid Code</td><td>Binding for path Bundle.entry[11].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Information</td><td>Bundle.entry[11].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code</td><td>Invalid Code</td><td>Binding for path Bundle.entry[11].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked</td><td/><td>InstanceValidator</td></tr><tr><td>Warning</td><td>Bundle.entry[11].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code</td><td>Invalid Code</td><td>None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)</td><td/><td>TerminologyEngine</td></tr></table></div>"
+      },
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-file",
+        "valueString" : "C:\\Users\\admin\\aheadwater\\fhir\\out\\ghent-incident-open.json"
+      }],
+      "issue" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 82
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 12
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Code_ValueSet_Ext"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Location|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "No code provided, and a code should be provided from the value set 'ServiceDeliveryLocationRoleType' (http://terminology.hl7.org/ValueSet/v3-ServiceDeliveryLocationRoleType|3.0.0)"
+        },
+        "expression" : ["Bundle.entry[2].resource/*Location/bevl-bw-gnt03*/.type[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 124
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "UNKNOWN_CODESYSTEM"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code.coding[0].system"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 124
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#bacteria-risk)"
+        },
+        "expression" : ["Bundle.entry[3].resource/*Observation/inc-gnt03-20210517-risk*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 200
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Observation|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 200
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_3_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Indicators (Non-Health)' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-indicators-no-health-oah-vs), and a coding is recommended to come from this value set (codes = https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater#citizen-report)"
+        },
+        "expression" : ["Bundle.entry[4].resource/*Observation/inc-gnt03-20210517-citizen*/.code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 235
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/DetectedIssue|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[5].resource/*DetectedIssue/inc-gnt03-20210517*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 301
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 16
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/CareTeam|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[6].resource/*CareTeam/inc-gnt03-20210517-team*/.participant[0].role[0].coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 343
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Task|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[7].resource/*Task/inc-gnt03-20210517-task*/.businessStatus in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Task|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[7].resource/*Task/inc-gnt03-20210517-task*/.businessStatus"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 348
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 10
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Task|4.0.1"
+        }],
+        "severity" : "warning",
+        "code" : "not-found",
+        "details" : {
+          "text" : "A definition for CodeSystem 'https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater' could not be found, so the code cannot be validated"
+        },
+        "expression" : ["Bundle.entry[7].resource/*Task/inc-gnt03-20210517-task*/.code.coding[0]"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 458
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Group|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[9].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[9].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 458
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_2_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/group-oah"
+        }],
+        "severity" : "warning",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)"
+        },
+        "expression" : ["Bundle.entry[9].resource/*Group/ghent-blaarmeersen-2km-all*/.characteristic[0].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 505
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Group|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[10].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[10].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[0].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 531
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Group|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[10].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[10].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 531
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_2_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/group-oah"
+        }],
+        "severity" : "warning",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)"
+        },
+        "expression" : ["Bundle.entry[10].resource/*Group/ghent-blaarmeersen-2km-age-0-12*/.characteristic[1].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 578
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Group|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[11].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[0].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[11].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[0].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 598
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "InstanceValidator"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_Binding_NoSource"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.org/fhir/StructureDefinition/Group|4.0.1"
+        }],
+        "severity" : "information",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "Binding for path Bundle.entry[11].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code in profile StructureDefinition[http://hl7.org/fhir/StructureDefinition/Group|4.0.1] has no source, so can't be checked"
+        },
+        "expression" : ["Bundle.entry[11].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code"]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+          "valueInteger" : 598
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+          "valueInteger" : 14
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+          "valueString" : "TerminologyEngine"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+          "valueCode" : "Terminology_TX_NoValid_2_CC"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+          "valueString" : "http://hl7.eu/fhir/ig/oah/StructureDefinition/group-oah"
+        }],
+        "severity" : "warning",
+        "code" : "code-invalid",
+        "details" : {
+          "text" : "None of the codings provided are in the value set 'OAH Cohort Characteristic Code' (http://hl7.eu/fhir/ig/oah/ValueSet/oah-cohort-characteristic-code-vs), and a coding should come from this value set unless it has no suitable code (note that the validator cannot judge what is suitable) (codes = http://snomed.info/sct#20733006)"
+        },
+        "expression" : ["Bundle.entry[11].resource/*Group/ghent-blaarmeersen-2km-age-70-plus*/.characteristic[1].code"]
+      }]
+    }
   }]
 }

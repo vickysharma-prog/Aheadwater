@@ -1,4 +1,5 @@
 // The One Health step: who lives near the incident, and the same cohort query run on real data.
+import { COHORTS } from "@/lib/fhir";
 import { SITE } from "@/lib/scenario";
 
 export const metadata = { title: "Health cohorts · Aheadwater" };
@@ -21,11 +22,6 @@ async function osloCohorts() {
   }
 }
 
-const SYNTHETIC = [
-  { id: "ghent-blaarmeersen-2km-all", label: "Everyone living within 2 km of Blaarmeersen" },
-  { id: "ghent-blaarmeersen-2km-age-0-12", label: "Children aged 0 to 12 within 2 km" },
-  { id: "ghent-blaarmeersen-2km-age-70-plus", label: "People aged 70 and over within 2 km" },
-];
 
 export default async function Page() {
   const oslo = await osloCohorts();
@@ -54,10 +50,10 @@ export default async function Page() {
           The OneAquaHealth sandbox holds no Ghent cohorts yet, so these three are defined by us to show the link. They carry no counts and no real health data.
         </p>
         <ul className="grid gap-2 sm:grid-cols-3">
-          {SYNTHETIC.map((g) => (
+          {COHORTS.map((g) => (
             <li key={g.id} className="rounded-md border border-slate-200 p-3 text-sm">
               <div className="font-medium">{g.label}</div>
-              <div className="mt-1 font-mono text-xs text-slate-400">Group/{g.id}</div>
+              <a href={`/fhir/Group/${g.id}`} className="mt-1 block font-mono text-xs text-water underline">Group/{g.id}</a>
             </li>
           ))}
         </ul>

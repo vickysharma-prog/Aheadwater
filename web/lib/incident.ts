@@ -20,8 +20,8 @@ export const LIMITS: Record<Severity, { ackMin: number; actionMin: number }> = {
 
 export type IncidentState = {
   stage: Stage;
-  /** Who has been told so far, in order. */
-  notified: ("owner" | "supervisor" | "public_health" | "responders")[];
+  /** Who has been told so far, in order. Public health and vets hear at once (One Health); the ladder adds the rest. */
+  notified: ("owner" | "public_health" | "vets" | "supervisor" | "responders")[];
   ackDue: Date;
   actionDue: Date;
   /** What the public page shows. */
@@ -40,9 +40,9 @@ export function incidentState(severity: Severity, events: IncidentEvent[], now: 
 
   const ack = seen("acknowledged");
   const action = seen("dispatched") ?? seen("claimed");
-  const notified: IncidentState["notified"] = ["owner"];
+  const notified: IncidentState["notified"] = ["owner", "public_health", "vets"];
   // A deadline counts as missed if the owner had not acted before it, even if they act later.
-  if (now >= ackDue && (!ack || new Date(ack.at) >= ackDue)) notified.push("supervisor", "public_health");
+  if (now >= ackDue && (!ack || new Date(ack.at) >= ackDue)) notified.push("supervisor");
   const openedToClaim = now >= actionDue && (!action || new Date(action.at) >= actionDue);
   if (openedToClaim) notified.push("responders");
 

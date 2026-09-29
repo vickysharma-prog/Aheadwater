@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "type": "transaction",
-  "timestamp": "2021-06-01T00:00:00.000Z",
+  "timestamp": "2021-05-17T08:30:00.000Z",
   "entry": [
     {
       "fullUrl": "https://aheadwater.vercel.app/fhir/Organization/ghent-water",
@@ -227,539 +227,11 @@
       }
     },
     {
-      "fullUrl": "https://aheadwater.vercel.app/fhir/Observation/inc-gnt03-20210517-lab-2021-05-03-ecoli",
-      "resource": {
-        "resourceType": "Observation",
-        "id": "inc-gnt03-20210517-lab-2021-05-03-ecoli",
-        "meta": {
-          "profile": [
-            "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-          ]
-        },
-        "status": "final",
-        "subject": {
-          "reference": "Location/bevl-bw-gnt03"
-        },
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "laboratory"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-              "code": "escherichia-coli",
-              "display": "Escherichia coli in bathing water"
-            }
-          ],
-          "text": "Escherichia coli in bathing water"
-        },
-        "effectiveDateTime": "2021-05-03",
-        "performer": [
-          {
-            "reference": "Organization/ghent-water"
-          }
-        ],
-        "valueQuantity": {
-          "value": 15,
-          "unit": "cfu/100 mL",
-          "system": "http://unitsofmeasure.org",
-          "code": "[CFU]/(100.mL)"
-        },
-        "referenceRange": [
-          {
-            "high": {
-              "value": 1000,
-              "unit": "cfu/100 mL",
-              "system": "http://unitsofmeasure.org",
-              "code": "[CFU]/(100.mL)"
-            }
-          }
-        ],
-        "text": {
-          "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Escherichia coli in bathing water</div>"
-        }
-      },
-      "request": {
-        "method": "PUT",
-        "url": "Observation/inc-gnt03-20210517-lab-2021-05-03-ecoli"
-      }
-    },
-    {
-      "fullUrl": "https://aheadwater.vercel.app/fhir/Observation/inc-gnt03-20210517-lab-2021-05-03-ie",
-      "resource": {
-        "resourceType": "Observation",
-        "id": "inc-gnt03-20210517-lab-2021-05-03-ie",
-        "meta": {
-          "profile": [
-            "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-          ]
-        },
-        "status": "final",
-        "subject": {
-          "reference": "Location/bevl-bw-gnt03"
-        },
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "laboratory"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-              "code": "intestinal-enterococci",
-              "display": "Intestinal enterococci in bathing water"
-            }
-          ],
-          "text": "Intestinal enterococci in bathing water"
-        },
-        "effectiveDateTime": "2021-05-03",
-        "performer": [
-          {
-            "reference": "Organization/ghent-water"
-          }
-        ],
-        "valueQuantity": {
-          "value": 15,
-          "unit": "cfu/100 mL",
-          "system": "http://unitsofmeasure.org",
-          "code": "[CFU]/(100.mL)"
-        },
-        "referenceRange": [
-          {
-            "high": {
-              "value": 400,
-              "unit": "cfu/100 mL",
-              "system": "http://unitsofmeasure.org",
-              "code": "[CFU]/(100.mL)"
-            }
-          }
-        ],
-        "text": {
-          "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Intestinal enterococci in bathing water</div>"
-        }
-      },
-      "request": {
-        "method": "PUT",
-        "url": "Observation/inc-gnt03-20210517-lab-2021-05-03-ie"
-      }
-    },
-    {
-      "fullUrl": "https://aheadwater.vercel.app/fhir/Observation/inc-gnt03-20210517-lab-2021-05-11-ecoli",
-      "resource": {
-        "resourceType": "Observation",
-        "id": "inc-gnt03-20210517-lab-2021-05-11-ecoli",
-        "meta": {
-          "profile": [
-            "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-          ]
-        },
-        "status": "final",
-        "subject": {
-          "reference": "Location/bevl-bw-gnt03"
-        },
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "laboratory"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-              "code": "escherichia-coli",
-              "display": "Escherichia coli in bathing water"
-            }
-          ],
-          "text": "Escherichia coli in bathing water"
-        },
-        "effectiveDateTime": "2021-05-11",
-        "performer": [
-          {
-            "reference": "Organization/ghent-water"
-          }
-        ],
-        "valueQuantity": {
-          "value": 93,
-          "unit": "cfu/100 mL",
-          "system": "http://unitsofmeasure.org",
-          "code": "[CFU]/(100.mL)"
-        },
-        "referenceRange": [
-          {
-            "high": {
-              "value": 1000,
-              "unit": "cfu/100 mL",
-              "system": "http://unitsofmeasure.org",
-              "code": "[CFU]/(100.mL)"
-            }
-          }
-        ],
-        "text": {
-          "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Escherichia coli in bathing water</div>"
-        }
-      },
-      "request": {
-        "method": "PUT",
-        "url": "Observation/inc-gnt03-20210517-lab-2021-05-11-ecoli"
-      }
-    },
-    {
-      "fullUrl": "https://aheadwater.vercel.app/fhir/Observation/inc-gnt03-20210517-lab-2021-05-11-ie",
-      "resource": {
-        "resourceType": "Observation",
-        "id": "inc-gnt03-20210517-lab-2021-05-11-ie",
-        "meta": {
-          "profile": [
-            "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-          ]
-        },
-        "status": "final",
-        "subject": {
-          "reference": "Location/bevl-bw-gnt03"
-        },
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "laboratory"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-              "code": "intestinal-enterococci",
-              "display": "Intestinal enterococci in bathing water"
-            }
-          ],
-          "text": "Intestinal enterococci in bathing water"
-        },
-        "effectiveDateTime": "2021-05-11",
-        "performer": [
-          {
-            "reference": "Organization/ghent-water"
-          }
-        ],
-        "valueQuantity": {
-          "value": 30,
-          "unit": "cfu/100 mL",
-          "system": "http://unitsofmeasure.org",
-          "code": "[CFU]/(100.mL)"
-        },
-        "referenceRange": [
-          {
-            "high": {
-              "value": 400,
-              "unit": "cfu/100 mL",
-              "system": "http://unitsofmeasure.org",
-              "code": "[CFU]/(100.mL)"
-            }
-          }
-        ],
-        "text": {
-          "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Intestinal enterococci in bathing water</div>"
-        }
-      },
-      "request": {
-        "method": "PUT",
-        "url": "Observation/inc-gnt03-20210517-lab-2021-05-11-ie"
-      }
-    },
-    {
-      "fullUrl": "https://aheadwater.vercel.app/fhir/Observation/inc-gnt03-20210517-lab-2021-05-17-ecoli",
-      "resource": {
-        "resourceType": "Observation",
-        "id": "inc-gnt03-20210517-lab-2021-05-17-ecoli",
-        "meta": {
-          "profile": [
-            "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-          ]
-        },
-        "status": "final",
-        "subject": {
-          "reference": "Location/bevl-bw-gnt03"
-        },
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "laboratory"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-              "code": "escherichia-coli",
-              "display": "Escherichia coli in bathing water"
-            }
-          ],
-          "text": "Escherichia coli in bathing water"
-        },
-        "effectiveDateTime": "2021-05-17",
-        "performer": [
-          {
-            "reference": "Organization/ghent-water"
-          }
-        ],
-        "valueQuantity": {
-          "value": 15,
-          "unit": "cfu/100 mL",
-          "system": "http://unitsofmeasure.org",
-          "code": "[CFU]/(100.mL)"
-        },
-        "referenceRange": [
-          {
-            "high": {
-              "value": 1000,
-              "unit": "cfu/100 mL",
-              "system": "http://unitsofmeasure.org",
-              "code": "[CFU]/(100.mL)"
-            }
-          }
-        ],
-        "text": {
-          "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Escherichia coli in bathing water</div>"
-        }
-      },
-      "request": {
-        "method": "PUT",
-        "url": "Observation/inc-gnt03-20210517-lab-2021-05-17-ecoli"
-      }
-    },
-    {
-      "fullUrl": "https://aheadwater.vercel.app/fhir/Observation/inc-gnt03-20210517-lab-2021-05-17-ie",
-      "resource": {
-        "resourceType": "Observation",
-        "id": "inc-gnt03-20210517-lab-2021-05-17-ie",
-        "meta": {
-          "profile": [
-            "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-          ]
-        },
-        "status": "final",
-        "subject": {
-          "reference": "Location/bevl-bw-gnt03"
-        },
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "laboratory"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-              "code": "intestinal-enterococci",
-              "display": "Intestinal enterococci in bathing water"
-            }
-          ],
-          "text": "Intestinal enterococci in bathing water"
-        },
-        "effectiveDateTime": "2021-05-17",
-        "performer": [
-          {
-            "reference": "Organization/ghent-water"
-          }
-        ],
-        "valueQuantity": {
-          "value": 489,
-          "unit": "cfu/100 mL",
-          "system": "http://unitsofmeasure.org",
-          "code": "[CFU]/(100.mL)"
-        },
-        "referenceRange": [
-          {
-            "high": {
-              "value": 400,
-              "unit": "cfu/100 mL",
-              "system": "http://unitsofmeasure.org",
-              "code": "[CFU]/(100.mL)"
-            }
-          }
-        ],
-        "text": {
-          "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Intestinal enterococci in bathing water</div>"
-        }
-      },
-      "request": {
-        "method": "PUT",
-        "url": "Observation/inc-gnt03-20210517-lab-2021-05-17-ie"
-      }
-    },
-    {
-      "fullUrl": "https://aheadwater.vercel.app/fhir/Observation/inc-gnt03-20210517-lab-2021-05-31-ecoli",
-      "resource": {
-        "resourceType": "Observation",
-        "id": "inc-gnt03-20210517-lab-2021-05-31-ecoli",
-        "meta": {
-          "profile": [
-            "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-          ]
-        },
-        "status": "final",
-        "subject": {
-          "reference": "Location/bevl-bw-gnt03"
-        },
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "laboratory"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-              "code": "escherichia-coli",
-              "display": "Escherichia coli in bathing water"
-            }
-          ],
-          "text": "Escherichia coli in bathing water"
-        },
-        "effectiveDateTime": "2021-05-31",
-        "performer": [
-          {
-            "reference": "Organization/ghent-water"
-          }
-        ],
-        "valueQuantity": {
-          "value": 15,
-          "unit": "cfu/100 mL",
-          "system": "http://unitsofmeasure.org",
-          "code": "[CFU]/(100.mL)"
-        },
-        "referenceRange": [
-          {
-            "high": {
-              "value": 1000,
-              "unit": "cfu/100 mL",
-              "system": "http://unitsofmeasure.org",
-              "code": "[CFU]/(100.mL)"
-            }
-          }
-        ],
-        "text": {
-          "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Escherichia coli in bathing water</div>"
-        }
-      },
-      "request": {
-        "method": "PUT",
-        "url": "Observation/inc-gnt03-20210517-lab-2021-05-31-ecoli"
-      }
-    },
-    {
-      "fullUrl": "https://aheadwater.vercel.app/fhir/Observation/inc-gnt03-20210517-lab-2021-05-31-ie",
-      "resource": {
-        "resourceType": "Observation",
-        "id": "inc-gnt03-20210517-lab-2021-05-31-ie",
-        "meta": {
-          "profile": [
-            "http://hl7.eu/fhir/ig/oah/StructureDefinition/observation-indicators-oah"
-          ]
-        },
-        "status": "final",
-        "subject": {
-          "reference": "Location/bevl-bw-gnt03"
-        },
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "laboratory"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-              "code": "intestinal-enterococci",
-              "display": "Intestinal enterococci in bathing water"
-            }
-          ],
-          "text": "Intestinal enterococci in bathing water"
-        },
-        "effectiveDateTime": "2021-05-31",
-        "performer": [
-          {
-            "reference": "Organization/ghent-water"
-          }
-        ],
-        "valueQuantity": {
-          "value": 15,
-          "unit": "cfu/100 mL",
-          "system": "http://unitsofmeasure.org",
-          "code": "[CFU]/(100.mL)"
-        },
-        "referenceRange": [
-          {
-            "high": {
-              "value": 400,
-              "unit": "cfu/100 mL",
-              "system": "http://unitsofmeasure.org",
-              "code": "[CFU]/(100.mL)"
-            }
-          }
-        ],
-        "text": {
-          "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Observation: Intestinal enterococci in bathing water</div>"
-        }
-      },
-      "request": {
-        "method": "PUT",
-        "url": "Observation/inc-gnt03-20210517-lab-2021-05-31-ie"
-      }
-    },
-    {
       "fullUrl": "https://aheadwater.vercel.app/fhir/DetectedIssue/inc-gnt03-20210517",
       "resource": {
         "resourceType": "DetectedIssue",
         "id": "inc-gnt03-20210517",
-        "status": "final",
+        "status": "preliminary",
         "code": {
           "coding": [
             {
@@ -788,86 +260,8 @@
               },
               {
                 "reference": "Observation/inc-gnt03-20210517-citizen"
-              },
-              {
-                "reference": "Observation/inc-gnt03-20210517-lab-2021-05-03-ecoli"
-              },
-              {
-                "reference": "Observation/inc-gnt03-20210517-lab-2021-05-03-ie"
-              },
-              {
-                "reference": "Observation/inc-gnt03-20210517-lab-2021-05-11-ecoli"
-              },
-              {
-                "reference": "Observation/inc-gnt03-20210517-lab-2021-05-11-ie"
-              },
-              {
-                "reference": "Observation/inc-gnt03-20210517-lab-2021-05-17-ecoli"
-              },
-              {
-                "reference": "Observation/inc-gnt03-20210517-lab-2021-05-17-ie"
-              },
-              {
-                "reference": "Observation/inc-gnt03-20210517-lab-2021-05-31-ecoli"
-              },
-              {
-                "reference": "Observation/inc-gnt03-20210517-lab-2021-05-31-ie"
               }
             ]
-          }
-        ],
-        "detail": "Avoid contact with the water at Blaarmeersen. Keep dogs out. Do not swim until the all-clear.",
-        "mitigation": [
-          {
-            "action": {
-              "coding": [
-                {
-                  "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-                  "code": "acknowledged",
-                  "display": "acknowledged"
-                }
-              ],
-              "text": "acknowledged"
-            },
-            "date": "2021-05-17T08:12:00+02:00",
-            "author": {
-              "reference": "PractitionerRole/ghent-water-officer",
-              "display": "Water officer"
-            }
-          },
-          {
-            "action": {
-              "coding": [
-                {
-                  "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-                  "code": "dispatched",
-                  "display": "dispatched"
-                }
-              ],
-              "text": "dispatched"
-            },
-            "date": "2021-05-17T08:30:00+02:00",
-            "author": {
-              "reference": "PractitionerRole/ghent-water-officer",
-              "display": "Water officer"
-            }
-          },
-          {
-            "action": {
-              "coding": [
-                {
-                  "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-                  "code": "resolved",
-                  "display": "resolved"
-                }
-              ],
-              "text": "resolved"
-            },
-            "date": "2021-05-31T15:00:00+02:00",
-            "author": {
-              "reference": "PractitionerRole/responder-lab-role",
-              "display": "City water quality lab"
-            }
           }
         ],
         "meta": {
@@ -890,68 +284,11 @@
       }
     },
     {
-      "fullUrl": "https://aheadwater.vercel.app/fhir/Organization/responder-lab",
-      "resource": {
-        "resourceType": "Organization",
-        "id": "responder-lab",
-        "name": "City water quality lab",
-        "meta": {
-          "security": [
-            {
-              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
-              "code": "HTEST",
-              "display": "test health data"
-            }
-          ]
-        },
-        "text": {
-          "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organization: City water quality lab</div>"
-        }
-      },
-      "request": {
-        "method": "PUT",
-        "url": "Organization/responder-lab"
-      }
-    },
-    {
-      "fullUrl": "https://aheadwater.vercel.app/fhir/PractitionerRole/responder-lab-role",
-      "resource": {
-        "resourceType": "PractitionerRole",
-        "id": "responder-lab-role",
-        "organization": {
-          "reference": "Organization/responder-lab"
-        },
-        "code": [
-          {
-            "text": "Responder"
-          }
-        ],
-        "meta": {
-          "security": [
-            {
-              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
-              "code": "HTEST",
-              "display": "test health data"
-            }
-          ]
-        },
-        "text": {
-          "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">PractitionerRole: responder-lab-role</div>"
-        }
-      },
-      "request": {
-        "method": "PUT",
-        "url": "PractitionerRole/responder-lab-role"
-      }
-    },
-    {
       "fullUrl": "https://aheadwater.vercel.app/fhir/CareTeam/inc-gnt03-20210517-team",
       "resource": {
         "resourceType": "CareTeam",
         "id": "inc-gnt03-20210517-team",
-        "status": "inactive",
+        "status": "active",
         "name": "Response team for Gent Blaarmeersen Peuterspeelkreek",
         "managingOrganization": [
           {
@@ -975,23 +312,6 @@
             "member": {
               "reference": "PractitionerRole/ghent-water-officer",
               "display": "Water officer"
-            }
-          },
-          {
-            "role": [
-              {
-                "coding": [
-                  {
-                    "system": "https://aheadwater.vercel.app/fhir/CodeSystem/aheadwater",
-                    "code": "responder",
-                    "display": "Responder"
-                  }
-                ],
-                "text": "Responder"
-              }
-            ],
-            "member": {
-              "reference": "Organization/responder-lab"
             }
           }
         ],
@@ -1019,9 +339,9 @@
       "resource": {
         "resourceType": "Task",
         "id": "inc-gnt03-20210517-task",
-        "status": "completed",
+        "status": "ready",
         "businessStatus": {
-          "text": "resolved"
+          "text": "open to claim"
         },
         "intent": "order",
         "priority": "urgent",
@@ -1044,9 +364,6 @@
         "authoredOn": "2021-05-17T08:05:00+02:00",
         "requester": {
           "reference": "Organization/ghent-water"
-        },
-        "owner": {
-          "reference": "Organization/responder-lab"
         },
         "restriction": {
           "period": {
@@ -1436,25 +753,25 @@
       }
     },
     {
-      "fullUrl": "https://aheadwater.vercel.app/fhir/Communication/inc-gnt03-20210517-public-advisory",
+      "fullUrl": "https://aheadwater.vercel.app/fhir/Communication/inc-gnt03-20210517-to-supervisor",
       "resource": {
         "resourceType": "Communication",
-        "id": "inc-gnt03-20210517-public-advisory",
+        "id": "inc-gnt03-20210517-to-supervisor",
         "status": "completed",
         "about": [
           {
             "reference": "DetectedIssue/inc-gnt03-20210517"
           }
         ],
-        "sent": "2021-05-17T08:05:00+02:00",
+        "sent": "2021-05-17T06:35:00.000Z",
         "recipient": [
           {
-            "display": "Public"
+            "display": "Water officer's supervisor"
           }
         ],
         "payload": [
           {
-            "contentString": "Avoid contact with the water at Blaarmeersen. Keep dogs out. Do not swim until the all-clear."
+            "contentString": "Gent Blaarmeersen Peuterspeelkreek: Not acknowledged in time. Escalated to you. Risk 8.6%."
           }
         ],
         "meta": {
@@ -1468,12 +785,53 @@
         },
         "text": {
           "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Communication: inc-gnt03-20210517-public-advisory</div>"
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Communication: inc-gnt03-20210517-to-supervisor</div>"
         }
       },
       "request": {
         "method": "PUT",
-        "url": "Communication/inc-gnt03-20210517-public-advisory"
+        "url": "Communication/inc-gnt03-20210517-to-supervisor"
+      }
+    },
+    {
+      "fullUrl": "https://aheadwater.vercel.app/fhir/Communication/inc-gnt03-20210517-to-responders",
+      "resource": {
+        "resourceType": "Communication",
+        "id": "inc-gnt03-20210517-to-responders",
+        "status": "completed",
+        "about": [
+          {
+            "reference": "DetectedIssue/inc-gnt03-20210517"
+          }
+        ],
+        "sent": "2021-05-17T08:05:00.000Z",
+        "recipient": [
+          {
+            "display": "Nearby verified responders"
+          }
+        ],
+        "payload": [
+          {
+            "contentString": "Gent Blaarmeersen Peuterspeelkreek: No action in time. Open to claim by verified responders nearby. Risk 8.6%."
+          }
+        ],
+        "meta": {
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Communication: inc-gnt03-20210517-to-responders</div>"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Communication/inc-gnt03-20210517-to-responders"
       }
     }
   ]

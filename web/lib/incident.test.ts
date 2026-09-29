@@ -8,17 +8,17 @@ const at = (min: number) => new Date(new Date(T0).getTime() + min * 60_000);
 const ev = (type: IncidentEvent["type"], min: number): IncidentEvent => ({ type, at: at(min).toISOString() });
 const opened = [ev("opened", 0)];
 
-test("high severity: owner only until 30 minutes pass", () => {
+test("high severity: owner, public health and vets until 30 minutes pass", () => {
   const s = incidentState("high", opened, at(29));
   assert.equal(s.stage, "awaiting_ack");
-  assert.deepEqual(s.notified, ["owner"]);
+  assert.deepEqual(s.notified, ["owner", "public_health", "vets"]);
   assert.equal(s.publicStep, "warning");
 });
 
 test("high severity: no acknowledgement at 30 minutes escalates", () => {
   const s = incidentState("high", opened, at(30));
   assert.equal(s.stage, "escalated");
-  assert.deepEqual(s.notified, ["owner", "supervisor", "public_health"]);
+  assert.deepEqual(s.notified, ["owner", "public_health", "vets", "supervisor"]);
 });
 
 test("acknowledged in time: no escalation, but no action by 2 hours opens it to claim", () => {
@@ -26,13 +26,13 @@ test("acknowledged in time: no escalation, but no action by 2 hours opens it to 
   assert.equal(incidentState("high", events, at(60)).stage, "acknowledged");
   const s = incidentState("high", events, at(120));
   assert.equal(s.stage, "open_to_claim");
-  assert.deepEqual(s.notified, ["owner", "responders"]);
+  assert.deepEqual(s.notified, ["owner", "public_health", "vets", "responders"]);
 });
 
 test("a late acknowledgement does not undo the escalation", () => {
   const s = incidentState("high", [...opened, ev("acknowledged", 45)], at(50));
   assert.equal(s.stage, "acknowledged");
-  assert.deepEqual(s.notified, ["owner", "supervisor", "public_health"]);
+  assert.deepEqual(s.notified, ["owner", "public_health", "vets", "supervisor"]);
 });
 
 test("claimed after opening to claim, then resolved", () => {
@@ -59,5 +59,5 @@ test("events after now are ignored, so the demo clock can replay a log", () => {
 test("acting at the exact deadline is too late", () => {
   const s = incidentState("high", [...opened, ev("claimed", 120)], at(120));
   assert.equal(s.stage, "in_progress");
-  assert.deepEqual(s.notified, ["owner", "supervisor", "public_health", "responders"]);
+  assert.deepEqual(s.notified, ["owner", "public_health", "vets", "supervisor", "responders"]);
 });

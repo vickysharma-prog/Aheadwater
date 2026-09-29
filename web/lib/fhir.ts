@@ -15,6 +15,16 @@ export const fhirId = (s: string) => s.toLowerCase().replace(/[^a-z0-9.-]/g, "-"
 
 const ref = (r: Resource, display?: string) => ({ reference: `${r.resourceType}/${r.id}`, ...(display && { display }) });
 const code = (c: string, display: string) => ({ coding: [{ system: CODES, code: c, display }], text: display });
+// Marks demo actors and simulated workflow; the site, the risk score and the lab results are real.
+const SYNTHETIC = { system: "http://terminology.hl7.org/CodeSystem/v3-ActReason", code: "HTEST", display: "test health data" };
+
+/** The synthetic Ghent cohorts: people living near the site, by age. */
+export const COHORTS = [
+  { id: "ghent-blaarmeersen-2km-all", label: "Everyone living within 2 km of Blaarmeersen" },
+  { id: "ghent-blaarmeersen-2km-age-0-12", label: "Children aged 0 to 12 within 2 km", age: [0, 12] },
+  { id: "ghent-blaarmeersen-2km-age-70-plus", label: "People aged 70 and over within 2 km", age: [70] },
+] as const;
+
 const category = (c: string) => [{ coding: [{ system: "http://terminology.hl7.org/CodeSystem/observation-category", code: c }] }];
 
 export function incidentBundle(inc: Incident, now: Date) {
@@ -85,6 +95,35 @@ export function incidentBundle(inc: Incident, now: Date) {
   ]);
 
   const evidence = [risk, citizen, ...labs].filter(Boolean) as Resource[];
+
+  const district: Resource = {
+    resourceType: "Location",
+    id: "ghent-blaarmeersen-2km",
+    meta: { profile: [`${OAH}/location-oah`] },
+    identifier: [{ system: `${BASE}/district`, value: "ghent-blaarmeersen-2km" }],
+    name: "Residential area within 2 km of Blaarmeersen",
+    mode: "instance",
+    position: { latitude: inc.site.lat, longitude: inc.site.lon },
+  };
+  const years = (value: number) => ({ value, unit: "years", system: UCUM, code: "a" });
+  const groups: Resource[] = COHORTS.map((c) => ({
+    resourceType: "Group",
+    id: c.id,
+    meta: { profile: [`${OAH}/group-oah`] },
+    name: c.label,
+    type: "person",
+    actual: false,
+    characteristic: [
+      ...("age" in c
+        ? [{
+            code: { coding: [{ system: "http://loinc.org", code: "30525-0", display: "Age" }] },
+            valueRange: { low: years(c.age[0]), ...(c.age[1] !== undefined && { high: years(c.age[1]) }) },
+            exclude: false,
+          }]
+        : []),
+      { code: { coding: [{ system: "http://snomed.info/sct", code: "20733006", display: "Living place" }] }, valueReference: ref(district), exclude: false },
+    ],
+  }));
   const byType = (t: string) => inc.events.find((e) => e.type === t && new Date(e.at) <= now);
 
   const responder: Resource | undefined = inc.responder && {
@@ -151,18 +190,25 @@ export function incidentBundle(inc: Incident, now: Date) {
   };
 
   const recipients = {
-    owner: "Water officer", supervisor: "Water officer's supervisor",
-    public_health: "Public health team", responders: "Nearby verified responders",
+    owner: "Water officer", public_health: "Public health team", vets: "Local vet practices",
+    supervisor: "Water officer's supervisor", responders: "Nearby verified responders",
   } as const;
-  const sentAt = { owner: inc.events[0].at, supervisor: state.ackDue, public_health: state.ackDue, responders: state.actionDue };
+  const sentAt = { owner: inc.events[0].at, public_health: inc.events[0].at, vets: inc.events[0].at, supervisor: state.ackDue, responders: state.actionDue };
+  const message = {
+    owner: "Bathing water likely unsafe. Acknowledge and act.",
+    public_health: "Bathing water likely unsafe. Watch GP reports of stomach illness and skin rashes in the linked cohorts for 7 days.",
+    vets: "Bathing water likely unsafe. Report dogs with vomiting or diarrhoea after swimming here.",
+    supervisor: "Not acknowledged in time. Escalated to you.",
+    responders: "No action in time. Open to claim by verified responders nearby.",
+  };
   const communications: Resource[] = state.notified.map((who) => ({
     resourceType: "Communication",
     id: `${inc.id}-to-${who.replace("_", "-")}`,
     status: "completed",
-    about: [ref(issue)],
+    about: [ref(issue), ...(who === "public_health" ? groups.map((g) => ref(g)) : [])],
     sent: new Date(sentAt[who]).toISOString(),
     recipient: [{ display: recipients[who] }],
-    payload: [{ contentString: `${inc.site.name}: bathing water likely unsafe. Risk ${(inc.risk.value * 100).toFixed(1)}%.` }],
+    payload: [{ contentString: `${inc.site.name}: ${message[who]} Risk ${(inc.risk.value * 100).toFixed(1)}%.` }],
   }));
   if (inc.advisory) {
     communications.push({
@@ -176,14 +222,20 @@ export function incidentBundle(inc: Incident, now: Date) {
     });
   }
 
-  const resources = [city, officer, location, ...evidence, issue, ...(responder && responderRole ? [responder, responderRole] : []), careTeam, task, ...communications];
+  const resources = [city, officer, location, ...evidence, issue, ...(responder && responderRole ? [responder, responderRole] : []), careTeam, task, district, ...groups, ...communications];
+  const real = new Set([location, risk, ...labs]);
   return {
     resourceType: "Bundle",
     type: "transaction",
     timestamp: now.toISOString(),
     entry: resources.map((r) => ({
       fullUrl: `${BASE}/${r.resourceType}/${r.id}`,
-      resource: JSON.parse(JSON.stringify({ ...r, text: narrative(r) })), // stringify drops undefined fields
+      // FHIR forbids empty arrays and nulls; the replacer drops them along with undefined fields.
+      resource: JSON.parse(JSON.stringify({
+        ...r,
+        ...(!real.has(r) && { meta: { ...(r.meta as object), security: [SYNTHETIC] } }),
+        text: narrative(r),
+      }, (_, v) => (Array.isArray(v) && v.length === 0) || v === null ? undefined : v)),
       request: { method: "PUT", url: `${r.resourceType}/${r.id}` },
     })),
   };

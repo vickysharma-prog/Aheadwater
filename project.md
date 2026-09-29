@@ -44,8 +44,8 @@ dogs out of the water").
 
 | Time since alert | What happens |
 |---|---|
-| 0 | The owner (city water or environment officer) is notified and must acknowledge |
-| High 30 min, medium 4 h, no acknowledgement | Escalates to their supervisor and the public health officer |
+| 0 | The owner (city water or environment officer) is notified and must acknowledge. Public health and local vets are told at the same time (One Health) |
+| High 30 min, medium 4 h, no acknowledgement | Escalates to the owner's supervisor |
 | High 2 h, medium 24 h, no action | Open to claim by nearby verified responders |
 | Always | The public page shows status, advisory and the update timeline |
 
@@ -117,6 +117,18 @@ its date and reason.
     CareTeam and Communication are base FHIR R4, because the OAH guide does not
     profile them. DetectedIssue is FHIR's resource for "a problem found that
     needs action", which is what an unsafe river is.
+
+16. **Health is told at once (29 Sep).** Public health and vets hear when the
+    incident opens, not when it escalates. The escalation ladder is about who
+    must act on the water; the health warning cannot wait for it. The public
+    health message points at the cohort `Group`s for the district.
+17. **Synthetic data is tagged in FHIR (29 Sep).** Demo actors and the
+    simulated workflow carry `meta.security` HTEST ("test health data"). The
+    site, the risk score and the lab results are real and carry no tag.
+18. **India in the video (29 Sep).** Shows the workflow, the escalation and the
+    FHIR records running unchanged on an Indian lake. It shows no risk number
+    there: the model learned European latitudes and the European bathing
+    season, and would recalibrate on local samples first.
 
 ## Rules we have to meet
 

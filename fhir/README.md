@@ -11,8 +11,16 @@ curl -L -o validator_cli.jar https://github.com/hapifhir/org.hl7.fhir.core/relea
 cd ../web && npm run validate-fhir        # needs Java 17 or later
 ```
 
-`out/ghent-incident.json` is the Bundle that was checked and
-`out/validation.json` is the validator's report. On 29 Sep 2026: 0 errors.
-The warnings say our own code system is not published anywhere the validator
-can reach (it is served at `/fhir/CodeSystem/aheadwater`) and that the lake's
-`Location.type` carries text rather than a code.
+Two Bundles are checked: `out/ghent-incident.json` (the incident played
+through to the end) and `out/ghent-incident-open.json` (two and a half hours in,
+nobody has acted, open to claim). `out/validation.json` is the validator's
+report. On 29 Sep 2026: 0 errors, 30 warnings, of three kinds:
+
+- Our own code system is not published where the validator can reach it. It
+  is served at `/fhir/CodeSystem/aheadwater`.
+- The cohort's "Living place" code (SNOMED 20733006) is outside the OAH cohort
+  value set. The binding is extensible, and the OAH guide's own Oslo examples
+  use the same code.
+- The lake's `Location.type` carries text rather than a code.
+
+The script exits with an error if the validator reports any error.
