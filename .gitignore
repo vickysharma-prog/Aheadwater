@@ -5,5 +5,5 @@ __pycache__/
 *.pyc
 .env*
 !.env.example
-ml/data/raw/
+ml/data/
 .vercel/

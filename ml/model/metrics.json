@@ -1,0 +1,48 @@
+{
+  "rows": 150734,
+  "sites": 7246,
+  "unsafe": 3026,
+  "alert_threshold": 0.1019,
+  "grouped_cv": {
+    "pr_auc": 0.147,
+    "roc_auc": 0.793,
+    "base_rate": 0.0201,
+    "recall_at_alert": 0.24,
+    "precision_at_alert": 0.2,
+    "alerts_per_100_samples": 2.41
+  },
+  "grouped_cv_weather_only": {
+    "pr_auc": 0.096,
+    "roc_auc": 0.727,
+    "base_rate": 0.0201,
+    "recall_at_alert": 0.144,
+    "precision_at_alert": 0.185,
+    "alerts_per_100_samples": 1.56
+  },
+  "train_2020_2023_test_2024": {
+    "pr_auc": 0.13,
+    "roc_auc": 0.767,
+    "base_rate": 0.0231,
+    "recall_at_alert": 0.23,
+    "precision_at_alert": 0.191,
+    "alerts_per_100_samples": 2.77
+  },
+  "importance": {
+    "last_log_ecoli": 23771,
+    "site_bad_rate": 21684,
+    "lat": 14234,
+    "doy": 9813,
+    "temp_3d": 9800,
+    "rain_1d": 9190,
+    "temp_7d": 8996,
+    "site_n": 8655,
+    "rain_2d": 8456,
+    "rain_14d": 7833,
+    "days_since_last": 7714,
+    "rain_7d": 7044,
+    "rain_3d": 5875,
+    "rain_max_3d": 5431,
+    "is_river": 3503,
+    "dry_days": 2172
+  }
+}

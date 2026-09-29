@@ -10,20 +10,39 @@ Where things stand now. Read this first after any break.
 |---|---|
 | `ml/fetch.py` | Pulls inland bathing-water sites and bacteria samples from EEA DiscoData. First run: 10,765 sites, 185,562 samples across 28 countries |
 | Weather | E-OBS v33.0e daily rain (`rr`) and mean temperature (`tg`), 0.25 degree grid, 2011 to 2025, downloaded to `ml/data/raw/` |
+| `ml/features.py` | One row per sample: rain and temperature from the days before it, plus the site's earlier record. 150,734 rows, 7,246 sites, 3,026 unsafe. Runs in 25 s. Tests in `test_features.py` |
+| `ml/train.py` | LightGBM, trained on a laptop CPU in about a minute. Writes `ml/model/bacteria.json` and `metrics.json` |
 
 ## Next
 
-1. Join samples to weather (features from the days before each sample only).
-2. Train the bacteria model, grouped by site, report PR-AUC and recall.
-3. Find the Ghent exceedances and check which followed heavy rain. That picks
-   the backtest event.
-4. Export the model and score it in the Next.js app.
-5. FHIR server and the OAH profiles.
-6. The three screens.
+1. Export the model and score it in the Next.js app.
+2. FHIR server and the OAH profiles.
+3. The three screens.
+
+## Model results (29 Sep)
+
+On sites the model never saw (5-fold, grouped by site): ROC-AUC 0.79, PR-AUC
+0.147 against a base rate of 0.020. At the alert level, 1 alert in 5 is a real
+exceedance, against 1 in 50 for a random pick, and 24% of exceedances are
+caught. Trained on 2020 to 2023 and tested on 2024: ROC-AUC 0.77, so it holds
+up on a later year. Weather alone gives ROC-AUC 0.73; the site's own record
+adds the rest.
+
+## Ghent backtest
+
+Model trained without the Ghent sites, then scored on Ghent's 314 samples.
+Ghent has four exceedances. One followed rain: Blaarmeersen GNT03 on
+17 May 2021, after 22 mm in three days. The model ranked it 7th of 314 (risk
+0.086, eight times the Ghent median of 0.011). The other three came in dry
+weather, so weather cannot explain them; in the product those are what the
+citizen reports and lab results in the Detect stage are for.
+
+Demo event: **GNT03, 17 May 2021.**
 
 ## Open questions
 
-- Which Ghent exceedance to replay in the demo (depends on step 3).
+- Alert level: one Europe-wide level (0.10) or a level relative to each
+  site's normal risk. GNT03 sat just under the Europe-wide level.
 
 ## Facts that are easy to forget
 
