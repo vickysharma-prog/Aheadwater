@@ -59,12 +59,12 @@ export function ResponderView() {
                 <p className="font-medium text-water">You are on this incident.</p>
                 {inc.lab.length === 0 && (
                   <button onClick={actions.labResult} className="rounded-md bg-water px-3 py-1.5 font-medium text-white">
-                    Upload the lab result for the {demo.cfg.lab[0].date} sample
+                    {demo.cfg.lab[0].period ? "Attach the official monitoring data" : `Upload the lab result for the ${demo.cfg.lab[0].date} sample`}
                   </button>
                 )}
                 {inc.lab.length > 0 && (
                   <button onClick={actions.resolve} className="rounded-md bg-water px-3 py-1.5 font-medium text-white">
-                    Close with the clean follow-up sample ({demo.cfg.lab.at(-1)!.date})
+                    Close with {demo.cfg.closeWith}
                   </button>
                 )}
               </div>

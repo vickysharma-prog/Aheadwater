@@ -11,7 +11,8 @@ districts are exposed, and the public page tells people to stay out of the
 water. Every step is stored as an HL7 FHIR resource, using the OneAquaHealth
 implementation guide.
 
-Demo city: Ghent, Belgium. Live at **https://aheadwater.vercel.app**.
+Demo cities: Ghent, Belgium (May 2021) and Bengaluru, India (August 2017),
+both replaying real events. Live at **https://aheadwater.vercel.app**.
 
 | Page | What it shows |
 |---|---|
@@ -77,3 +78,6 @@ pytest
 - Weather: E-OBS v33.0e (Cornes et al., 2018), Copernicus Climate Change
   Service and ECA&D.
 - Health cohorts: OneAquaHealth FHIR sandbox, HL7 Europe.
+- Bengaluru lakes: Central Pollution Control Board, National Water Quality
+  Monitoring Programme 2017 (lakes, ponds and tanks, Karnataka); bathing
+  criteria from Schedule I, item 93 of the Environment (Protection) Rules.

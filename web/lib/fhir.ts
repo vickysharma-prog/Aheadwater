@@ -79,24 +79,23 @@ export function incidentBundle(inc: Incident, now: Date) {
     valueCodeableConcept: { text: inc.citizen.text },
   });
 
-  const labs = inc.lab.flatMap((l) => [
-    obs(`${inc.id}-lab-${l.date}-ecoli`, {
-      category: category("laboratory"),
-      code: code("escherichia-coli", "Escherichia coli in bathing water"),
-      effectiveDateTime: l.date,
-      performer: [ref(city)],
-      valueQuantity: { value: l.ecoli, unit: "cfu/100 mL", system: UCUM, code: "[CFU]/(100.mL)" },
-      referenceRange: [{ high: { value: 1000, unit: "cfu/100 mL", system: UCUM, code: "[CFU]/(100.mL)" } }],
+  const stat = (code: string) => ({ coding: [{ system: "http://terminology.hl7.org/CodeSystem/observation-statistics", code }] });
+  const labs = inc.lab.flatMap((l) =>
+    l.measures.map((m) => {
+      const q = (value: number) => ({ value, unit: m.unit, system: UCUM, code: m.ucum });
+      return obs(`${inc.id}-lab-${l.date}-${m.code}`, {
+        ...(m.value === undefined && { meta: { profile: [`${OAH}/observation-with-component-oah`] } }),
+        category: category("laboratory"),
+        code: code(m.code, `${m.display} in water`),
+        ...(l.period ? { effectivePeriod: { start: l.period[0], end: l.period[1] } } : { effectiveDateTime: l.date }),
+        performer: l.source ? [{ display: l.source }] : [ref(city)],
+        ...(m.value !== undefined
+          ? { valueQuantity: q(m.value) }
+          : { component: [{ code: stat("minimum"), valueQuantity: q(m.low!) }, { code: stat("maximum"), valueQuantity: q(m.high!) }] }),
+        referenceRange: [{ high: q(m.limit) }],
+      });
     }),
-    obs(`${inc.id}-lab-${l.date}-ie`, {
-      category: category("laboratory"),
-      code: code("intestinal-enterococci", "Intestinal enterococci in bathing water"),
-      effectiveDateTime: l.date,
-      performer: [ref(city)],
-      valueQuantity: { value: l.ie, unit: "cfu/100 mL", system: UCUM, code: "[CFU]/(100.mL)" },
-      referenceRange: [{ high: { value: 400, unit: "cfu/100 mL", system: UCUM, code: "[CFU]/(100.mL)" } }],
-    }),
-  ]);
+  );
 
   const evidence = [risk, citizen, ...labs].filter(Boolean) as Resource[];
 
@@ -227,8 +226,7 @@ export function incidentBundle(inc: Incident, now: Date) {
   }
 
   const resources = [city, officer, location, ...evidence, issue, ...(responder && responderRole ? [responder, responderRole] : []), careTeam, task, district, ...groups, ...communications];
-  // An illustrative city is test data throughout.
-  const real = new Set<Resource | undefined>(cfg.kind === "replay" ? [location, risk, ...labs] : []);
+  const real = new Set<Resource | undefined>([location, risk, ...labs]);
   return {
     resourceType: "Bundle",
     type: "transaction",

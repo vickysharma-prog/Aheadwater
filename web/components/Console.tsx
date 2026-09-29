@@ -10,7 +10,7 @@ import { incidentBundle } from "@/lib/fhir";
 import { pct, relative, time } from "@/lib/format";
 import { incidentState, type IncidentState } from "@/lib/incident";
 import { ALERT_LEVEL, level, SITES, WATCH_MULTIPLE } from "@/lib/risk";
-import { trust } from "@/lib/scenario";
+import { measureText, trust } from "@/lib/scenario";
 import { actions, useDemo } from "@/lib/store";
 
 const STAGE_LABEL: Record<IncidentState["stage"], [string, string]> = {
@@ -133,7 +133,10 @@ export function Console() {
             {(west.risk / west.usual).toFixed(1)}x, after 22 mm of rain in three days. Watch raises nothing on its own. It asks the officer to look.
             </>
             ) : (
-              <>No risk score for {cfg.name} yet. The model needs local samples to learn these lakes; until then a case opens from reports and lab results.</>
+              <>
+                Record rain hit Bengaluru before dawn on 15 Aug 2017: 180 mm between 3 and 6 am, the most for August in 127 years (as reported by NDTV). No risk
+                score here yet: the model needs local samples to learn these lakes, so a case opens from reports and lab results.
+              </>
             )}
           </Step>
 
@@ -217,7 +220,9 @@ export function Console() {
                 <p>
                   Public health and the neighbourhood vet practice were told when the incident opened. The public page now reads:
                 </p>
-                {state?.stage === "resolved" ? (
+                {state?.stage === "resolved" && cfg.standingWarning ? (
+                  <p className="rounded-md bg-watch-soft px-3 py-2 font-medium text-watch">Case closed. {cfg.standingWarning}</p>
+                ) : state?.stage === "resolved" ? (
                   <p className="rounded-md bg-ok-soft px-3 py-2 font-medium text-ok">Advisory lifted. The follow-up sample was clean.</p>
                 ) : (
                   <p className="rounded-md bg-alert-soft px-3 py-2 font-medium text-alert">{inc.advisory}</p>
@@ -235,18 +240,18 @@ export function Console() {
             {inc && (
               <div className="space-y-2">
                 {inc.lab.length === 0 ? (
-                  <Button onClick={actions.labResult}>The lab result for the {cfg.lab[0].date} sample arrives</Button>
+                  <Button onClick={actions.labResult}>{cfg.lab[0].period ? `Pull the official monitoring for ${cfg.focus.name}` : `The lab result for the ${cfg.lab[0].date} sample arrives`}</Button>
                 ) : (
                   <ul className="space-y-1 text-xs">
                     {inc.lab.map((l) => (
                       <li key={l.date} className={l.bad ? "text-alert" : "text-ok"}>
-                        {l.date}: E. coli {l.ecoli}, enterococci {l.ie} cfu/100 ml {l.bad ? "(above 400)" : "(clean)"}
+                        {l.source ?? l.date}: {l.measures.map(measureText).join(", ")}. {l.bad ? "Above the limit." : "Clean."}
                       </li>
                     ))}
                   </ul>
                 )}
                 {state?.stage === "in_progress" && inc.lab.length > 0 && (
-                  <Button onClick={actions.resolve}>Close with the {cfg.lab.at(-1)!.date} follow-up sample</Button>
+                  <Button onClick={actions.resolve}>Close with {cfg.closeWith}</Button>
                 )}
               </div>
             )}

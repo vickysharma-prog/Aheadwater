@@ -38,26 +38,31 @@ export function PublicPage() {
         <ul className="space-y-3">
           {demo.cfg.sites.map((s) => {
             const active = inc?.site.id === s.id && state;
-            const unsafe = active && state.publicStep !== "resolved";
+            const closed = active && state.publicStep === "resolved";
+            const standing = closed && demo.cfg.standingWarning;
+            const unsafe = (active && !closed) || standing;
             return (
               <li key={s.id} className={`rounded-lg border bg-white p-4 ${unsafe ? "border-alert" : "border-slate-200"}`}>
                 <div className="flex flex-wrap items-center gap-2">
                   <h2 className="flex-1 font-medium">{s.name}</h2>
                   {unsafe ? (
                     <span className="rounded bg-alert px-2 py-0.5 text-xs font-semibold text-white">Avoid contact</span>
+                  ) : demo.cfg.standing?.[s.id] ? (
+                    <span className="rounded bg-watch-soft px-2 py-0.5 text-xs font-semibold text-watch">Not fit for contact</span>
                   ) : (
                     <span className="rounded bg-ok-soft px-2 py-0.5 text-xs font-semibold text-ok">No warning</span>
                   )}
                 </div>
+                {!active && demo.cfg.standing?.[s.id] && <p className="mt-2 text-sm text-watch">{demo.cfg.standing[s.id]}</p>}
                 {active && (
                   <>
-                    {unsafe && <p className="mt-2 font-medium text-alert">{inc.advisory}</p>}
+                    {unsafe && <p className="mt-2 font-medium text-alert">{standing ? demo.cfg.standingWarning : inc.advisory}</p>}
                     <ol className="mt-3 grid grid-cols-3 gap-2 text-xs">
                       {STEPS.map(([key, label]) => {
                         const at = stepAt(key);
                         return (
                           <li key={key} className={`rounded-md border px-2 py-1.5 ${at ? "border-water bg-water-soft text-water" : "border-slate-200 text-slate-400"}`}>
-                            <div className="font-semibold">{label}</div>
+                            <div className="font-semibold">{key === "resolved" && demo.cfg.standingWarning ? "Case closed" : label}</div>
                             <div>{at ? time(at, demo.cfg.tz) : "not yet"}</div>
                           </li>
                         );
@@ -65,7 +70,7 @@ export function PublicPage() {
                     </ol>
                     {inc.lab.length > 0 && (
                       <p className="mt-2 text-xs text-slate-600">
-                        Latest lab result: {inc.lab.at(-1)!.bad ? "above the safe limit" : "within the safe limit"} ({inc.lab.at(-1)!.date}).
+                        Latest lab result: {inc.lab.at(-1)!.bad ? "above the safe limit" : "within the safe limit"} ({inc.lab.at(-1)!.source ?? inc.lab.at(-1)!.date}).
                       </p>
                     )}
                   </>

@@ -125,10 +125,17 @@ its date and reason.
 17. **Synthetic data is tagged in FHIR (29 Sep).** Demo actors and the
     simulated workflow carry `meta.security` HTEST ("test health data"). The
     site, the risk score and the lab results are real and carry no tag.
-18. **India in the video (29 Sep).** Shows the workflow, the escalation and the
-    FHIR records running unchanged on an Indian lake. It shows no risk number
-    there: the model learned European latitudes and the European bathing
-    season, and would recalibrate on local samples first.
+18. **India in the video (29 Sep).** Bengaluru is a second demo city on the
+    same code, replaying a real event: record rain on 15 Aug 2017 (180 mm
+    between 3 and 6 am, reported by NDTV) and froth from Varthur Lake over
+    Whitefield road on 16 Aug; the National Green Tribunal heard the case on
+    17 Aug and summoned officials for 22 Aug. Lab evidence is CPCB's 2017
+    monitoring for Varthur (faecal coliform 79,000 to 3,480,000 MPN/100 ml,
+    against the bathing limit of 2,500 in Schedule I item 93 of the
+    Environment (Protection) Rules); CPCB gives a yearly range, not dated
+    samples, and the app says so. No risk number there: the model learned
+    European latitudes and seasons and would recalibrate on local samples
+    first.
 
 ## Rules we have to meet
 
