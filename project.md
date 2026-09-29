@@ -142,9 +142,9 @@ its date and reason.
     3,480,000) was published after the year and is attached at close, labelled
     so. CPCB gives yearly ranges, not dated samples, and the app says so. A
     yearly range is not a training row. Agara Lake is left out: CPCB's
-    "Agaram Lake" (station 3612) could not be confirmed as the same lake. No risk number there: the model learned
-    European latitudes and seasons and would recalibrate on local samples
-    first.
+    "Agaram Lake" (station 3612) could not be confirmed as the same lake.
+    Prediction switches on in Bengaluru once the model has local samples: it
+    learned European latitudes and seasons.
 
 19. **Citizen photo check (29 Sep).** Runs in the reporter's browser; the
     photo never leaves it. Light and focus are measured (mean brightness,
