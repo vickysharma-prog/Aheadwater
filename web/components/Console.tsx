@@ -193,7 +193,11 @@ export function Console() {
                 <p>
                   Public health and the neighbourhood vet practice were told when the incident opened. The public page now reads:
                 </p>
-                <p className="rounded-md bg-alert-soft px-3 py-2 font-medium text-alert">{inc.advisory}</p>
+                {state?.stage === "resolved" ? (
+                  <p className="rounded-md bg-ok-soft px-3 py-2 font-medium text-ok">Advisory lifted. The follow-up sample was clean.</p>
+                ) : (
+                  <p className="rounded-md bg-alert-soft px-3 py-2 font-medium text-alert">{inc.advisory}</p>
+                )}
                 <a href="/health" className="text-xs font-medium text-water underline">
                   Check the health cohorts for this district &rarr;
                 </a>

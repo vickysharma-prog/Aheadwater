@@ -55,3 +55,9 @@ test("events after now are ignored, so the demo clock can replay a log", () => {
   assert.equal(incidentState("high", events, at(4)).stage, "awaiting_ack");
   assert.equal(incidentState("high", events, at(21)).stage, "in_progress");
 });
+
+test("acting at the exact deadline is too late", () => {
+  const s = incidentState("high", [...opened, ev("claimed", 120)], at(120));
+  assert.equal(s.stage, "in_progress");
+  assert.deepEqual(s.notified, ["owner", "supervisor", "public_health", "responders"]);
+});

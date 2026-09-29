@@ -41,9 +41,9 @@ export function incidentState(severity: Severity, events: IncidentEvent[], now: 
   const ack = seen("acknowledged");
   const action = seen("dispatched") ?? seen("claimed");
   const notified: IncidentState["notified"] = ["owner"];
-  // Escalation happened if the deadline passed before the owner acted, even if they act later.
-  if (now >= ackDue && (!ack || new Date(ack.at) > ackDue)) notified.push("supervisor", "public_health");
-  const openedToClaim = now >= actionDue && (!action || new Date(action.at) > actionDue);
+  // A deadline counts as missed if the owner had not acted before it, even if they act later.
+  if (now >= ackDue && (!ack || new Date(ack.at) >= ackDue)) notified.push("supervisor", "public_health");
+  const openedToClaim = now >= actionDue && (!action || new Date(action.at) >= actionDue);
   if (openedToClaim) notified.push("responders");
 
   let stage: Stage;
