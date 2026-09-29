@@ -3,6 +3,23 @@
 One entry per working session, newest at the top. Date, what got done, what
 broke, what is next.
 
+## 2026-09-29 (late night): Hazard rules and the photo check
+
+Two things from the plan were still missing, and Vicky asked for both. The
+other hazards now run as rules on the forecast: algae blooms, low oxygen and
+sewer overflow, each with thresholds a city can tune. They need no local
+samples, so they work in Bengaluru too. Citizen photos are checked in the
+reporter's browser for light and focus, and MobileNet looks for open water.
+
+The blur limit was first set by guesswork at 40. Measured on a real
+Blaarmeersen photo, a clearly blurred copy scored 27 and a slightly soft one
+265, so the limit went to 100. In Chrome, the real photo passed and the blurred
+copy was turned back. Learn stays a record of the next training row; it does
+not retrain live, and the docs say so.
+
+What broke: the internet dropped mid-session; nothing was lost, the photo work
+was on disk and went into the next commit.
+
 ## 2026-09-29 (night): Live risk, One Health in FHIR, Bengaluru
 
 The console shows today's risk for Ghent from the Open-Meteo forecast.

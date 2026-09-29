@@ -15,10 +15,12 @@ deployed from `web/` with `npx vercel deploy --prod`).
 | `ml/features.py` | Training table from E-OBS weather and site history: 150,734 rows, 7,246 sites, 3,026 unsafe. 25 s |
 | `ml/train.py` | LightGBM, about a minute on the laptop CPU. Writes model, metrics and a parity fixture to `web/data/` |
 | `ml/export.py` | Ghent sites and samples, usual risk per site, the May 2021 backtest, a features fixture |
-| `web/lib/` | Model scorer, features, live risk (Open-Meteo), escalation ladder, scenario, FHIR bundle, browser store. 14 tests (`npm test`) |
+| `web/lib/` | Model scorer, features, live risk, hazards, photo checks, escalation ladder, cities and trust, FHIR bundle, browser store. 30 tests (`npm test`) |
 | `/console` | Map, risk table, backtest chart, the seven steps. Whole flow clicked through on the live site: report, confirm, escalate, open to claim, claim from `/responder`, lab result, close, learn |
 | `/public`, `/responder`, `/health`, `/fhir-explorer` | Built, load, share one incident across tabs |
 | Bengaluru | Second demo city on the same code (city picker in the clock bar): the real Varthur Lake froth of 16 Aug 2017, CPCB 2017 monitoring, no risk score. Clicked through end to end |
+| `/api/hazards` + panel | Algae, low oxygen and sewer-overflow rules on the Open-Meteo forecast, for both cities, plus Ghent's replay day. `lib/hazards.ts`, 4 tests |
+| Photo check | `/public` report form: light and focus measured in the browser, MobileNet for water in frame. Tested in Chrome with a real Blaarmeersen photo (passes) and a blurred copy (turned back) |
 | `/api/risk` + live panel | Today's Open-Meteo forecast scored for the four Ghent sites, shown on `/console` |
 | `/fhir/*` | Read-only FHIR R4: metadata, read, search by `_id` and `status`, the transaction Bundle, our CodeSystem |
 | FHIR validation | HL7 validator against the OAH profiles (built with SUSHI), on three Bundles (Ghent resolved, Ghent mid-incident, Bengaluru): 0 errors, 48 warnings. `fhir/README.md` |

@@ -16,9 +16,9 @@ both replaying real events. Live at **https://aheadwater.vercel.app**.
 
 | Page | What it shows |
 |---|---|
-| `/console` | The water officer's view: map, next-day risk, the seven steps from prediction to learning |
+| `/console` | The water officer's view: map, next-day risk, today's forecast risk, algae / low oxygen / overflow rules, the seven steps from prediction to learning |
 | `/responder` | Labs, NGOs, wardens and vets: incidents near them, claim, close with evidence |
-| `/public` | Is the water safe today, the advisory, and a report form |
+| `/public` | Is the water safe today, the advisory, and a report form whose photo is checked in the browser for light, focus and open water |
 | `/health` | The One Health cohort check, with real Oslo cohorts read from the OneAquaHealth sandbox |
 | `/fhir-explorer` | Every FHIR resource in the incident |
 | `/fhir/metadata` | A read-only FHIR R4 endpoint (`/fhir/Task`, `/fhir/DetectedIssue/...`, `/fhir/Bundle/ghent-incident`) |
@@ -48,7 +48,7 @@ Download the E-OBS weather grids into `ml/data/raw/`:
 cd web
 npm install
 npm run dev      # http://localhost:3000
-npm test         # model parity with Python, features, escalation ladder, FHIR bundle
+npm test         # 30 tests: model parity with Python, features, escalation, FHIR, hazards, photo checks, trust
 ```
 
 FHIR validation against the OneAquaHealth profiles: see [`fhir/README.md`](fhir/README.md).

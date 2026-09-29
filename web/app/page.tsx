@@ -7,7 +7,7 @@ import { RiskChart } from "@/components/RiskChart";
 
 const STAGES = [
   ["Predict", "A model trained on bathing-water samples from across Europe reads the weather and scores each site for the next day."],
-  ["Detect", "High risk, a lab result over the limit, or a citizen's report with a photo opens a case."],
+  ["Detect", "High risk, a lab result over the limit, a rule for algae, low oxygen or sewer overflow, or a citizen's report opens a case. Photos are checked for light, focus and water in the reporter's browser."],
   ["Verify", "Each case gets a trust score from how many sources agree. The officer confirms before anything goes public."],
   ["Mobilise", "The city officer owns it. If nobody acts in time it escalates, then opens to nearby verified responders."],
   ["Resolve", "The responder closes it with evidence. The public page shows each step as it happens."],

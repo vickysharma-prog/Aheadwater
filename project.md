@@ -78,8 +78,13 @@ its date and reason.
 6. **Scope of the model.** Tuned for recreational contact during the bathing
    season, which is when the samples are taken.
 7. **Other hazards.** Algae bloom, low oxygen and flash flood run as rules on
-   weather and water readings. The EEA publishes no cyanobacteria table to
-   train on.
+   the weather (`web/lib/hazards.ts`). The EEA publishes no cyanobacteria table
+   to train on. Defaults: algae watch at a 7-day mean of 20 °C with 3-day mean
+   wind under 10 km/h, alert at 23 °C (warm, calm weather, per WHO's Toxic
+   Cyanobacteria in Water, 2021); low oxygen watch after three days at 28 °C or
+   more, or heavy rain (20 mm) after seven dry days, alert when both; sewer
+   overflow watch at 20 mm in a day, alert at 40 mm. Each city tunes its own.
+   The rules need no local samples, so they run in Bengaluru too.
 8. **Backtest.** The demo replays a real past exceedance at a Ghent site and
    shows how early the model would have warned. Observed rain stands in for the
    forecast.
@@ -140,6 +145,18 @@ its date and reason.
     "Agaram Lake" (station 3612) could not be confirmed as the same lake. No risk number there: the model learned
     European latitudes and seasons and would recalibrate on local samples
     first.
+
+19. **Citizen photo check (29 Sep).** Runs in the reporter's browser; the
+    photo never leaves it. Light and focus are measured (mean brightness,
+    variance of the Laplacian at 256 px wide; limits set on a real
+    Blaarmeersen photo and blurred copies). A photo that fails is not attached,
+    and the reporter is asked for another. MobileNet v2 (ImageNet) looks for
+    open water in frame; that is a hint, not a gate, since close-ups of foam or
+    murky water may not match any ImageNet label. A checked photo adds 0.1 to
+    the trust score.
+20. **Learn is a record, not a live retrain (29 Sep).** A closed case with a
+    dated lab sample is shown as the next training row. Retraining runs
+    offline with `ml/train.py`.
 
 ## Rules we have to meet
 
