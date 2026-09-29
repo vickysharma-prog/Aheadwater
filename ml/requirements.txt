@@ -5,3 +5,4 @@ netCDF4
 lightgbm
 scikit-learn
 pytest
+pyarrow

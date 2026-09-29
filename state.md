@@ -2,22 +2,32 @@
 
 Where things stand now. Read this first after any break.
 
-**Last updated:** 2026-09-29
+**Last updated:** 2026-09-29, evening
 
 ## Built
 
+Live at **https://aheadwater.vercel.app** (Vercel project `vicky-sharma/aheadwater`,
+deployed from `web/` with `npx vercel deploy --prod`).
+
 | Part | State |
 |---|---|
-| `ml/fetch.py` | Pulls inland bathing-water sites and bacteria samples from EEA DiscoData. First run: 10,765 sites, 185,562 samples across 28 countries |
-| Weather | E-OBS v33.0e daily rain (`rr`) and mean temperature (`tg`), 0.25 degree grid, 2011 to 2025, downloaded to `ml/data/raw/` |
-| `ml/features.py` | One row per sample: rain and temperature from the days before it, plus the site's earlier record. 150,734 rows, 7,246 sites, 3,026 unsafe. Runs in 25 s. Tests in `test_features.py` |
-| `ml/train.py` | LightGBM, trained on a laptop CPU in about a minute. Writes `ml/model/bacteria.json` and `metrics.json` |
+| `ml/fetch.py` | EEA inland sites and bacteria samples: 10,765 sites, 185,562 samples, 28 countries |
+| `ml/features.py` | Training table from E-OBS weather and site history: 150,734 rows, 7,246 sites, 3,026 unsafe. 25 s |
+| `ml/train.py` | LightGBM, about a minute on the laptop CPU. Writes model, metrics and a parity fixture to `web/data/` |
+| `ml/export.py` | Ghent sites and samples, usual risk per site, the May 2021 backtest, a features fixture |
+| `web/lib/` | Model scorer, features, live risk (Open-Meteo), escalation ladder, scenario, FHIR bundle, browser store. 14 tests (`npm test`) |
+| `/console` | Map, risk table, backtest chart, the seven steps. Checked in the browser end to end up to Mobilise |
+| `/public`, `/responder`, `/health`, `/fhir-explorer` | Built, load, share one incident across tabs |
+| `/fhir/*` | Read-only FHIR R4: metadata, read, search by `_id` and `status`, the transaction Bundle, our CodeSystem |
+| FHIR validation | HL7 validator against the OAH profiles (built with SUSHI): 0 errors, 18 warnings. `fhir/README.md` |
 
 ## Next
 
-1. Export the model and score it in the Next.js app.
-2. FHIR server and the OAH profiles.
-3. The three screens.
+1. Click through the whole flow on the live site (escalation by waiting, claim from the responder view, resolve, learn).
+2. Live mode on the console: today's Open-Meteo risk for the Ghent sites (`liveRisk` exists, not shown yet).
+3. The 30-second India scale proof for the video.
+4. Post the Bundle to a local HAPI server to show a real FHIR server accepts it.
+5. Devpost text and the video storyboard.
 
 ## Model results (29 Sep)
 

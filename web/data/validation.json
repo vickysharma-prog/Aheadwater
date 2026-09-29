@@ -1,0 +1,7 @@
+{
+  "validator": "HL7 FHIR validator (validator_cli.jar)",
+  "profiles": "hl7.eu.fhir.oah, built from github.com/hl7-eu/oah with SUSHI",
+  "date": "2026-09-29",
+  "errors": 0,
+  "warnings": 18
+}
