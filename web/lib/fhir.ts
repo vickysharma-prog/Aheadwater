@@ -80,7 +80,7 @@ export function incidentBundle(inc: Incident, now: Date) {
   });
 
   const stat = (code: string) => ({ coding: [{ system: "http://terminology.hl7.org/CodeSystem/observation-statistics", code }] });
-  const labs = inc.lab.flatMap((l) =>
+  const labs = [...(inc.prior ? [inc.prior] : []), ...inc.lab].flatMap((l) =>
     l.measures.map((m) => {
       const q = (value: number) => ({ value, unit: m.unit, system: UCUM, code: m.ucum });
       return obs(`${inc.id}-lab-${l.date}-${m.code}`, {

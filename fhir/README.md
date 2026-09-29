@@ -15,7 +15,7 @@ Three Bundles are checked: `out/ghent-incident.json` (Ghent, played through
 to the end), `out/ghent-incident-open.json` (Ghent two and a half hours in,
 nobody has acted, open to claim) and `out/bengaluru-incident.json` (the
 Varthur Lake case, closed). `out/validation.json` is the validator's report.
-On 29 Sep 2026: 0 errors, 43 warnings, of these kinds:
+On 29 Sep 2026: 0 errors, 48 warnings, of these kinds:
 
 - Our own code system is not published where the validator can reach it. It
   is served at `/fhir/CodeSystem/aheadwater`.
@@ -25,7 +25,7 @@ On 29 Sep 2026: 0 errors, 43 warnings, of these kinds:
 - A lake's `Location.type` carries text rather than a code.
 - The UCUM unit `{MPN}/(100.mL)` uses an annotation, which is how MPN counts
   are written in UCUM.
-- The CPCB min-max observation uses our code rather than one from the OAH
+- The CPCB min-max observations use our code rather than one from the OAH
   component value set.
 
 The script exits with an error if the validator reports any error.

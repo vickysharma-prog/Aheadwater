@@ -21,7 +21,7 @@ deployed from `web/` with `npx vercel deploy --prod`).
 | Bengaluru | Second demo city on the same code (city picker in the clock bar): the real Varthur Lake froth of 16 Aug 2017, CPCB 2017 monitoring, no risk score. Clicked through end to end |
 | `/api/risk` + live panel | Today's Open-Meteo forecast scored for the four Ghent sites, shown on `/console` |
 | `/fhir/*` | Read-only FHIR R4: metadata, read, search by `_id` and `status`, the transaction Bundle, our CodeSystem |
-| FHIR validation | HL7 validator against the OAH profiles (built with SUSHI), on three Bundles (Ghent resolved, Ghent mid-incident, Bengaluru): 0 errors, 43 warnings. `fhir/README.md` |
+| FHIR validation | HL7 validator against the OAH profiles (built with SUSHI), on three Bundles (Ghent resolved, Ghent mid-incident, Bengaluru): 0 errors, 48 warnings. `fhir/README.md` |
 
 ## Next
 

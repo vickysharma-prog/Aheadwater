@@ -33,6 +33,8 @@ export type City = {
   owner: string;
   district: string;
   advisory: string;
+  /** Official monitoring from before the event, if any: a source the officer has on the morning itself. */
+  prior?: LabResult;
   /** The confirming result first; for Ghent the clean follow-up sample last. */
   lab: LabResult[];
   closeAt: string;
@@ -51,6 +53,7 @@ export type Incident = {
   severity: Severity;
   risk?: { day: string; value: number; usual: number };
   citizen?: { at: string; text: string };
+  prior?: LabResult;
   lab: LabResult[];
   events: IncidentEvent[];
   responder?: Responder;
@@ -71,7 +74,6 @@ const ghentLab = (l: { date: string; ecoli: number; ie: number; bad: number }): 
 const bengaluruSites: Site[] = [
   { id: "blr-varthur", name: "Varthur Lake", lat: 12.9484, lon: 77.7393, zone: "lake" },
   { id: "blr-bellandur", name: "Bellandur Lake", lat: 12.9371, lon: 77.672, zone: "lake" },
-  { id: "blr-agara", name: "Agara Lake", lat: 12.9202, lon: 77.6418, zone: "lake" },
 ];
 
 export const CITIES: Record<CityId, City> = {
@@ -108,7 +110,7 @@ export const CITIES: Record<CityId, City> = {
     id: "bengaluru",
     name: "Bengaluru",
     tz: "Asia/Kolkata",
-    note: "Real event: record rain on 15 Aug 2017, froth from Varthur Lake onto Whitefield road on 16 Aug. Lab figures are CPCB's 2017 monitoring range. Responders are written for the demo.",
+    note: "Real event: record rain on 15 Aug 2017, froth from Varthur Lake onto Whitefield road on 16 Aug, NGT summons for 22 Aug. Lab figures are CPCB's yearly ranges. Responders and the closing site report are written for the demo.",
     intro: "Lakes in south-east Bengaluru. Updated by the city's lakes team.",
     start: "2017-08-16T06:00:00+05:30",
     sites: bengaluruSites,
@@ -127,22 +129,28 @@ export const CITIES: Record<CityId, City> = {
     owner: "City lakes department",
     district: "Varthur",
     advisory: "Stay away from the froth and the water at Varthur Lake and on Whitefield road at Varthur Kodi. Keep children and animals away.",
+    prior: {
+      date: "2016",
+      period: ["2016-01-01", "2016-12-31"],
+      source: "CPCB National Water Quality Monitoring Programme 2016, station 3608 (Varthur Lake)",
+      bad: 1,
+      measures: [{ code: "faecal-coliform", display: "Faecal coliform", unit: "MPN/100 mL", ucum: "{MPN}/(100.mL)", limit: 2500, low: 79000, high: 7000000 }],
+    },
     lab: [
       {
         date: "2017",
         period: ["2017-01-01", "2017-12-31"],
-        source: "CPCB National Water Quality Monitoring Programme 2017, station 3608 (Varthur Lake)",
+        source: "CPCB National Water Quality Monitoring Programme 2017, station 3608 (Varthur Lake), published after the year",
         bad: 1,
         measures: [{ code: "faecal-coliform", display: "Faecal coliform", unit: "MPN/100 mL", ucum: "{MPN}/(100.mL)", limit: 2500, low: 79000, high: 3480000 }],
       },
     ],
     closeAt: "2017-08-22T17:00:00+05:30",
-    closeWith: "the site report: froth cleared from the road, case before the National Green Tribunal on 22 Aug",
+    closeWith: "the site report on 22 Aug, the day the National Green Tribunal summoned officials",
     standingWarning:
-      "Standing warning: CPCB's 2017 monitoring found faecal coliform at Varthur Lake of 79,000 or more per 100 ml all year, over 30 times the bathing limit of 2,500.",
+      "Standing warning: in every sample CPCB recorded at Varthur Lake in 2016 and 2017, faecal coliform was 79,000 per 100 ml or more, over 30 times the bathing limit of 2,500.",
     standing: {
-      "blr-bellandur": "CPCB's 2017 monitoring found faecal coliform of 70,000 or more per 100 ml all year, against a bathing limit of 2,500.",
-      "blr-agara": "CPCB's 2017 monitoring found faecal coliform as high as 210,000 per 100 ml, against a bathing limit of 2,500.",
+      "blr-bellandur": "In every sample CPCB recorded here in 2016, faecal coliform was 70,000 per 100 ml or more, against a bathing limit of 2,500.",
     },
     incidentId: "inc-varthur-20170816",
   },
@@ -156,16 +164,18 @@ export function newIncident(city: City, openedAt: string): Incident {
     severity: "high",
     risk: city.risk,
     citizen: city.citizen,
+    prior: city.prior,
     lab: [],
     events: [{ type: "opened", at: openedAt, by: "Water officer" }],
   };
 }
 
 /** How many independent sources point the same way, and how strongly. */
-export function trust(inc: Pick<Incident, "risk" | "citizen" | "lab">) {
+export function trust(inc: Pick<Incident, "risk" | "citizen" | "lab" | "prior">) {
   const reasons: { source: string; weight: number }[] = [];
   const ratio = inc.risk ? inc.risk.value / inc.risk.usual : 0;
   if (ratio >= 5) reasons.push({ source: `Model risk ${ratio.toFixed(1)}x the site's usual`, weight: 0.35 });
+  if (inc.prior?.bad) reasons.push({ source: `Official monitoring above the limit (${inc.prior.source?.split(",")[0]})`, weight: 0.35 });
   if (inc.citizen) reasons.push({ source: "Citizen report with location", weight: 0.25 });
   if (inc.lab.some((l) => l.bad)) reasons.push({ source: "Lab result above the limit", weight: 0.6 });
   return { score: Math.min(1, reasons.reduce((a, r) => a + r.weight, 0)), reasons };

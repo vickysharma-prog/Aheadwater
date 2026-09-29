@@ -129,11 +129,15 @@ its date and reason.
     same code, replaying a real event: record rain on 15 Aug 2017 (180 mm
     between 3 and 6 am, reported by NDTV) and froth from Varthur Lake over
     Whitefield road on 16 Aug; the National Green Tribunal heard the case on
-    17 Aug and summoned officials for 22 Aug. Lab evidence is CPCB's 2017
-    monitoring for Varthur (faecal coliform 79,000 to 3,480,000 MPN/100 ml,
-    against the bathing limit of 2,500 in Schedule I item 93 of the
-    Environment (Protection) Rules); CPCB gives a yearly range, not dated
-    samples, and the app says so. No risk number there: the model learned
+    17 Aug and summoned officials for 22 Aug. The evidence known on the morning is
+    CPCB's 2016 monitoring for Varthur (faecal coliform 79,000 to 7,000,000
+    MPN/100 ml, against the bathing limit of 2,500 in Schedule I item 93 of the
+    Environment (Protection) Rules); with the citizen report that makes two
+    sources, the rule every city follows. CPCB's 2017 range (79,000 to
+    3,480,000) was published after the year and is attached at close, labelled
+    so. CPCB gives yearly ranges, not dated samples, and the app says so. A
+    yearly range is not a training row. Agara Lake is left out: CPCB's
+    "Agaram Lake" (station 3612) could not be confirmed as the same lake. No risk number there: the model learned
     European latitudes and seasons and would recalibrate on local samples
     first.
 

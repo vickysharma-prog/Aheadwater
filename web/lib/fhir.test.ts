@@ -55,4 +55,6 @@ test("Bengaluru runs through the same builder: references resolve, the CPCB rang
   assert.deepEqual(fc.component.map((c: { valueQuantity: { value: number } }) => c.valueQuantity.value), [79000, 3480000]);
   assert.equal(fc.effectivePeriod.start, "2017-01-01");
   assert.ok(!bundle.entry.some((e) => e.resource.id.endsWith("-risk")));
+  const issue = bundle.entry.map((e) => e.resource).find((r) => r.resourceType === "DetectedIssue");
+  assert.ok(JSON.stringify(issue.evidence).includes("lab-2016-faecal-coliform"), "the 2016 monitoring is evidence known before the event");
 });

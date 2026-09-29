@@ -21,7 +21,7 @@ export function DemoClock() {
           value={demo.city}
           onChange={(e) => actions.setCity(e.target.value as CityId)}
           aria-label="Demo city"
-          className="rounded bg-water px-2 py-0.5 text-xs font-semibold text-white"
+          className="rounded bg-white px-2 py-0.5 text-xs font-semibold text-slate-900"
         >
           {Object.values(CITIES).map((c) => (
             <option key={c.id} value={c.id}>

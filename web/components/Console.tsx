@@ -52,6 +52,7 @@ export function Console() {
   const west = risks.find((r) => r.site.id === "BEVL_BW_GNT02")!;
   const evidence = trust({
     risk: cfg.risk,
+    prior: cfg.prior,
     citizen: demo.reported ? { ...cfg.citizen, text: demo.reportText ?? cfg.citizen.text } : undefined,
     lab: inc?.lab ?? [],
   });
@@ -134,8 +135,8 @@ export function Console() {
             </>
             ) : (
               <>
-                Record rain hit Bengaluru before dawn on 15 Aug 2017: 180 mm between 3 and 6 am, the most for August in 127 years (as reported by NDTV). No risk
-                score here yet: the model needs local samples to learn these lakes, so a case opens from reports and lab results.
+                Record rain hit Bengaluru before dawn on 15 Aug 2017: 180 mm between 3 and 6 am, the most for August in 127 years (as reported by NDTV).
+                Prediction switches on here once the model has local samples to learn from; until then a case opens from reports and official monitoring.
               </>
             )}
           </Step>
@@ -169,11 +170,13 @@ export function Console() {
               ))}
             </ul>
             {!inc && (
-              <Button onClick={actions.openIncident} disabled={!demo.reported}>
+              <Button onClick={actions.openIncident} disabled={evidence.reasons.length < 2}>
                 Confirm and open a high-severity incident
               </Button>
             )}
-            {!inc && !demo.reported && <p className="mt-1 text-xs text-slate-500">One source is not enough to go public. The officer confirms once a second source agrees.</p>}
+            {!inc && evidence.reasons.length < 2 && (
+              <p className="mt-1 text-xs text-slate-500">One source is not enough to go public. The officer confirms once a second source agrees.</p>
+            )}
           </Step>
 
           <Step n={4} title="Mobilise" done={state && ["in_progress", "resolved"].includes(state.stage)} disabled={!inc}>
@@ -240,7 +243,7 @@ export function Console() {
             {inc && (
               <div className="space-y-2">
                 {inc.lab.length === 0 ? (
-                  <Button onClick={actions.labResult}>{cfg.lab[0].period ? `Pull the official monitoring for ${cfg.focus.name}` : `The lab result for the ${cfg.lab[0].date} sample arrives`}</Button>
+                  <Button onClick={actions.labResult}>{cfg.lab[0].period ? `Attach CPCB's ${cfg.lab[0].date} range for ${cfg.focus.name}, published after the year` : `The lab result for the ${cfg.lab[0].date} sample arrives`}</Button>
                 ) : (
                   <ul className="space-y-1 text-xs">
                     {inc.lab.map((l) => (
@@ -259,7 +262,9 @@ export function Console() {
 
           <Step n={7} title="Learn" done={demo.learned} disabled={state?.stage !== "resolved"}>
             {state?.stage === "resolved" &&
-              (demo.learned ? (
+              (demo.learned && cfg.lab[0].period ? (
+                <p>Case recorded. The first dated local sample becomes the first training row for {cfg.focus.name}.</p>
+              ) : demo.learned ? (
                 <p>
                   Added to the next training run: <span className="font-mono text-xs">{cfg.focus.id}, {cfg.lab[0].date}, unsafe=1</span>, with the weather before it. Every closed incident is a new labelled example.
                 </p>

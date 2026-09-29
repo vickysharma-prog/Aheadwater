@@ -105,7 +105,7 @@ export default function Home() {
           Real: every bacteria sample (European Environment Agency), the rain and temperature (E-OBS), each risk score, the Ghent lab results, and the Oslo health
           cohorts (OneAquaHealth sandbox). Written for the demo: the citizen report, the responders, and the Ghent cohorts, which the sandbox does not hold yet.
           The model is tuned for recreational contact during the bathing season, when the samples are taken. The Bengaluru replay (August 2017) runs the same workflow on
-          CPCB&apos;s 2017 monitoring, without a risk score.
+          CPCB&apos;s monitoring; prediction switches on there once the model has local samples.
         </p>
       </section>
     </div>
