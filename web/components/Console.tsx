@@ -3,6 +3,7 @@ import { useState, type ReactNode } from "react";
 
 import backtest from "@/data/backtest.json";
 import { DemoClock } from "@/components/DemoClock";
+import { HazardPanel } from "@/components/HazardPanel";
 import { LiveRisk } from "@/components/LiveRisk";
 import { RiskChart } from "@/components/RiskChart";
 import { SiteMap, type MapSite } from "@/components/SiteMap";
@@ -117,6 +118,7 @@ export function Console() {
             </div>
           )}
           {ghent && <LiveRisk />}
+          <HazardPanel key={cfg.id} city={cfg.id} />
           {selectedDays && (
             <div className="rounded-lg border border-slate-200 bg-white p-4">
               <h2 className="text-sm font-semibold">Backtest: {backtest.name}, May 2021</h2>
