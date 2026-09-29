@@ -3,6 +3,7 @@ import { useState, type ReactNode } from "react";
 
 import backtest from "@/data/backtest.json";
 import { DemoClock } from "@/components/DemoClock";
+import { LiveRisk } from "@/components/LiveRisk";
 import { RiskChart } from "@/components/RiskChart";
 import { SiteMap, type MapSite } from "@/components/SiteMap";
 import { incidentBundle } from "@/lib/fhir";
@@ -98,6 +99,7 @@ export function Console() {
               Alert at {pct(ALERT_LEVEL)} risk (1 alert in 5 is a real exceedance across Europe). Watch at {WATCH_MULTIPLE}x a site&apos;s usual risk. Scores use weather up to the day before.
             </p>
           </div>
+          <LiveRisk />
           {selectedDays && (
             <div className="rounded-lg border border-slate-200 bg-white p-4">
               <h2 className="text-sm font-semibold">Backtest: {backtest.name}, May 2021</h2>

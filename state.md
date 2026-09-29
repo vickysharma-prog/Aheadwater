@@ -18,15 +18,14 @@ deployed from `web/` with `npx vercel deploy --prod`).
 | `web/lib/` | Model scorer, features, live risk (Open-Meteo), escalation ladder, scenario, FHIR bundle, browser store. 14 tests (`npm test`) |
 | `/console` | Map, risk table, backtest chart, the seven steps. Whole flow clicked through on the live site: report, confirm, escalate, open to claim, claim from `/responder`, lab result, close, learn |
 | `/public`, `/responder`, `/health`, `/fhir-explorer` | Built, load, share one incident across tabs |
+| `/api/risk` + live panel | Today's Open-Meteo forecast scored for the four Ghent sites, shown on `/console` |
 | `/fhir/*` | Read-only FHIR R4: metadata, read, search by `_id` and `status`, the transaction Bundle, our CodeSystem |
 | FHIR validation | HL7 validator against the OAH profiles (built with SUSHI), on the resolved incident and a mid-incident snapshot: 0 errors, 30 warnings. `fhir/README.md` |
 
 ## Next
 
-1. Live mode on the console: today's Open-Meteo risk for the Ghent sites (`liveRisk` exists, not shown yet).
-2. The 30-second India scale proof for the video (decision 18: workflow and FHIR, no risk number).
-3. Post the Bundle to a local HAPI server to show a real FHIR server accepts it.
-4. Devpost text and the video storyboard. The rules ask for no AI-use disclosure (checked 29 Sep).
+1. The 30-second India scale proof for the video (decision 18: workflow and FHIR, no risk number).
+2. Devpost text and the video storyboard. The rules ask for no AI-use disclosure (checked 29 Sep).
 
 ## Model results (29 Sep)
 
@@ -61,6 +60,7 @@ Demo event: **GNT03, 17 May 2021.**
 - DiscoData rejects `ORDER BY`, system tables and `SELECT *` with `TOP`. Alias
   every table. Pages come back unordered, so `fetch.py` removes duplicates.
 - The UK has no rows in the samples table.
+- Docker does not run on this laptop, so no local HAPI server. The HL7 validator is the conformance check.
 - Weather for training comes from E-OBS, not Open-Meteo, because Open-Meteo's
   free tier counts a multi-year history for one location as dozens of calls.
   The live app uses the Open-Meteo forecast for five Ghent sites, which is
