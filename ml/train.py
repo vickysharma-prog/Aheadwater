@@ -15,7 +15,7 @@ from sklearn.model_selection import StratifiedGroupKFold
 
 from features import FEATURES, OUT as TRAIN
 
-MODEL_DIR = Path(__file__).parent / "model"
+MODEL_DIR = Path(__file__).parent.parent / "web" / "data"
 PARAMS = dict(n_estimators=400, learning_rate=0.03, num_leaves=31, min_child_samples=50,
               subsample=0.8, subsample_freq=1, colsample_bytree=0.8, verbose=-1)
 WEATHER_ONLY = [f for f in FEATURES if not f.startswith(("site_", "last_", "days_since"))]
@@ -74,6 +74,13 @@ def main():
     MODEL_DIR.mkdir(exist_ok=True)
     (MODEL_DIR / "bacteria.json").write_text(json.dumps(model.booster_.dump_model()))
     (MODEL_DIR / "metrics.json").write_text(json.dumps(report, indent=2))
+    # Rows and scores the app's scorer is tested against.
+    sample = df.sample(40, random_state=1)
+    (MODEL_DIR / "parity.json").write_text(json.dumps({
+        "features": FEATURES,
+        "rows": sample[FEATURES].astype(float).replace({np.nan: None}).values.tolist(),
+        "expected": model.predict_proba(sample[FEATURES])[:, 1].round(6).tolist(),
+    }))
     print(json.dumps(report, indent=2))
 
 
