@@ -46,7 +46,7 @@ export function Console() {
   const west = risks.find((r) => r.site.id === "BEVL_BW_GNT02")!;
   const evidence = trust({
     risk: { day: backtest.event_day, value: east.risk, usual: east.usual },
-    citizen: demo.reported ? CITIZEN_REPORT : undefined,
+    citizen: demo.reported ? { ...CITIZEN_REPORT, text: demo.reportText ?? CITIZEN_REPORT.text } : undefined,
     lab: inc?.lab ?? [],
   });
 
@@ -116,13 +116,13 @@ export function Console() {
           <Step n={2} title="Detect" done={demo.reported}>
             {demo.reported ? (
               <blockquote className="rounded-md border-l-4 border-water bg-water-soft px-3 py-2 text-slate-800">
-                <p>&ldquo;{CITIZEN_REPORT.text}&rdquo;</p>
+                <p>&ldquo;{demo.reportText ?? CITIZEN_REPORT.text}&rdquo;</p>
                 <footer className="mt-1 text-xs text-slate-500">Citizen report from the public page, {time(CITIZEN_REPORT.at)}, pinned at GNT03</footer>
               </blockquote>
             ) : (
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-slate-600">Waiting for reports from the public page.</span>
-                <Button onClick={actions.citizenReport}>Deliver the citizen report</Button>
+                <Button onClick={() => actions.citizenReport()}>Deliver the citizen report</Button>
               </div>
             )}
           </Step>

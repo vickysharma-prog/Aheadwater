@@ -64,3 +64,15 @@ export function trust(inc: Pick<Incident, "risk" | "citizen" | "lab">) {
   if (inc.lab.some((l) => l.bad)) reasons.push({ source: "Lab result above the limit", weight: 0.6 });
   return { score: Math.min(1, reasons.reduce((a, r) => a + r.weight, 0)), reasons };
 }
+
+/** The whole replay played through to the end, as served at /fhir. */
+export const RESOLVED_AT = new Date("2021-06-01T00:00:00Z");
+export function resolvedIncident(): Incident {
+  const inc = newIncident("2021-05-17T08:05:00+02:00");
+  inc.events.push(
+    { type: "acknowledged", at: "2021-05-17T08:12:00+02:00", by: "Water officer" },
+    { type: "dispatched", at: "2021-05-17T08:30:00+02:00", by: "Water officer" },
+    { type: "resolved", at: "2021-05-31T15:00:00+02:00", by: "City water quality lab" },
+  );
+  return { ...inc, lab: LAB, responder: RESPONDERS[0], advisory: ADVISORY };
+}

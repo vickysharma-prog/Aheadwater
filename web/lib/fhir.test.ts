@@ -2,20 +2,9 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import { incidentBundle } from "./fhir.ts";
-import { ADVISORY, LAB, newIncident, RESPONDERS } from "./scenario.ts";
+import { RESOLVED_AT, resolvedIncident } from "./scenario.ts";
 
-export function fullScenario() {
-  const inc = newIncident("2021-05-17T08:05:00+02:00");
-  inc.events.push(
-    { type: "acknowledged", at: "2021-05-17T08:12:00+02:00", by: "Water officer" },
-    { type: "dispatched", at: "2021-05-17T08:30:00+02:00", by: "Water officer" },
-    { type: "resolved", at: "2021-05-31T15:00:00+02:00", by: "City water quality lab" },
-  );
-  inc.lab = LAB;
-  inc.responder = RESPONDERS[0];
-  inc.advisory = ADVISORY;
-  return { inc, bundle: incidentBundle(inc, new Date("2021-06-01T00:00:00Z")) };
-}
+export const fullScenario = () => ({ bundle: incidentBundle(resolvedIncident(), RESOLVED_AT) });
 
 test("every reference in the bundle points at a resource in it", () => {
   const { bundle } = fullScenario();

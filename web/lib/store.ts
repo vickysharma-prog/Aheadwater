@@ -9,6 +9,7 @@ export type Demo = {
   /** Scenario time: the clock the incident runs on, which the visitor can speed up. */
   clock: string;
   reported: boolean; // citizen report has arrived
+  reportText?: string; // what the visitor typed on the public page, if they did
   incident?: Incident;
   learned: boolean; // closed incident added to the training set
 };
@@ -66,8 +67,13 @@ function log(type: EventType, by: string) {
 export const actions = {
   reset: () => write(START),
   advance: (min: number) => write({ ...read(), clock: addMinutes(read().clock, min) }),
-  citizenReport: () => write({ ...read(), reported: true, clock: maxIso(read().clock, "2021-05-17T07:40:00+02:00") }),
-  openIncident: () => write({ ...read(), incident: { ...newIncident(read().clock), advisory: ADVISORY } }),
+  citizenReport: (text?: string) =>
+    write({ ...read(), reported: true, reportText: text?.trim() || undefined, clock: maxIso(read().clock, "2021-05-17T07:40:00+02:00") }),
+  openIncident: () => {
+    const d = read();
+    const inc = newIncident(d.clock);
+    write({ ...d, incident: { ...inc, advisory: ADVISORY, citizen: { ...inc.citizen!, text: d.reportText ?? inc.citizen!.text } } });
+  },
   acknowledge: () => log("acknowledged", "Water officer"),
   dispatch: (responderId: string) => {
     withIncident((inc) => ({ ...inc, responder: RESPONDERS.find((r) => r.id === responderId) }));
