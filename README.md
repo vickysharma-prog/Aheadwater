@@ -83,3 +83,6 @@ pytest
   criteria from Schedule I, item 93 of the Environment (Protection) Rules.
 - Landing page video: aerial ocean footage from Pexels (free licence),
   re-encoded to 1080p.
+- Demo video: wave sound "Ocean Waves on a Tropical Beach" (CC0, Wikimedia
+  Commons); test photo of Blaarmeersen by Ravindra Hegade (CC BY-SA 4.0,
+  Wikimedia Commons). The video is built by `video/build.py`.
