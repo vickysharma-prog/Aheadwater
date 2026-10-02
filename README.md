@@ -81,3 +81,5 @@ pytest
 - Bengaluru lakes: Central Pollution Control Board, National Water Quality
   Monitoring Programme 2016 and 2017 (lakes, ponds and tanks, Karnataka); bathing
   criteria from Schedule I, item 93 of the Environment (Protection) Rules.
+- Landing page video: aerial ocean footage from Pexels (free licence),
+  re-encoded to 1080p.

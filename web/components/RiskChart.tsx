@@ -21,7 +21,7 @@ export function RiskChart({ days, usual, lab, eventDay }: { days: Day[]; usual: 
         ))}
         <line x1={L} x2={W - R} y1={yr(watch)} y2={yr(watch)} stroke="#b45309" strokeDasharray="4 3" />
         <text x={W - R + 4} y={yr(watch) + 4} fontSize="10" fill="#b45309">Watch</text>
-        <path d={line} fill="none" stroke="#0e6f86" strokeWidth="2.2" />
+        <path d={line} pathLength={1} className="draw-line" fill="none" stroke="#0e6f86" strokeWidth="2.2" />
         {days.map((d, i) =>
           d.date === eventDay ? <circle key={d.date} cx={x(i)} cy={yr(d.risk)} r="5" fill="#0e6f86" stroke="white" strokeWidth="2" /> : null,
         )}

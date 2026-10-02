@@ -3,6 +3,19 @@
 One entry per working session, newest at the top. Date, what got done, what
 broke, what is next.
 
+## 2026-10-02: A landing page that sells the idea
+
+Vicky found the landing page flat: no motion, nothing to click, and a headline
+that did not land. Rebuilt it with Motion and Lenis: a full-screen ocean video
+behind a glass header with centred tabs, the headline "Stop water crises before
+they start." with a one-line description of the product under it, counters,
+an auto-playing six-step walkthrough you can click, a chart that draws itself,
+a tap-through One Health picker, and city cards that open the replay. All
+copy is positive and plain.
+
+What broke: the first video encode (720p, heavy compression) looked soft. A
+1080p encode cut to 10 seconds is sharp at 7.9 MB.
+
 ## 2026-09-29 (late night): Hazard rules and the photo check
 
 Two things from the plan were still missing, and Vicky asked for both. The

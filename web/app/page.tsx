@@ -4,110 +4,165 @@ import backtest from "@/data/backtest.json";
 import metrics from "@/data/metrics.json";
 import validation from "@/data/validation.json";
 import { RiskChart } from "@/components/RiskChart";
+import { Cities } from "@/components/landing/Cities";
+import { Hero } from "@/components/landing/Hero";
+import { OneHealth } from "@/components/landing/OneHealth";
+import { CountUp, Reveal } from "@/components/landing/Reveal";
+import { SmoothScroll } from "@/components/landing/SmoothScroll";
+import { Steps } from "@/components/landing/Steps";
 
-const STAGES = [
-  ["Predict", "A model trained on bathing-water samples from across Europe reads the weather and scores each site for the next day."],
-  ["Detect", "High risk, a lab result over the limit, a rule for algae, low oxygen or sewer overflow, or a citizen's report opens a case. Photos are checked for light, focus and water in the reporter's browser."],
-  ["Verify", "Each case gets a trust score from how many sources agree. The officer confirms before anything goes public."],
-  ["Mobilise", "The city officer owns it. If nobody acts in time it escalates, then opens to nearby verified responders."],
-  ["Resolve", "The responder closes it with evidence. The public page shows each step as it happens."],
-  ["Learn", "Every closed case becomes a labelled example for the next training run."],
-];
+const event = backtest.days.find((d) => d.date === backtest.event_day)!;
 
-const n = (x: number) => x.toLocaleString("en-GB");
+function Heading({ kicker, title, text }: { kicker: string; title: string; text?: string }) {
+  return (
+    <Reveal className="mx-auto mb-12 max-w-2xl text-center">
+      <div className="text-sm font-semibold uppercase tracking-widest text-water">{kicker}</div>
+      <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">{title}</h2>
+      {text && <p className="mt-4 text-lg text-slate-600">{text}</p>}
+    </Reveal>
+  );
+}
 
 export default function Home() {
   const cv = metrics.grouped_cv;
-  const lift = cv.precision_at_alert / cv.base_rate;
+  const stats = [
+    { to: metrics.rows, label: "water samples it learned from" },
+    { to: metrics.sites, label: "lakes and rivers in 27 countries" },
+    { to: Math.round(cv.precision_at_alert / cv.base_rate), suffix: "x", label: "more often right than a random pick" },
+    { to: validation.errors, label: "errors on the official HL7 FHIR validator" },
+  ];
+
   return (
-    <div className="mx-auto max-w-6xl space-y-16 px-4 py-10">
-      <section className="grid items-center gap-8 lg:grid-cols-2">
-        <div className="space-y-5">
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">Know before the water turns.</h1>
-          <p className="text-lg text-slate-600">
-            After heavy rain, sewage overflows into city lakes and rivers, and bacteria counts climb. People swim and dogs go in, because the lab result
-            arrives days later. Aheadwater warns the city the morning it matters, then runs the response until the water is safe again.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/console" className="rounded-md bg-water px-4 py-2 font-medium text-white hover:bg-cyan-800">
-              Run the Ghent replay
-            </Link>
-            <Link href="/public" className="rounded-md border border-slate-300 bg-white px-4 py-2 font-medium hover:border-water hover:text-water">
-              See the public page
-            </Link>
-          </div>
-          <p className="text-sm text-slate-500">Open the console, the responder view and the public page in three tabs. They share one incident.</p>
-        </div>
-        <div className="rounded-lg border border-slate-200 bg-white p-4">
-          <h2 className="text-sm font-semibold">Blaarmeersen, Ghent, May 2021</h2>
-          <p className="mb-2 text-xs text-slate-500">
-            Scored by a model that never saw a Ghent sample. On the morning of 17 May risk reached {(backtest.days.find((d) => d.date === backtest.event_day)!.risk * 100).toFixed(1)}%,
-            {" "}{(backtest.days.find((d) => d.date === backtest.event_day)!.risk / backtest.usual).toFixed(1)}x the site&apos;s usual level. The lab sample taken that day found
-            enterococci at 489 per 100 ml, over the limit of 400.
-          </p>
-          <RiskChart days={backtest.days} usual={backtest.usual} lab={backtest.lab} eventDay={backtest.event_day} />
-        </div>
-      </section>
+    <SmoothScroll>
+      <Hero />
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          [n(metrics.rows), "bacteria samples it learned from"],
-          [n(metrics.sites), "lake and river sites in 27 countries"],
-          [`${lift.toFixed(0)}x`, "better than chance: 1 alert in 5 is a real exceedance, against 1 in 50"],
-          [cv.roc_auc.toFixed(2), "ROC-AUC on sites it never saw during training"],
-        ].map(([big, small]) => (
-          <div key={small} className="rounded-lg border border-slate-200 bg-white p-4">
-            <div className="text-3xl font-semibold text-water">{big}</div>
-            <div className="text-sm text-slate-600">{small}</div>
-          </div>
-        ))}
-      </section>
-
-      <section>
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight">From warning to all-clear</h2>
-        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {STAGES.map(([title, text], i) => (
-            <li key={title} className="rounded-lg border border-slate-200 bg-white p-4">
-              <div className="mb-1 text-xs font-semibold text-water">{i + 1}</div>
-              <div className="font-semibold">{title}</div>
-              <p className="text-sm text-slate-600">{text}</p>
-            </li>
+      <section className="relative z-10 -mt-12 px-4">
+        <div className="mx-auto grid max-w-6xl gap-4 rounded-3xl bg-white p-6 shadow-2xl shadow-cyan-950/10 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 100} className="rounded-2xl p-4 text-center">
+              <div className="text-4xl font-semibold text-water">
+                <CountUp to={s.to} suffix={s.suffix} />
+              </div>
+              <div className="mt-1 text-sm text-slate-600">{s.label}</div>
+            </Reveal>
           ))}
-        </ol>
-      </section>
-
-      <section className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-lg border border-slate-200 bg-white p-5">
-          <h2 className="mb-2 text-xl font-semibold">One Health, in one click</h2>
-          <p className="text-slate-600">
-            When a case opens, the public health team learns which population cohorts live near the water, vets are asked to report sick dogs, and the public
-            page tells people to stay out. River, animals and people, linked by the same incident.
-          </p>
-          <Link href="/health" className="mt-3 inline-block text-sm font-medium text-water underline">
-            See the cohort check
-          </Link>
-        </div>
-        <div className="rounded-lg border border-slate-200 bg-white p-5">
-          <h2 className="mb-2 text-xl font-semibold">Built on the OneAquaHealth standard</h2>
-          <p className="text-slate-600">
-            Every step is stored as HL7 FHIR R4, on the OneAquaHealth implementation guide. The full incident passes the official HL7 validator with{" "}
-            {validation.errors} errors. Any FHIR system can read it at <code className="text-sm">/fhir</code>.
-          </p>
-          <Link href="/fhir-explorer" className="mt-3 inline-block text-sm font-medium text-water underline">
-            Look at the FHIR resources
-          </Link>
         </div>
       </section>
 
-      <section className="rounded-lg border border-slate-200 bg-white p-5 text-sm text-slate-600">
-        <h2 className="mb-2 text-base font-semibold text-slate-900">What is real in the demo</h2>
-        <p>
-          Real: every bacteria sample (European Environment Agency), the rain and temperature (E-OBS), each risk score, the Ghent lab results, and the Oslo health
-          cohorts (OneAquaHealth sandbox). Written for the demo: the citizen report, the responders, and the Ghent cohorts, which the sandbox does not hold yet.
-          The model is tuned for recreational contact during the bathing season, when the samples are taken. The Bengaluru replay (August 2017) runs the same workflow on
-          CPCB&apos;s monitoring; prediction switches on there once the model has local samples.
-        </p>
+      <section id="how" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-24">
+        <Heading kicker="How it works" title="From forecast to all-clear" text="Six steps, one shared picture. Tap any step to see it." />
+        <Reveal>
+          <Steps />
+        </Reveal>
       </section>
-    </div>
+
+      <section className="bg-gradient-to-b from-white to-cyan-50/60 py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 lg:grid-cols-2">
+          <Reveal>
+            <div className="text-sm font-semibold uppercase tracking-widest text-water">Tested on a real day</div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">It saw Blaarmeersen coming.</h2>
+            <p className="mt-5 text-lg text-slate-600">
+              On the morning of 17 May 2021, after a wet weekend in Ghent, our model rated Blaarmeersen lake at {(event.risk / backtest.usual).toFixed(1)} times its usual
+              risk. The lab sample taken that day confirmed it. The model had never seen a single Ghent sample.
+            </p>
+            <p className="mt-4 text-lg text-slate-600">That is the head start Aheadwater gives a city: a warning in the morning, while the lab is still at work.</p>
+            <Link href="/console" className="mt-8 inline-flex items-center gap-2 font-semibold text-water hover:underline">
+              Replay that morning <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </Reveal>
+          <Reveal delay={150} className="rounded-3xl bg-white p-6 shadow-xl shadow-cyan-950/5">
+            <h3 className="text-sm font-semibold">Blaarmeersen, Ghent, May 2021</h3>
+            <p className="mb-3 text-xs text-slate-500">Daily risk from the model, rain below it, lab samples as dashed lines.</p>
+            <RiskChart days={backtest.days} usual={backtest.usual} lab={backtest.lab} eventDay={backtest.event_day} />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-24">
+        <Heading kicker="One Health" title="Water, animals and people, in one picture" text="When the water needs care, everyone who looks after it hears at the same moment." />
+        <Reveal>
+          <OneHealth />
+        </Reveal>
+        <Reveal className="mt-10 text-center">
+          <Link href="/health" className="font-semibold text-water hover:underline">
+            See the health cohort check <span aria-hidden="true">&rarr;</span>
+          </Link>
+        </Reveal>
+      </section>
+
+      <section className="bg-slate-50 py-24">
+        <div className="mx-auto max-w-6xl px-4">
+          <Heading kicker="Works where you are" title="Two cities, two real days" text="Pick one and replay the whole case, from the first signal to the close." />
+          <Reveal>
+            <Cities />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-24">
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <Reveal>
+            <div className="text-sm font-semibold uppercase tracking-widest text-water">Built on open standards</div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Speaks the language of health systems.</h2>
+            <p className="mt-5 text-lg text-slate-600">
+              Every step is stored as HL7 FHIR, on the OneAquaHealth implementation guide. Hospitals, labs and city systems can read a case directly, and the
+              official HL7 validator checks every one.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/fhir-explorer" className="rounded-full bg-water px-5 py-2.5 font-medium text-white transition-transform hover:scale-105">
+                Explore the FHIR records
+              </Link>
+              <Link href="/fhir/metadata" prefetch={false} className="rounded-full border border-slate-300 px-5 py-2.5 font-medium transition-colors hover:border-water hover:text-water">
+                Open the FHIR endpoint
+              </Link>
+            </div>
+          </Reveal>
+          <Reveal delay={150}>
+            <div className="rounded-3xl bg-slate-900 p-6 font-mono text-sm text-slate-200 shadow-2xl">
+              <div className="mb-4 flex gap-1.5" aria-hidden="true">
+                <span className="h-3 w-3 rounded-full bg-red-400" />
+                <span className="h-3 w-3 rounded-full bg-amber-400" />
+                <span className="h-3 w-3 rounded-full bg-emerald-400" />
+              </div>
+              <div className="text-emerald-300">GET /fhir/DetectedIssue/inc-gnt03-20210517</div>
+              <pre className="mt-3 whitespace-pre-wrap text-slate-300">{`{
+  "resourceType": "DetectedIssue",
+  "status": "final",
+  "severity": "high",
+  "implicated": [{ "reference": "Location/bevl-bw-gnt03" }],
+  "evidence": [ risk score, citizen report, lab results ]
+}`}</pre>
+              <div className="mt-4 rounded-lg bg-emerald-500/15 px-3 py-2 text-emerald-300">
+                HL7 validator: {validation.errors} errors across {validation.bundles.length} incident bundles
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-gradient-to-br from-cyan-800 via-cyan-700 to-teal-600 py-24 text-white">
+        <svg className="absolute bottom-0 left-0 w-full opacity-15" height="120" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 60 C 240 0 480 120 720 60 S 1200 0 1440 60 V120 H0Z" fill="white" />
+        </svg>
+        <Reveal className="relative mx-auto max-w-3xl px-4 text-center">
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-5xl">See a whole case in two minutes.</h2>
+          <p className="mt-4 text-lg text-cyan-50">Open the console, the responder view and the public page side by side. They share one live case.</p>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <Link href="/console" className="rounded-full bg-white px-7 py-3.5 text-lg font-semibold text-water transition-transform hover:scale-105">
+              Start the replay
+            </Link>
+            <Link href="/public" className="rounded-full border border-white/40 px-7 py-3.5 text-lg font-semibold transition-colors hover:bg-white/10">
+              Open the public page
+            </Link>
+          </div>
+        </Reveal>
+      </section>
+
+      <footer className="mx-auto max-w-6xl px-4 py-10 text-sm text-slate-500">
+        Built on real data: bathing-water samples from the European Environment Agency, E-OBS weather, monitoring from India&apos;s Central Pollution Control
+        Board, and health cohorts from the OneAquaHealth sandbox. People and messages written for the demo carry the HL7 test-data tag. The model is tuned
+        for the bathing season, when sites are sampled.
+      </footer>
+    </SmoothScroll>
   );
 }
