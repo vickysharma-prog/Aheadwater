@@ -93,10 +93,8 @@ def framed(sc, length: float) -> pathlib.Path:
     if "card" in sc:
         run("-i", src, "-vf", f"{pad},format=yuv420p", "-r", 30, "-c:v", "libx264", "-crf", 16, "-preset", "fast", out)
     else:
-        # A slow push-in on the frame keeps a still screen alive.
-        z = f"zoompan=z='1+0.035*on/({length}*30)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=1920x1080:fps=30"
         run("-framerate", 30, "-loop", 1, "-i", BUILD / f"frame-{sc['id']}.png", "-i", src,
-            "-filter_complex", f"[1:v]scale={APP_W}:{APP_H}:flags=lanczos,{pad}[app];[0:v][app]overlay={APP_X}:{APP_Y}:shortest=1,{z},format=yuv420p",
+            "-filter_complex", f"[1:v]scale={APP_W}:{APP_H}:flags=lanczos,{pad}[app];[0:v][app]overlay={APP_X}:{APP_Y}:shortest=1,format=yuv420p",
             "-t", length, "-r", 30, "-c:v", "libx264", "-crf", 16, "-preset", "fast", out)
     return out
 

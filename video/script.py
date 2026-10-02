@@ -21,6 +21,14 @@ def preset(state: str) -> str:
 SCENES = [
     {"id": "intro", "card": "intro", "lines": [], "length": 5.6},
     {
+        "id": "stakes", "card": "stakes",
+        "lines": [
+            ("Unsafe water, sanitation and hygiene cost one point four million lives in a single year, according to the World Health Organization.", 0.3),
+            ("About half a million of them in India. More than thirty thousand across Europe.", 0.4),
+            ("Every warning that reaches people a day earlier is a chance to keep them safe.", 0.8),
+        ],
+    },
+    {
         "id": "open", "card": "open",
         "lines": [
             ("Every summer, millions of people swim, paddle, fish and play in their city's lakes and rivers.", 0.5),
@@ -44,11 +52,6 @@ SCENES = [
         ],
     },
     {
-        "id": "landing", "label": "aheadwater.vercel.app", "url": "/",
-        "lines": [("And it is live on the web today.", 1.2)],
-        "take": [("goto", "/", 3), ("rec", True), ("wait", 2.2), ("scroll", 520)],
-    },
-    {
         "id": "tour", "label": "aheadwater.vercel.app", "url": "/",
         "lines": [
             ("Every step opens with a tap,", 0.2),
@@ -65,7 +68,6 @@ SCENES = [
         "id": "model", "card": "model",
         "lines": [
             ("For bacteria, the hazard you cannot see, the forecast comes from a model trained on 150,734 bathing-water samples, from 7,246 lakes and rivers in 27 countries.", 0.4),
-            ("It reads the weather before each sample, the rain, the heat, the dry spells, and learns what tends to follow.", 0.4),
             ("On sites it has never seen, its alerts are right ten times more often than chance.", 0.8),
         ],
     },
@@ -197,7 +199,6 @@ SCENES = [
     {
         "id": "future", "card": "future",
         "lines": [
-            ("What comes next is already mapped out.", 0.3),
             ("Live sensors and city lab feeds flowing straight in, a trained forecast for every hazard as local data grows, and the incident and citizen-report profiles offered back to the OneAquaHealth standard.", 0.3),
             ("Then the next city, and the next. Every lake and river people love, watched a day ahead.", 0.9),
         ],

@@ -146,6 +146,16 @@
   .go .i-shine { animation: ishine 1.6s ease-in-out 3.3s forwards; }
   @keyframes ishine { to { transform: translateX(100%); } }
 
+
+  /* Stakes: what unsafe water costs */
+  .tally { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; width: 1640px; }
+  .tal { border-radius: 32px; padding: 46px 44px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); text-align: left; }
+  .tal .big { font-size: 112px; font-weight: 700; letter-spacing: -.04em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .tal .where { margin-top: 14px; font-size: 34px; font-weight: 600; }
+  .tal .what { margin-top: 8px; font-size: 25px; color: #cdeef4; }
+  .tal.world .big { color: #fde68a; }
+  .src { font-size: 22px; color: rgba(255,255,255,.6); }
+
   /* Frame: the background behind a take */
   .browser { position: absolute; left: 140px; top: 128px; width: 1640px; height: 922px; border-radius: 26px; background: #e2e8f0; box-shadow: 0 50px 120px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.15); overflow: hidden; }
   .browser .bar { height: 22px; }
@@ -169,6 +179,25 @@
     <div class="i-tag">Stop water crises before they start.</div>
   </div>
   <div class="i-shine"></div>
+</section>
+
+<!-- 0b. Stakes -->
+<section class="scene" id="stakes">
+  <div class="gradient"></div>
+  <svg class="waves" viewBox="0 0 1920 260" preserveAspectRatio="none"><path d="M0 120 C 320 40 640 200 960 120 S 1600 40 2080 120 V260 H0Z" fill="white"/><path d="M0 170 C 320 100 640 240 960 170 S 1600 100 2080 170 V260 H0Z" fill="white"/></svg>
+  <div class="center" style="gap: 56px">
+    <div>
+      <div class="kicker" data-beat="0">Why it matters</div>
+      <h2 class="mt" data-beat="0">Unsafe water costs lives every year.</h2>
+    </div>
+    <div class="tally">
+      <div class="tal world" data-beat="0"><div class="big"><span data-count="1.4" data-dec="1">0</span>M</div><div class="where">Worldwide</div><div class="what">deaths a year</div></div>
+      <div class="tal" data-beat="1"><div class="big">~<span data-count="498000">0</span></div><div class="where">India</div><div class="what">deaths a year</div></div>
+      <div class="tal" data-beat="1"><div class="big">~<span data-count="33000">0</span></div><div class="where">Europe</div><div class="what">deaths a year</div></div>
+    </div>
+    <p class="lead" data-beat="2">Every warning that arrives a day earlier is a chance to keep people safe.</p>
+    <div class="src" data-beat="1">Deaths attributable to unsafe drinking water, sanitation and hygiene, 2019. WHO (2023); WHO Global Health Observatory, SDG 3.9.2; WHO/Europe.</div>
+  </div>
 </section>
 
 <!-- 1. Open: the city's water, then the rain -->
@@ -251,8 +280,8 @@
       <div class="stat"><div class="big" data-count="7246">0</div><div class="lab">lakes and rivers</div></div>
       <div class="stat"><div class="big" data-count="27">0</div><div class="lab">countries</div></div>
     </div>
-    <p class="lead" data-beat="1">Rain, heat and dry spells before each sample, and what came next.</p>
-    <div class="compare" data-beat="2">
+    <p class="lead" data-beat="0">It reads the rain, heat and dry spells before each sample, and learns what comes next.</p>
+    <div class="compare" data-beat="1">
       <div class="row"><span>A random pick</span><div class="bar"><b></b></div><strong>1 in 50</strong></div>
       <div class="row"><span>Aheadwater's alert</span><div class="bar"><b></b></div><strong>1 in 5</strong></div>
     </div>
@@ -329,10 +358,10 @@
   });
 
   function count(el) {
-    const to = +el.dataset.count, start = performance.now();
+    const to = +el.dataset.count, dec = +(el.dataset.dec || 0), start = performance.now();
     const tick = (t) => {
       const k = Math.min(1, (performance.now() - start) / 1800);
-      el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))).toLocaleString('en-GB');
+      el.textContent = (to * (1 - Math.pow(1 - k, 3))).toLocaleString('en-GB', { minimumFractionDigits: dec, maximumFractionDigits: dec });
       if (k < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
