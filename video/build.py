@@ -28,6 +28,11 @@ XF = 0.45  # cross-fade between scenes, seconds
 APP_W, APP_H, APP_X, APP_Y = 1640, 900, 140, 150  # where a take sits inside its frame
 
 
+def seconds(path: pathlib.Path) -> float:
+    out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)], capture_output=True, text=True)
+    return float(out.stdout.strip())
+
+
 def run(*args):
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", *map(str, args)], check=True)
 
@@ -77,7 +82,7 @@ def still(path: str, out: pathlib.Path):
         out.write_bytes(base64.b64decode(data))
         tab.ws.close()
     finally:
-        proc.kill()
+        rec.close(proc)
 
 
 def framed(sc, length: float) -> pathlib.Path:
@@ -90,7 +95,7 @@ def framed(sc, length: float) -> pathlib.Path:
     else:
         # A slow push-in on the frame keeps a still screen alive.
         z = f"zoompan=z='1+0.035*on/({length}*30)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=1920x1080:fps=30"
-        run("-loop", 1, "-i", BUILD / f"frame-{sc['id']}.png", "-i", src,
+        run("-framerate", 30, "-loop", 1, "-i", BUILD / f"frame-{sc['id']}.png", "-i", src,
             "-filter_complex", f"[1:v]scale={APP_W}:{APP_H}:flags=lanczos,{pad}[app];[0:v][app]overlay={APP_X}:{APP_Y}:shortest=1,{z},format=yuv420p",
             "-t", length, "-r", 30, "-c:v", "libx264", "-crf", 16, "-preset", "fast", out)
     return out
@@ -173,7 +178,14 @@ def assemble(tm):
     clips, lengths = [], []
     for sc in SCENES:
         L = tm[sc["id"]]["length"] + 0.6
-        clips.append(framed(sc, L))
+        if "take" in sc:
+            # A take whose clicks outlast its narration keeps all of them; the voice simply finishes first.
+            L = max(L, seconds(FOOT / f"{sc['id']}.mp4"))
+        clip = framed(sc, L)
+        got = seconds(clip)
+        if abs(got - L) > 0.2:  # the cross-fades are timed on L, so a short clip would leave black behind it
+            raise RuntimeError(f"{sc['id']}: clip is {got:.2f}s, expected {L:.2f}s")
+        clips.append(clip)
         lengths.append(L)
 
     # Picture: cross-fade each scene into the next.
@@ -225,7 +237,12 @@ def main():
             for sc in SCENES:
                 if sc["id"] in wanted:
                     print(f"recording {sc['id']} ({tm[sc['id']]['length']:.1f}s)")
-                    record(sc, tm[sc["id"]])
+                    for attempt in range(3):
+                        try:
+                            record(sc, tm[sc["id"]])
+                            break
+                        except Exception as e:  # one bad take should not stop the rest
+                            print(f"  {sc['id']}: attempt {attempt + 1} failed: {e!r}")
         if not args or args[0] == "cut":
             assemble(tm)
     finally:

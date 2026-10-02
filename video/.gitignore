@@ -6,3 +6,4 @@ build/
 assets/*.ogg
 assets/*.wav
 __pycache__/
+run_*.bat

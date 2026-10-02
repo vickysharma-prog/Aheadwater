@@ -91,6 +91,20 @@ CURSOR_JS = r"""
       await new Promise(r => setTimeout(r, 1000));
       return r;
     },
+    async glide(el, offset = 140, ms = 1400) {
+      const from = scrollY, t0 = performance.now();
+      await new Promise(done => {
+        const step = () => {
+          const k = Math.min(1, (performance.now() - t0) / ms), e = 1 - Math.pow(1 - k, 3);
+          const to = el.getBoundingClientRect().top + scrollY - offset;
+          window.scrollTo(0, from + (to - from) * e);
+          k < 1 ? requestAnimationFrame(step) : done();
+        };
+        requestAnimationFrame(step);
+      });
+      return 'ok';
+    },
+    heading(text) { return [...document.querySelectorAll('h2,h3')].find(h => h.innerText.startsWith(text)); },
     async click(text) {
       const el = this.find(text);
       if (!el) return 'missing: ' + text;
@@ -155,6 +169,13 @@ class Tab:
             self.stamps.append((time.time() * SLOW, name))  # page time
         self.ws.send(json.dumps({"id": 900_000 + self.n, "method": "Page.screencastFrameAck", "params": {"sessionId": p["sessionId"]}}))
 
+    def snap(self):
+        """A frame on demand: Chrome only streams frames when something changes, so a still page needs this."""
+        data = self.send("Page.captureScreenshot", format="jpeg", quality=90)["data"]
+        name = f"{len(self.stamps):06d}.jpg"
+        (self.dir / name).write_bytes(base64.b64decode(data))
+        self.stamps.append((time.time() * SLOW, name))
+
     def eval(self, expr: str):
         res = self.send("Runtime.evaluate", expression=expr, awaitPromise=True, returnByValue=True, userGesture=True)
         return res.get("result", {}).get("value")
@@ -170,6 +191,15 @@ def chrome(w: int, h: int, profile: pathlib.Path):
     )
 
 
+def close(proc):
+    """Chrome leaves child processes behind on Windows; take the whole tree down so the next take gets the port."""
+    subprocess.run(["taskkill", "/F", "/T", "/PID", str(proc.pid)], capture_output=True)
+    try:
+        proc.wait(timeout=15)
+    except subprocess.TimeoutExpired:
+        pass
+
+
 def attach(frames: pathlib.Path) -> Tab:
     end = time.time() + 30
     while time.time() < end:
@@ -178,9 +208,15 @@ def attach(frames: pathlib.Path) -> Tab:
             break
         except OSError:
             time.sleep(0.3)
-    for t in json.loads(urllib.request.urlopen(f"http://localhost:{PORT}/json/list").read()):
-        if t["type"] == "page":
-            return Tab(t["webSocketDebuggerUrl"], frames)
+    # Chrome opens the port a moment before it answers on it.
+    for _ in range(40):
+        try:
+            for t in json.loads(urllib.request.urlopen(f"http://localhost:{PORT}/json/list", timeout=5).read()):
+                if t["type"] == "page":
+                    return Tab(t["webSocketDebuggerUrl"], frames)
+        except OSError:
+            pass
+        time.sleep(0.5)
     raise RuntimeError("no page target")
 
 
@@ -210,6 +246,8 @@ def take(name: str, steps: list, w=1920, h=1080, base=SITE, beats=(), length=0.0
             elif kind == "rec":
                 tab.keep = arg
                 tab.started = time.time() * SLOW
+                if arg:
+                    tab.snap()
             elif kind == "beat":
                 extra = step[2] if len(step) > 2 else 0.0
                 tab.pump(max(0.0, beats[arg] + extra - tab.elapsed()))
@@ -252,24 +290,27 @@ def take(name: str, steps: list, w=1920, h=1080, base=SITE, beats=(), length=0.0
                 tab.pump(1.2)
         if tab.keep and length:
             tab.pump(max(0.0, length - tab.elapsed()))  # never shorter than its narration
+        if tab.keep:
+            tab.snap()  # close the clip at the time it really ended
         tab.send("Page.stopScreencast")
         tab.ws.close()
     finally:
-        proc.kill()
-    return encode(name, tab.stamps, frames)
+        close(proc)
+    return encode(name, tab.stamps, frames, w, h)
 
 
-def encode(name: str, stamps, frames: pathlib.Path) -> pathlib.Path:
+def encode(name: str, stamps, frames: pathlib.Path, w: int, h: int) -> pathlib.Path:
     """Variable-rate frames to a constant 30 fps clip in real time."""
     out = HERE / "footage" / f"{name}.mp4"
     out.parent.mkdir(exist_ok=True)
+    stamps = sorted(stamps)  # a snapshot can be stamped after frames that arrived while it was taken
     lines = []
     for (t, f), nxt in zip(stamps, stamps[1:] + [(stamps[-1][0] + 1 / FPS, None)]):
         lines += [f"file '{f}'", f"duration {max(nxt[0] - t, 0.001):.4f}"]
     lines.append(f"file '{stamps[-1][1]}'")
     (frames / "list.txt").write_text("\n".join(lines))
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(frames / "list.txt"),
-                    "-vf", f"fps={FPS},format=yuv420p", "-c:v", "libx264", "-preset", "medium", "-crf", "18", str(out)], check=True)
+                    "-vf", f"scale={w}:{h}:flags=lanczos,fps={FPS},format=yuv420p", "-c:v", "libx264", "-preset", "medium", "-crf", "18", str(out)], check=True)
     span = stamps[-1][0] - stamps[0][0]
     print(f"  {name}: {len(stamps)} frames over {span:.1f}s = {len(stamps) / max(span, 0.01):.1f} fps -> {out.name}")
     shutil.rmtree(frames, ignore_errors=True)

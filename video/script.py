@@ -79,7 +79,8 @@ SCENES = [
         "take": [
             ("goto", "/console", 5), ("rec", True), ("wait", 1.5),
             ("beat", 1), ("js", "window.scrollTo({top: 360, behavior: 'smooth'})"),
-            ("beat", 2), ("js", "window.scrollTo({top: 1200, behavior: 'smooth'})"),
+            ("beat", 1, 4.0), ("js", "window.__aw.glide(window.__aw.heading('Backtest'), 120)"),
+            ("wait", 2.0),
         ],
     },
     {
