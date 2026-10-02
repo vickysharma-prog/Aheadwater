@@ -1,4 +1,5 @@
 // The One Health step: who lives near the incident, and the same cohort query run on real data.
+import { Item, Stagger } from "@/components/Motion";
 import { cohorts } from "@/lib/fhir";
 import { CITIES } from "@/lib/scenario";
 
@@ -43,7 +44,7 @@ export default async function Page() {
         </p>
       </header>
 
-      <section className="rounded-lg border border-slate-200 bg-white p-4">
+      <section className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <h2 className="flex-1 font-semibold">Ghent, Blaarmeersen district</h2>
           <span className="rounded bg-watch-soft px-2 py-0.5 text-xs font-semibold text-watch">Synthetic cohorts</span>
@@ -51,14 +52,14 @@ export default async function Page() {
         <p className="mb-3 text-sm text-slate-600">
           The OneAquaHealth sandbox holds no Ghent cohorts yet, so these three are defined by us to show the link. They carry no counts and no real health data.
         </p>
-        <ul className="grid gap-2 sm:grid-cols-3">
+        <Stagger className="grid gap-2 sm:grid-cols-3">
           {cohorts(CITIES.ghent).map((g) => (
-            <li key={g.id} className="rounded-md border border-slate-200 p-3 text-sm">
+            <Item key={g.id} whileHover={{ y: -3 }} className="rounded-lg border border-slate-200 p-3 text-sm transition-shadow hover:shadow-md">
               <div className="font-medium">{g.label}</div>
               <a href={`/fhir/Group/${g.id}`} className="mt-1 block font-mono text-xs text-water underline">Group/{g.id}</a>
-            </li>
+            </Item>
           ))}
-        </ul>
+        </Stagger>
         <div className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
           <div className="rounded-md bg-water-soft p-3">
             <div className="font-medium text-water">Public health team</div>
@@ -71,7 +72,7 @@ export default async function Page() {
         </div>
       </section>
 
-      <section className="rounded-lg border border-slate-200 bg-white p-4">
+      <section className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <h2 className="flex-1 font-semibold">The same query on real data: Oslo, Nordre Aker</h2>
           <span className="rounded bg-ok-soft px-2 py-0.5 text-xs font-semibold text-ok">Live from the OneAquaHealth sandbox</span>

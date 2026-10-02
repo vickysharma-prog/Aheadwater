@@ -1,17 +1,20 @@
 "use client";
 import { time } from "@/lib/format";
+import { motion, Swap } from "@/components/Motion";
 import { CITIES, type CityId } from "@/lib/scenario";
 import { actions, useDemo } from "@/lib/store";
 
 export function DemoClock() {
   const demo = useDemo();
   const step = (label: string, min: number) => (
-    <button
+    <motion.button
+      whileHover={{ y: -1 }}
+      whileTap={{ scale: 0.92 }}
       onClick={() => actions.advance(min)}
       className="rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium hover:border-water hover:text-water"
     >
       {label}
-    </button>
+    </motion.button>
   );
   return (
     <div className="border-b border-slate-200 bg-slate-900 text-slate-100">
@@ -29,9 +32,11 @@ export function DemoClock() {
             </option>
           ))}
         </select>
-        <span>
-          <span className="font-mono">{time(demo.clock, demo.cfg.tz)}</span> {new Date(demo.clock).getUTCFullYear()}
-        </span>
+        <div>
+          <Swap id={demo.clock}>
+            <span className="font-mono">{time(demo.clock, demo.cfg.tz)}</span> {new Date(demo.clock).getUTCFullYear()}
+          </Swap>
+        </div>
         <span className="hidden text-slate-400 md:inline">
           {demo.cfg.note}
         </span>

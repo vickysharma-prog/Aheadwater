@@ -12,6 +12,13 @@ function draw(L: Leaflet, layer: LayerGroup, sites: MapSite[], onSelect?: (id: s
   for (const s of sites) {
     const c = COLOR[s.level];
     if (s.level !== "normal" && s.level !== "unscored") L.circle([s.lat, s.lon], { radius: 260, color: c, weight: 1, fillOpacity: 0.12 }).addTo(layer);
+    if (s.level === "incident" || s.level === "watch" || s.level === "alert") {
+      // A ring that pulses out from the marker, so the site needing attention stands out.
+      L.marker([s.lat, s.lon], {
+        interactive: false,
+        icon: L.divIcon({ className: "", html: `<span class="map-ping" style="--c:${c}"></span>`, iconSize: [44, 44], iconAnchor: [22, 22] }),
+      }).addTo(layer);
+    }
     L.circleMarker([s.lat, s.lon], { radius: 9, color: "white", weight: 2, fillColor: c, fillOpacity: 1 })
       .bindTooltip(`<b>${s.name}</b><br>${s.label}`, { direction: "top" })
       .on("click", () => onSelect?.(s.id))

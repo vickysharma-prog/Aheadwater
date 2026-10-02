@@ -2,6 +2,7 @@
 import { useState } from "react";
 
 import validation from "@/data/validation.json";
+import { Item, Stagger, Swap } from "@/components/Motion";
 import { incidentBundle } from "@/lib/fhir";
 import { RESOLVED_AT, resolvedIncident } from "@/lib/scenario";
 import { useDemo } from "@/lib/store";
@@ -43,9 +44,9 @@ export function FhirExplorer() {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-[300px_1fr]">
-        <ul className="max-h-[70vh] overflow-auto rounded-lg border border-slate-200 bg-white text-sm">
+        <Stagger gap={0.03} className="max-h-[70vh] overflow-auto rounded-xl border border-slate-200 bg-white text-sm shadow-sm">
           {resources.map((r, i) => (
-            <li key={`${r.resourceType}/${r.id}`}>
+            <Item key={`${r.resourceType}/${r.id}`}>
               <button
                 onClick={() => setPick(i)}
                 className={`w-full border-b border-slate-100 px-3 py-2 text-left ${i === pick ? "bg-water-soft" : "hover:bg-slate-50"}`}
@@ -56,12 +57,14 @@ export function FhirExplorer() {
                 </div>
                 <div className="truncate font-mono text-xs text-slate-500">{r.id}</div>
               </button>
-            </li>
+            </Item>
           ))}
-        </ul>
-        <pre className="max-h-[70vh] overflow-auto rounded-lg bg-slate-900 p-4 text-xs leading-relaxed text-slate-100">
-          {JSON.stringify(current, null, 2)}
-        </pre>
+        </Stagger>
+        <div className="max-h-[70vh] overflow-auto rounded-xl bg-slate-900 p-4 shadow-xl">
+          <Swap id={`${current.resourceType}/${current.id}`}>
+            <pre className="text-xs leading-relaxed text-slate-100">{JSON.stringify(current, null, 2)}</pre>
+          </Swap>
+        </div>
       </div>
     </div>
   );

@@ -3,6 +3,17 @@
 One entry per working session, newest at the top. Date, what got done, what
 broke, what is next.
 
+## 2026-10-02 (later): Motion on every page
+
+Every page fades in on arrival. The console's steps enter in turn, the step
+waiting for the officer glows, a finished step's tick springs in, the stage
+badge cross-fades, and markers that need attention pulse on the map. The public
+page's site cards stagger in, a site under warning pulses, each reached step
+pops, and a sent report gets an animated tick. The responder card slides in
+and the claim button pulses while a case is open to claim. Health cohorts and
+the FHIR resource list stagger in, and the FHIR JSON cross-fades on switch.
+Spacing on the landing page was tightened so it reads as one piece.
+
 ## 2026-10-02: A landing page that sells the idea
 
 Vicky found the landing page flat: no motion, nothing to click, and a headline

@@ -5,6 +5,7 @@ import backtest from "@/data/backtest.json";
 import { DemoClock } from "@/components/DemoClock";
 import { HazardPanel } from "@/components/HazardPanel";
 import { LiveRisk } from "@/components/LiveRisk";
+import { Item, Pop, Stagger, Swap, motion } from "@/components/Motion";
 import { RiskChart } from "@/components/RiskChart";
 import { SiteMap, type MapSite } from "@/components/SiteMap";
 import { incidentBundle } from "@/lib/fhir";
@@ -72,10 +73,10 @@ export function Console() {
     <>
       <DemoClock />
       <div className="mx-auto grid max-w-7xl gap-4 px-4 py-4 lg:grid-cols-[1fr_440px]">
-        <section className="space-y-4">
-          <div className="h-[380px] overflow-hidden rounded-lg border border-slate-200 bg-white">
+        <Stagger className="space-y-4">
+          <Item className="h-[380px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
             <SiteMap key={cfg.id} sites={mapSites} onSelect={setSelected} />
-          </div>
+          </Item>
           {ghent ? (
           <div className="rounded-lg border border-slate-200 bg-white">
             <h2 className="border-b border-slate-100 px-4 py-2.5 text-sm font-semibold">Next-day risk, Ghent bathing sites, {time(backtest.event_day + "T06:00:00+02:00").split(",")[0]}</h2>
@@ -117,8 +118,14 @@ export function Console() {
               </p>
             </div>
           )}
-          {ghent && <LiveRisk />}
-          <HazardPanel key={cfg.id} city={cfg.id} />
+          {ghent && (
+            <Item>
+              <LiveRisk />
+            </Item>
+          )}
+          <Item>
+            <HazardPanel key={cfg.id} city={cfg.id} />
+          </Item>
           {selectedDays && (
             <div className="rounded-lg border border-slate-200 bg-white p-4">
               <h2 className="text-sm font-semibold">Backtest: {backtest.name}, May 2021</h2>
@@ -126,9 +133,9 @@ export function Console() {
               <RiskChart days={selectedDays} usual={backtest.usual} lab={backtest.lab} eventDay={backtest.event_day} />
             </div>
           )}
-        </section>
+        </Stagger>
 
-        <section className="space-y-3">
+        <Stagger className="space-y-3" gap={0.06}>
           <Step n={1} title="Predict" done={ghent}>
             {ghent ? (
             <>
@@ -189,7 +196,9 @@ export function Console() {
             {inc && state && (
               <div className="space-y-3">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className={`rounded px-2 py-0.5 text-xs font-semibold ${STAGE_LABEL[state.stage][1]}`}>{STAGE_LABEL[state.stage][0]}</span>
+                  <Swap id={state.stage}>
+                    <span className={`inline-block rounded px-2 py-0.5 text-xs font-semibold ${STAGE_LABEL[state.stage][1]}`}>{STAGE_LABEL[state.stage][0]}</span>
+                  </Swap>
                   {state.stage === "awaiting_ack" && <span className="text-xs text-slate-600">Acknowledge {relative(state.ackDue, now)}, or it escalates.</span>}
                   {["awaiting_ack", "escalated", "acknowledged"].includes(state.stage) && (
                     <span className="text-xs text-slate-600">Opens to nearby responders {relative(state.actionDue, now)}.</span>
@@ -202,7 +211,7 @@ export function Console() {
                     <p className="mb-1 text-xs font-medium text-slate-500">Suggested responders, nearest first</p>
                     <ul className="divide-y divide-slate-100 rounded-md border border-slate-200">
                       {[...cfg.responders].sort((a, b) => a.km - b.km).map((r) => (
-                        <li key={r.id} className="flex items-center gap-2 px-3 py-1.5 text-xs">
+                        <motion.li key={r.id} whileHover={{ x: 3, backgroundColor: "#f8fafc" }} className="flex items-center gap-2 px-3 py-1.5 text-xs">
                           <span className="flex-1">
                             {r.name} <span className="text-slate-400">{r.km} km</span>
                           </span>
@@ -213,7 +222,7 @@ export function Console() {
                           ) : (
                             <span className="text-slate-400">Can see it, cannot claim it</span>
                           )}
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
                   </div>
@@ -253,9 +262,9 @@ export function Console() {
                 ) : (
                   <ul className="space-y-1 text-xs">
                     {inc.lab.map((l) => (
-                      <li key={l.date} className={l.bad ? "text-alert" : "text-ok"}>
+                      <motion.li key={l.date} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className={l.bad ? "text-alert" : "text-ok"}>
                         {l.source ?? l.date}: {l.measures.map(measureText).join(", ")}. {l.bad ? "Above the limit." : "Clean."}
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
                 )}
@@ -280,38 +289,57 @@ export function Console() {
           </Step>
 
           {inc && (
-            <div className="flex flex-wrap gap-2 rounded-lg border border-slate-200 bg-white p-3">
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-wrap gap-2 rounded-lg border border-slate-200 bg-white p-3">
               <Button onClick={download}>Download as FHIR Bundle</Button>
               <a href="/fhir-explorer" className="rounded-md px-3 py-1.5 text-sm font-medium text-water hover:underline">
                 See each FHIR resource
               </a>
-            </div>
+            </motion.div>
           )}
-        </section>
+        </Stagger>
       </div>
     </>
   );
 }
 
 function Step({ n, title, done, disabled, children }: { n: number; title: string; done?: boolean; disabled?: boolean; children: ReactNode }) {
+  // The step waiting on the officer gets a soft glow, so the next click is obvious.
+  const next = !done && !disabled;
   return (
-    <div className={`rounded-lg border bg-white p-3 text-sm ${disabled ? "border-slate-100 opacity-50" : "border-slate-200"}`}>
+    <Item
+      layout
+      className={`rounded-xl border bg-white p-3 text-sm transition-shadow duration-500 ${
+        disabled ? "border-slate-100 opacity-50" : next ? "border-water/60 shadow-lg shadow-cyan-900/10 ring-2 ring-cyan-100" : "border-slate-200"
+      }`}
+    >
       <h3 className="mb-1.5 flex items-center gap-2 font-semibold">
-        <span className={`flex h-5 w-5 items-center justify-center rounded-full text-xs ${done ? "bg-ok text-white" : "bg-slate-200 text-slate-600"}`}>
-          {done ? "✓" : n}
+        <span className={`flex h-5 w-5 items-center justify-center rounded-full text-xs transition-colors ${done ? "bg-ok text-white" : next ? "bg-water text-white" : "bg-slate-200 text-slate-600"}`}>
+          {done ? <Pop>✓</Pop> : n}
         </span>
         {title}
       </h3>
-      {!disabled && <div className="text-slate-700">{children}</div>}
-    </div>
+      {!disabled && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="text-slate-700">
+          {children}
+        </motion.div>
+      )}
+    </Item>
   );
 }
 
 function Button({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  const { onClick, disabled, type } = props;
   return (
-    <button {...props} className="rounded-md bg-water px-3 py-1.5 text-sm font-medium text-white hover:bg-cyan-800 disabled:cursor-not-allowed disabled:bg-slate-300">
+    <motion.button
+      onClick={onClick}
+      disabled={disabled}
+      type={type}
+      whileHover={disabled ? undefined : { scale: 1.03 }}
+      whileTap={disabled ? undefined : { scale: 0.96 }}
+      className="rounded-md bg-water px-3 py-1.5 text-sm font-medium text-white shadow-sm hover:bg-cyan-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+    >
       {children}
-    </button>
+    </motion.button>
   );
 }
 

@@ -2,6 +2,7 @@
 import { useState } from "react";
 
 import { DemoClock } from "@/components/DemoClock";
+import { item, motion, Pop, Stagger } from "@/components/Motion";
 import { PhotoInput, type CheckedPhoto } from "@/components/PhotoInput";
 import { time } from "@/lib/format";
 import { incidentState } from "@/lib/incident";
@@ -37,14 +38,22 @@ export function PublicPage() {
           <p className="text-slate-600">{demo.cfg.intro}</p>
         </header>
 
-        <ul className="space-y-3">
+        <Stagger className="space-y-3">
           {demo.cfg.sites.map((s) => {
             const active = inc?.site.id === s.id && state;
             const closed = active && state.publicStep === "resolved";
             const standing = closed && demo.cfg.standingWarning;
             const unsafe = (active && !closed) || standing;
             return (
-              <li key={s.id} className={`rounded-lg border bg-white p-4 ${unsafe ? "border-alert" : "border-slate-200"}`}>
+              <motion.div
+                key={s.id}
+                variants={item}
+                layout
+                whileHover={{ y: -2 }}
+                animate={unsafe ? { boxShadow: ["0 0 0 0 rgba(185,28,28,0.25)", "0 0 0 8px rgba(185,28,28,0)"] } : undefined}
+                transition={unsafe ? { boxShadow: { duration: 1.8, repeat: Infinity } } : undefined}
+                className={`rounded-xl border bg-white p-4 shadow-sm ${unsafe ? "border-alert" : "border-slate-200"}`}
+              >
                 <div className="flex flex-wrap items-center gap-2">
                   <h2 className="flex-1 font-medium">{s.name}</h2>
                   {unsafe ? (
@@ -63,10 +72,16 @@ export function PublicPage() {
                       {STEPS.map(([key, label]) => {
                         const at = stepAt(key);
                         return (
-                          <li key={key} className={`rounded-md border px-2 py-1.5 ${at ? "border-water bg-water-soft text-water" : "border-slate-200 text-slate-400"}`}>
+                          <motion.li
+                            key={key + (at ? "-done" : "")}
+                            initial={at ? { scale: 0.85, opacity: 0.4 } : false}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                            className={`rounded-md border px-2 py-1.5 ${at ? "border-water bg-water-soft text-water" : "border-slate-200 text-slate-400"}`}
+                          >
                             <div className="font-semibold">{key === "resolved" && demo.cfg.standingWarning ? "Case closed" : label}</div>
                             <div>{at ? time(at, demo.cfg.tz) : "not yet"}</div>
-                          </li>
+                          </motion.li>
                         );
                       })}
                     </ol>
@@ -77,17 +92,20 @@ export function PublicPage() {
                     )}
                   </>
                 )}
-              </li>
+              </motion.div>
             );
           })}
-        </ul>
+        </Stagger>
 
-        <section className="rounded-lg border border-slate-200 bg-white p-4">
+        <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
           <h2 className="font-semibold">Report something</h2>
           {demo.reported ? (
-            <p className="mt-2 text-sm text-ok">
-              Thank you. Your report went to the city&apos;s water officer at {time(demo.clock, demo.cfg.tz)}. If it leads to a warning, you will see it above.
-            </p>
+            <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-2 flex items-start gap-2 text-sm text-ok">
+              <Pop className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-ok text-xs text-white">✓</Pop>
+              <span>
+                Thank you. Your report went to the city&apos;s water officer at {time(demo.clock, demo.cfg.tz)}. If it leads to a warning, you will see it above.
+              </span>
+            </motion.p>
           ) : (
             <form
               className="mt-3 space-y-3"
@@ -122,13 +140,13 @@ export function PublicPage() {
                   <PhotoInput onChange={setPhoto} />
                 </div>
               </label>
-              <button className="rounded-md bg-water px-3 py-1.5 text-sm font-medium text-white hover:bg-cyan-800">Send report</button>
+              <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.96 }} className="rounded-md bg-water px-3 py-1.5 text-sm font-medium text-white hover:bg-cyan-800">Send report</motion.button>
               <p className="text-xs text-slate-500">
                 In this demo the report joins the {demo.cfg.district} scenario. Leave the box empty to send the written example.
               </p>
             </form>
           )}
-        </section>
+        </motion.section>
       </div>
     </>
   );
