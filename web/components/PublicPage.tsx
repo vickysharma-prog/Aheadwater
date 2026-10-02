@@ -50,7 +50,8 @@ export function PublicPage() {
                 variants={item}
                 layout
                 whileHover={{ y: -2 }}
-                animate={unsafe ? { boxShadow: ["0 0 0 0 rgba(185,28,28,0.25)", "0 0 0 8px rgba(185,28,28,0)"] } : undefined}
+                // A card under warning pulses; it still has to fade in like the others.
+                animate={unsafe ? { opacity: 1, y: 0, boxShadow: ["0 0 0 0 rgba(185,28,28,0.25)", "0 0 0 8px rgba(185,28,28,0)"] } : undefined}
                 transition={unsafe ? { boxShadow: { duration: 1.8, repeat: Infinity } } : undefined}
                 className={`rounded-xl border bg-white p-4 shadow-sm ${unsafe ? "border-alert" : "border-slate-200"}`}
               >
