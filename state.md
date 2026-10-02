@@ -28,7 +28,7 @@ deployed from `web/` with `npx vercel deploy --prod`).
 
 ## Next
 
-1. The video is on YouTube: https://youtu.be/v87ago6cD8k. Vicky pastes `docs/devpost.md` (local) into Devpost with that link and submits before 4 Oct, 9:00pm PDT (5 Oct, 9:30am IST). The rules ask for no AI-use disclosure (checked 29 Sep).
+1. **Submitted on Devpost on 3 Oct 2026.** Vicky has a few fixes in mind for the next session (he will list them); edits are allowed until the deadline, 4 Oct, 9:00pm PDT (5 Oct, 9:30am IST). Video: https://youtu.be/v87ago6cD8k. Release: v1.0.0. Local media and the PDF deck are in `media/` (not in git).
 
 ## Model results (29 Sep)
 
