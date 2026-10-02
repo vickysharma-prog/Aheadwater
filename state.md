@@ -2,7 +2,7 @@
 
 Where things stand now. Read this first after any break.
 
-**Last updated:** 2026-09-29, evening
+**Last updated:** 2026-10-03
 
 ## Built
 
@@ -23,11 +23,12 @@ deployed from `web/` with `npx vercel deploy --prod`).
 | Photo check | `/public` report form: light and focus measured in the browser, MobileNet for water in frame. Tested in Chrome with a real Blaarmeersen photo (passes) and a blurred copy (turned back) |
 | `/api/risk` + live panel | Today's Open-Meteo forecast scored for the four Ghent sites, shown on `/console` |
 | `/fhir/*` | Read-only FHIR R4: metadata, read, search by `_id` and `status`, the transaction Bundle, our CodeSystem |
+| Demo video | `video/`: narration (edge-tts), slow-motion takes of the live site in headless Chrome, motion cards, assembled with ffmpeg. `python tts.py`, `python build.py`. Output `video/aheadwater-demo.mp4` (not in git), 4:54, 1080p30 |
 | FHIR validation | HL7 validator against the OAH profiles (built with SUSHI), on three Bundles (Ghent resolved, Ghent mid-incident, Bengaluru): 0 errors, 48 warnings. `fhir/README.md` |
 
 ## Next
 
-1. Record the video from `docs/video.md` (local). Devpost text is in `docs/devpost.md` (local). The rules ask for no AI-use disclosure (checked 29 Sep).
+1. Vicky uploads `video/aheadwater-demo.mp4` (4:54, built on 3 Oct) to YouTube, pastes `docs/devpost.md` (local) into Devpost with the video link, and submits before 4 Oct, 9:00pm PDT (5 Oct, 9:30am IST). The rules ask for no AI-use disclosure (checked 29 Sep).
 
 ## Model results (29 Sep)
 

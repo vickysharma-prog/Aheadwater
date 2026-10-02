@@ -3,6 +3,21 @@
 One entry per working session, newest at the top. Date, what got done, what
 broke, what is next.
 
+## 2026-10-03: The demo video
+
+Built the demo film from the live site: a logo intro, what unsafe water costs
+(WHO: 1.4 million deaths a year worldwide, about 498,000 in India, about 33,000
+in Europe, 2019), the challenge, the six steps, the model, then every screen
+of the app in use, Bengaluru, FHIR, what comes next, and a close. 4:54.
+
+What broke: this laptop's Chrome sends three or four frames a second, so every
+take runs the page ten times slower and the frames are re-timed. Then a run of
+smaller things: background jobs hit a time limit, Chrome children kept the
+port, still pages sent no frames, a snapshot arrived out of order, and a 25
+fps background still made each take shorter than its slot, which left black
+behind the cross-fades. All fixed in `video/`. Recording it also caught a real
+bug: the warning card on the public page was invisible. Fixed on the site.
+
 ## 2026-10-02 (later): Motion on every page
 
 Every page fades in on arrival. The console's steps enter in turn, the step
