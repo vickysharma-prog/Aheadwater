@@ -8,3 +8,4 @@ __pycache__/
 ml/data/
 .vercel/
 .dev.log
+.archify/
