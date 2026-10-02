@@ -1,0 +1,8 @@
+footage/
+build/
+*.mp4
+*.srt
+*.ass
+assets/*.ogg
+assets/*.wav
+__pycache__/

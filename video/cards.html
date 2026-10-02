@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Aheadwater film cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root { --water:#0e6f86; --deep:#062b36; --teal:#14b8a6; --sky:#7dd3fc; --amber:#fbbf24; --ink:#0f172a; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--deep); font-family: Geist, system-ui, sans-serif; color: white; }
+  .scene { position: absolute; inset: 0; display: none; }
+  .scene.on { display: block; }
+  .bgvideo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); animation: drift 30s linear forwards; }
+  @keyframes drift { to { transform: scale(1.14); } }
+  .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,43,54,.55), rgba(6,43,54,.35) 45%, rgba(6,43,54,.85)); }
+  .gradient { position: absolute; inset: 0; background: radial-gradient(1200px 700px at 20% 0%, #0f7c95 0%, transparent 60%), radial-gradient(1000px 800px at 100% 100%, #0d9488 0%, transparent 55%), linear-gradient(135deg, #073a49, #062b36); }
+  .waves { position: absolute; left: 0; right: 0; bottom: 0; height: 260px; opacity: .18; }
+  .waves path { animation: sway 9s ease-in-out infinite alternate; }
+  .waves path:nth-child(2) { animation-duration: 12s; opacity: .6; }
+  @keyframes sway { to { transform: translateX(-160px); } }
+
+  /* Elements wait for their beat. */
+  [data-beat] { opacity: 0; transform: translateY(40px); filter: blur(10px); transition: opacity .9s ease, transform 1.1s cubic-bezier(.2,.8,.2,1), filter .9s ease; }
+  [data-beat].in { opacity: 1; transform: none; filter: blur(0); }
+  [data-beat].pop { transform: scale(.6); }
+  [data-beat].pop.in { transform: none; transition: opacity .5s ease, transform .7s cubic-bezier(.3,1.6,.4,1), filter .5s; }
+
+  .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 160px; }
+  .kicker { font: 600 26px/1 Geist; letter-spacing: .32em; text-transform: uppercase; color: var(--sky); }
+  h1 { font-weight: 650; font-size: 112px; line-height: 1.02; letter-spacing: -.035em; }
+  h2 { font-weight: 640; font-size: 76px; line-height: 1.05; letter-spacing: -.03em; }
+  .lead { font-size: 40px; line-height: 1.35; color: #d7f3f8; max-width: 1400px; }
+  .mt { margin-top: 36px; }
+
+  /* Rain */
+  .rain { position: absolute; inset: 0; overflow: hidden; opacity: 0; transition: opacity 1.5s; }
+  .rain.in { opacity: 1; }
+  .rain i { position: absolute; top: -120px; width: 2px; height: 90px; background: linear-gradient(transparent, rgba(186,230,253,.75)); animation: fall linear infinite; }
+  @keyframes fall { to { transform: translateY(1300px) translateX(-120px); } }
+
+  /* Challenge: three panels */
+  .panels { position: absolute; left: 120px; right: 120px; top: 300px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
+  .panel { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 36px; padding: 48px; height: 600px; backdrop-filter: blur(10px); position: relative; overflow: hidden; }
+  .panel h3 { font-size: 42px; font-weight: 640; letter-spacing: -.02em; }
+  .panel p { margin-top: 14px; font-size: 27px; line-height: 1.35; color: #cdeef4; }
+  .num { font: 600 24px/1 Geist; color: var(--sky); letter-spacing: .2em; }
+  .pipe { position: absolute; left: 48px; right: 48px; bottom: 56px; height: 250px; }
+  .bars { display: flex; align-items: flex-end; gap: 14px; height: 100%; }
+  .bars span { flex: 1; border-radius: 10px 10px 4px 4px; background: linear-gradient(180deg, var(--amber), #f59e0b); transform-origin: bottom; transform: scaleY(0); transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
+  .in .bars span { transform: scaleY(1); }
+  .timeline { position: absolute; left: 48px; right: 48px; bottom: 120px; }
+  .track { height: 14px; border-radius: 99px; background: rgba(255,255,255,.15); overflow: hidden; }
+  .track b { display: block; height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--sky), var(--teal)); transition: width 3.2s cubic-bezier(.4,.1,.2,1) .4s; }
+  .in .track b { width: 100%; }
+  .ticks { display: flex; justify-content: space-between; margin-top: 22px; font-size: 25px; color: #cdeef4; }
+  .ticks strong { color: white; }
+  .people { position: absolute; left: 48px; right: 48px; bottom: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .chip { border-radius: 20px; background: rgba(255,255,255,.1); border: 1px dashed rgba(255,255,255,.35); padding: 20px; font-size: 25px; text-align: center; }
+  .in .chip:nth-child(1) { animation: jiggle 2.6s ease-in-out infinite; }
+  .in .chip:nth-child(2) { animation: jiggle 2.6s ease-in-out .5s infinite; }
+  .in .chip:nth-child(3) { animation: jiggle 2.6s ease-in-out 1s infinite; }
+  .in .chip:nth-child(4) { animation: jiggle 2.6s ease-in-out 1.5s infinite; }
+  .hz .chip { border-style: solid; background: rgba(251,191,36,.14); border-color: rgba(251,191,36,.5); opacity: 0; transform: scale(.7); transition: opacity .5s, transform .6s cubic-bezier(.3,1.6,.4,1); }
+  .in .hz .chip { opacity: 1; transform: none; animation: none; }
+  .in .hz .chip:nth-child(2) { transition-delay: .25s; } .in .hz .chip:nth-child(3) { transition-delay: .5s; }
+  .in .hz .chip:nth-child(4) { transition-delay: .75s; } .in .hz .chip:nth-child(5) { transition-delay: 1s; } .in .hz .chip:nth-child(6) { transition-delay: 1.25s; }
+  .road { width: 1640px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; position: relative; text-align: left; }
+  .road .line { position: absolute; left: 0; right: 0; top: 38px; height: 6px; background: rgba(255,255,255,.18); border-radius: 9px; overflow: hidden; }
+  .road .line b { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--sky)); transition: width 3.5s linear .2s; }
+  .road.in .line b { width: 100%; }
+  .mile { position: relative; padding-top: 80px; opacity: 0; transform: translateY(20px); transition: opacity .6s, transform .8s cubic-bezier(.2,.8,.2,1); }
+  .road.in .mile { opacity: 1; transform: none; }
+  .road.in .mile:nth-child(3) { transition-delay: .9s; } .road.in .mile:nth-child(4) { transition-delay: 1.8s; } .road.in .mile:nth-child(5) { transition-delay: 2.7s; }
+  .mile::before { content: ""; position: absolute; left: 0; top: 24px; width: 34px; height: 34px; border-radius: 50%; background: white; box-shadow: 0 0 0 10px rgba(125,211,252,.25); }
+  .mile b { display: block; font-size: 38px; font-weight: 640; letter-spacing: -.02em; }
+  .mile span { display: block; margin-top: 12px; font-size: 26px; line-height: 1.35; color: #cdeef4; }
+  @keyframes jiggle { 50% { transform: translate(6px, -6px); } }
+
+  /* Meet */
+  .logo { display: flex; align-items: center; gap: 32px; }
+  .drop { width: 150px; height: 150px; position: relative; }
+  .ripple { position: absolute; left: 50%; top: 60%; width: 160px; height: 160px; margin: -80px 0 0 -80px; border-radius: 50%; border: 4px solid var(--sky); opacity: 0; }
+  .in .ripple { animation: ripple 2.4s ease-out infinite; }
+  .in .ripple:nth-child(2) { animation-delay: .8s; }
+  @keyframes ripple { 0% { transform: scale(.3); opacity: .9; } 100% { transform: scale(2.6); opacity: 0; } }
+  .word { font-size: 132px; font-weight: 700; letter-spacing: -.045em; }
+  .steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 26px; width: 1640px; position: relative; }
+  .steps .line { position: absolute; left: 120px; right: 120px; top: 74px; height: 6px; border-radius: 9px; background: rgba(255,255,255,.18); overflow: hidden; }
+  .steps .line b { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--sky), var(--teal)); transition: width 4s linear .3s; }
+  .steps.in .line b { width: 100%; }
+  .step { display: flex; flex-direction: column; align-items: center; gap: 18px; position: relative; }
+  .ico { width: 150px; height: 150px; border-radius: 50%; background: white; color: var(--water); display: flex; align-items: center; justify-content: center; box-shadow: 0 24px 60px rgba(0,0,0,.3); transform: scale(0); transition: transform .7s cubic-bezier(.3,1.6,.4,1); }
+  .steps.in .ico { transform: scale(1); }
+  .step b { font-size: 36px; font-weight: 640; opacity: 0; transition: opacity .6s; }
+  .steps.in .step b { opacity: 1; }
+  .step small { font-size: 22px; color: #cdeef4; opacity: 0; transition: opacity .6s; text-align: center; }
+  .steps.in .step small { opacity: 1; }
+
+  /* Model */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; width: 1600px; }
+  .stat { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 32px; padding: 44px; text-align: left; }
+  .stat .big { font-size: 104px; font-weight: 700; letter-spacing: -.04em; color: white; font-variant-numeric: tabular-nums; }
+  .stat .lab { font-size: 30px; color: #cdeef4; margin-top: 6px; }
+  .compare { width: 1600px; display: grid; gap: 26px; }
+  .row { display: grid; grid-template-columns: 420px 1fr 260px; align-items: center; gap: 30px; font-size: 32px; text-align: left; }
+  .row .bar { height: 54px; border-radius: 18px; background: rgba(255,255,255,.12); overflow: hidden; }
+  .row .bar b { display: block; height: 100%; width: 0; border-radius: 18px; transition: width 2s cubic-bezier(.2,.8,.2,1) .3s; }
+  .compare.in .row:nth-child(1) .bar b { width: 9%; background: rgba(255,255,255,.5); }
+  .compare.in .row:nth-child(2) .bar b { width: 90%; background: linear-gradient(90deg, var(--teal), var(--sky)); }
+  .row strong { font-size: 44px; }
+  .dots { position: absolute; right: 90px; top: 90px; width: 560px; height: 360px; opacity: .55; }
+
+  /* Close */
+  .pills { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+  .pills span { border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1); border-radius: 999px; padding: 14px 28px; font-size: 28px; }
+  .url { font: 500 34px/1 "Geist Mono", monospace; color: var(--sky); }
+
+
+  /* Intro: a drop falls, the water ripples, the logo forms */
+  #intro { background: radial-gradient(1100px 800px at 50% 55%, #0b5566 0%, #062b36 60%, #031a21 100%); }
+  .i-drop { position: absolute; left: 50%; top: -160px; width: 120px; height: 120px; margin-left: -60px; opacity: 0; }
+  .go .i-drop { animation: idrop 1.05s cubic-bezier(.55,0,.9,.5) .2s forwards; }
+  @keyframes idrop { 0% { opacity: 1; transform: translateY(0) scaleY(1.25); } 92% { opacity: 1; transform: translateY(500px) scaleY(1.25); } 100% { opacity: 0; transform: translateY(530px) scale(.4); } }
+  .i-ring { position: absolute; left: 50%; top: 432px; width: 230px; height: 70px; margin: -40px 0 0 -130px; border-radius: 50%; border: 4px solid rgba(125,211,252,.9); opacity: 0; }
+  .go .i-ring { animation: iring 2.2s ease-out forwards; }
+  .go .i-ring:nth-of-type(2) { animation-delay: 1.38s; } .go .i-ring:nth-of-type(3) { animation-delay: 1.62s; } .go .i-ring:nth-of-type(4) { animation-delay: 1.86s; }
+  .i-ring:nth-of-type(2) { animation-delay: 1.38s; }
+  @keyframes iring { 0% { opacity: .95; transform: scale(.2); } 100% { opacity: 0; transform: scale(3.4); } }
+  .go .i-ring:first-of-type { animation-delay: 1.2s; }
+  .i-logo { position: absolute; left: 0; right: 0; top: 330px; display: flex; flex-direction: column; align-items: center; gap: 26px; }
+  .i-mark { width: 190px; height: 190px; opacity: 0; transform: scale(.3) translateY(60px); }
+  .go .i-mark { animation: imark 1.1s cubic-bezier(.3,1.5,.4,1) 1.35s forwards; }
+  @keyframes imark { to { opacity: 1; transform: none; } }
+  .i-mark .wave { stroke-dasharray: 20; stroke-dashoffset: 20; }
+  .go .i-mark .wave { animation: iwave .8s ease-out 2.2s forwards; }
+  @keyframes iwave { to { stroke-dashoffset: 0; } }
+  .i-word { font-size: 150px; font-weight: 700; letter-spacing: -.045em; display: flex; }
+  .i-word span { display: inline-block; opacity: 0; transform: translateY(50px) rotate(6deg); filter: blur(8px); }
+  .go .i-word span { animation: iletter .7s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes iletter { to { opacity: 1; transform: none; filter: blur(0); } }
+  .i-tag { font-size: 46px; font-weight: 500; color: #bae6fd; opacity: 0; letter-spacing: .01em; }
+  .go .i-tag { animation: itag 1s ease 3.5s forwards; }
+  @keyframes itag { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .i-shine { position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.14) 50%, transparent 60%); transform: translateX(-100%); }
+  .go .i-shine { animation: ishine 1.6s ease-in-out 3.3s forwards; }
+  @keyframes ishine { to { transform: translateX(100%); } }
+
+  /* Frame: the background behind a take */
+  .browser { position: absolute; left: 140px; top: 128px; width: 1640px; height: 922px; border-radius: 26px; background: #e2e8f0; box-shadow: 0 50px 120px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.15); overflow: hidden; }
+  .browser .bar { height: 22px; }
+  .bar2 { position: absolute; left: 0; right: 0; top: 0; height: 22px; display: flex; align-items: center; gap: 8px; padding: 0 18px; background: #f1f5f9; }
+  .bar2 i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+  .label { position: absolute; left: 140px; top: 46px; display: flex; align-items: center; gap: 18px; }
+  .label .tag { font: 600 34px/1 Geist; letter-spacing: -.01em; }
+  .label .dot { width: 18px; height: 18px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 8px rgba(20,184,166,.25); }
+  .addr { position: absolute; right: 140px; top: 52px; font: 500 24px/1 "Geist Mono", monospace; color: #bae6fd; background: rgba(255,255,255,.1); padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); }
+</style>
+</head>
+<body>
+
+<!-- 0. Intro: the logo -->
+<section class="scene" id="intro">
+  <svg class="i-drop" viewBox="0 0 24 24"><path d="M12 2C8 8 5 11.5 5 15a7 7 0 0 0 14 0c0-3.5-3-7-7-13z" fill="#7dd3fc"/></svg>
+  <span class="i-ring"></span><span class="i-ring"></span><span class="i-ring"></span><span class="i-ring"></span>
+  <div class="i-logo">
+    <svg class="i-mark" viewBox="0 0 24 24"><path d="M12 2C8 8 5 11.5 5 15a7 7 0 0 0 14 0c0-3.5-3-7-7-13z" fill="white"/><path class="wave" d="M8 15.5c1.3 1 2.6 1 4 0s2.7-1 4 0" stroke="#0e6f86" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+    <div class="i-word" id="iword"></div>
+    <div class="i-tag">Stop water crises before they start.</div>
+  </div>
+  <div class="i-shine"></div>
+</section>
+
+<!-- 1. Open: the city's water, then the rain -->
+<section class="scene" id="open">
+  <video class="bgvideo" src="https://aheadwater.vercel.app/video/ocean.mp4" autoplay muted loop playsinline></video>
+  <div class="shade"></div>
+  <div class="rain" data-rain data-beat="1"></div>
+  <div class="center">
+    <div class="kicker" data-beat="0">City lakes and rivers</div>
+    <h1 class="mt" data-beat="0">Every summer, millions of us<br>swim in city water.</h1>
+    <p class="lead mt" data-beat="1">Most days it is fine. But water can change fast.</p>
+  </div>
+</section>
+
+<!-- 2. Challenge -->
+<section class="scene" id="challenge">
+  <div class="gradient"></div>
+  <svg class="waves" viewBox="0 0 1920 260" preserveAspectRatio="none"><path d="M0 120 C 320 40 640 200 960 120 S 1600 40 2080 120 V260 H0Z" fill="white"/><path d="M0 170 C 320 100 640 240 960 170 S 1600 100 2080 170 V260 H0Z" fill="white"/></svg>
+  <div class="center" style="justify-content:flex-start; padding-top: 110px;">
+    <div class="kicker" data-beat="0">The challenge</div>
+    <h2 class="mt" data-beat="0">Water can change faster than news travels.</h2>
+  </div>
+  <div class="panels">
+    <div class="panel" data-beat="0">
+      <div class="num">01</div>
+      <h3 style="margin-top:18px">Water changes fast</h3>
+      <p>Storms, heat and spills can turn a lake overnight.</p>
+      <div class="people hz"><div class="chip">Sewage overflow</div><div class="chip">Bacteria</div><div class="chip">Algae bloom</div><div class="chip">Low oxygen</div><div class="chip">Flash flood</div><div class="chip">Spills</div></div>
+
+    </div>
+    <div class="panel" data-beat="1">
+      <div class="num">02</div>
+      <h3 style="margin-top:18px">The lab takes time</h3>
+      <p>A sample can confirm it, and the result comes back a day or more later.</p>
+      <div class="timeline"><div class="track"><b></b></div><div class="ticks"><span><strong>Sample</strong><br>day 0</span><span style="text-align:right"><strong>Result</strong><br>day 1 to 2</span></div></div>
+    </div>
+    <div class="panel" data-beat="2">
+      <div class="num">03</div>
+      <h3 style="margin-top:18px">Everyone hears separately</h3>
+      <p>Each team learns about it in a different place, at a different time.</p>
+      <div class="people"><div class="chip">Water team</div><div class="chip">Health service</div><div class="chip">Labs</div><div class="chip">Volunteers</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Meet Aheadwater -->
+<section class="scene" id="meet">
+  <div class="gradient"></div>
+  <svg class="waves" viewBox="0 0 1920 260" preserveAspectRatio="none"><path d="M0 120 C 320 40 640 200 960 120 S 1600 40 2080 120 V260 H0Z" fill="white"/><path d="M0 170 C 320 100 640 240 960 170 S 1600 100 2080 170 V260 H0Z" fill="white"/></svg>
+  <div class="center" style="gap: 0">
+    <div class="logo pop" data-beat="0">
+      <div class="drop"><span class="ripple"></span><span class="ripple"></span>
+        <svg width="150" height="150" viewBox="0 0 24 24"><path d="M12 2C8 8 5 11.5 5 15a7 7 0 0 0 14 0c0-3.5-3-7-7-13z" fill="white"/><path d="M8 15.5c1.3 1 2.6 1 4 0s2.7-1 4 0" stroke="#0e6f86" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <div class="word">Aheadwater</div>
+    </div>
+    <p class="lead mt" data-beat="1" style="max-width:1500px">Forecasts unsafe water a day ahead. Brings the right people together at once. Follows every case until the water is safe.</p>
+    <div class="steps mt" data-beat="2" style="margin-top:70px">
+      <div class="line"><b></b></div>
+      <div class="step"><div class="ico" style="transition-delay:.1s"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 8-9M15 6h5v5"/></svg></div><b>Predict</b><small>tomorrow's risk</small></div>
+      <div class="step"><div class="ico" style="transition-delay:.6s"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg></div><b>Detect</b><small>every signal</small></div>
+      <div class="step"><div class="ico" style="transition-delay:1.1s"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg></div><b>Verify</b><small>two sources agree</small></div>
+      <div class="step"><div class="ico" style="transition-delay:1.6s"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></div><b>Act</b><small>on a clock</small></div>
+      <div class="step"><div class="ico" style="transition-delay:2.1s"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l7 4v5c0 4-3 7-7 9-4-2-7-5-7-9V7z"/></svg></div><b>Resolve</b><small>shown to all</small></div>
+      <div class="step"><div class="ico" style="transition-delay:2.6s"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></svg></div><b>Learn</b><small>sharper each time</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. The model -->
+<section class="scene" id="model">
+  <div class="gradient"></div>
+  <div class="center" style="gap: 54px">
+    <div>
+      <div class="kicker" data-beat="0">The forecast</div>
+      <h2 class="mt" data-beat="0">Trained on Europe's bathing water</h2>
+    </div>
+    <div class="stats" data-beat="0">
+      <div class="stat"><div class="big" data-count="150734">0</div><div class="lab">water samples</div></div>
+      <div class="stat"><div class="big" data-count="7246">0</div><div class="lab">lakes and rivers</div></div>
+      <div class="stat"><div class="big" data-count="27">0</div><div class="lab">countries</div></div>
+    </div>
+    <p class="lead" data-beat="1">Rain, heat and dry spells before each sample, and what came next.</p>
+    <div class="compare" data-beat="2">
+      <div class="row"><span>A random pick</span><div class="bar"><b></b></div><strong>1 in 50</strong></div>
+      <div class="row"><span>Aheadwater's alert</span><div class="bar"><b></b></div><strong>1 in 5</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. What comes next -->
+<section class="scene" id="future">
+  <div class="gradient"></div>
+  <svg class="waves" viewBox="0 0 1920 260" preserveAspectRatio="none"><path d="M0 120 C 320 40 640 200 960 120 S 1600 40 2080 120 V260 H0Z" fill="white"/><path d="M0 170 C 320 100 640 240 960 170 S 1600 100 2080 170 V260 H0Z" fill="white"/></svg>
+  <div class="center" style="gap: 80px">
+    <div>
+      <div class="kicker" data-beat="0">What comes next</div>
+      <h2 class="mt" data-beat="0">From two cities to every city.</h2>
+    </div>
+    <div class="road" data-beat="1">
+      <div class="line"><b></b></div>
+      <div class="mile"><b>Live sensors</b><span>Sensors and city lab feeds flowing straight into the console.</span></div>
+      <div class="mile"><b>Every hazard forecast</b><span>A trained model for algae, oxygen and overflow as local data grows.</span></div>
+      <div class="mile"><b>Shared standard</b><span>Incident and citizen-report profiles offered to OneAquaHealth.</span></div>
+      <div class="mile"><b>Next cities</b><span>Each one onboarded on the same code, in days.</span></div>
+    </div>
+    <p class="lead" data-beat="2">Every lake and river people love, watched a day ahead.</p>
+  </div>
+</section>
+
+<!-- 6. Close -->
+<section class="scene" id="close">
+  <video class="bgvideo" src="https://aheadwater.vercel.app/video/ocean.mp4" autoplay muted loop playsinline></video>
+  <div class="shade"></div>
+  <div class="center" style="gap: 34px">
+    <div class="logo pop" data-beat="0">
+      <div class="drop"><span class="ripple"></span><span class="ripple"></span>
+        <svg width="150" height="150" viewBox="0 0 24 24"><path d="M12 2C8 8 5 11.5 5 15a7 7 0 0 0 14 0c0-3.5-3-7-7-13z" fill="white"/><path d="M8 15.5c1.3 1 2.6 1 4 0s2.7-1 4 0" stroke="#0e6f86" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <div class="word">Aheadwater</div>
+    </div>
+    <h2 data-beat="0">Know before the water turns.</h2>
+    <div class="pills" data-beat="1"><span>Forecast a day ahead</span><span>One shared case</span><span>One Health</span><span>HL7 FHIR, 0 errors</span></div>
+    <div class="url" data-beat="1" style="margin-top:20px">aheadwater.vercel.app &nbsp;·&nbsp; github.com/vickysharma-prog/aheadwater</div>
+  </div>
+</section>
+
+<!-- Frame behind a take: rendered once as a still -->
+<section class="scene" id="frame">
+  <div class="gradient"></div>
+  <svg class="waves" viewBox="0 0 1920 260" preserveAspectRatio="none"><path d="M0 120 C 320 40 640 200 960 120 S 1600 40 2080 120 V260 H0Z" fill="white"/></svg>
+  <div class="label"><span class="dot"></span><span class="tag" id="tag"></span></div>
+  <div class="addr" id="addr"></div>
+  <div class="browser"><div class="bar2"><i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#34d399"></i></div></div>
+</section>
+
+<script>
+  const q = new URLSearchParams(location.search);
+  const scene = document.getElementById(q.get('scene') || 'open');
+  scene.classList.add('on');
+  if (q.get('tag')) document.getElementById('tag').textContent = q.get('tag');
+  if (q.get('addr')) document.getElementById('addr').textContent = q.get('addr');
+  const beats = (q.get('beats') || '0').split(',').map(Number);
+
+  // Rain streaks
+  scene.querySelectorAll('[data-rain]').forEach(r => {
+    for (let i = 0; i < 140; i++) {
+      const d = document.createElement('i');
+      d.style.left = Math.random() * 115 + '%';
+      d.style.animationDuration = (0.55 + Math.random() * 0.5) + 's';
+      d.style.animationDelay = (-Math.random() * 2) + 's';
+      d.style.opacity = 0.35 + Math.random() * 0.6;
+      r.append(d);
+    }
+  });
+
+  function count(el) {
+    const to = +el.dataset.count, start = performance.now();
+    const tick = (t) => {
+      const k = Math.min(1, (performance.now() - start) / 1800);
+      el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))).toLocaleString('en-GB');
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  // The intro spells its word out a letter at a time.
+  const iw = document.getElementById('iword');
+  [...'Aheadwater'].forEach((ch, i) => { const s = document.createElement('span'); s.textContent = ch; s.style.animationDelay = (2.05 + i * 0.07) + 's'; iw.append(s); });
+
+  // Each element appears when its narration line starts.
+  window.go = () => {
+    scene.classList.add('go');
+    scene.querySelectorAll('[data-beat]').forEach(el => {
+      setTimeout(() => {
+        el.classList.add('in');
+        el.querySelectorAll('[data-count]').forEach(count);
+      }, (beats[+el.dataset.beat] || 0) * 1000 + 150);
+    });
+  };
+  if (q.has('preview')) go();
+</script>
+</body>
+</html>
