@@ -15,7 +15,7 @@ const event = backtest.days.find((d) => d.date === backtest.event_day)!;
 
 function Heading({ kicker, title, text }: { kicker: string; title: string; text?: string }) {
   return (
-    <Reveal className="mx-auto mb-12 max-w-2xl text-center">
+    <Reveal className="mx-auto mb-8 max-w-2xl text-center">
       <div className="text-sm font-semibold uppercase tracking-widest text-water">{kicker}</div>
       <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">{title}</h2>
       {text && <p className="mt-4 text-lg text-slate-600">{text}</p>}
@@ -34,6 +34,7 @@ export default function Home() {
 
   return (
     <SmoothScroll>
+      <div className="bg-gradient-to-b from-slate-50 via-cyan-50/50 to-slate-50">
       <Hero />
 
       <section className="relative z-10 -mt-12 px-4">
@@ -49,14 +50,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="how" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-24">
+      <section id="how" className="mx-auto max-w-6xl scroll-mt-20 px-4 pb-12 pt-20">
         <Heading kicker="How it works" title="From forecast to all-clear" text="Six steps, one shared picture. Tap any step to see it." />
         <Reveal>
           <Steps />
         </Reveal>
       </section>
 
-      <section className="bg-gradient-to-b from-white to-cyan-50/60 py-24">
+      <section className="py-12">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 lg:grid-cols-2">
           <Reveal>
             <div className="text-sm font-semibold uppercase tracking-widest text-water">Tested on a real day</div>
@@ -78,19 +79,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-24">
+      <section className="mx-auto max-w-6xl px-4 py-12">
         <Heading kicker="One Health" title="Water, animals and people, in one picture" text="When the water needs care, everyone who looks after it hears at the same moment." />
         <Reveal>
           <OneHealth />
         </Reveal>
-        <Reveal className="mt-10 text-center">
+        <Reveal className="mt-6 text-center">
           <Link href="/health" className="font-semibold text-water hover:underline">
             See the health cohort check <span aria-hidden="true">&rarr;</span>
           </Link>
         </Reveal>
       </section>
 
-      <section className="bg-slate-50 py-24">
+      <section className="py-12">
         <div className="mx-auto max-w-6xl px-4">
           <Heading kicker="Works where you are" title="Two cities, two real days" text="Pick one and replay the whole case, from the first signal to the close." />
           <Reveal>
@@ -99,7 +100,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-24">
+      <section className="mx-auto max-w-6xl px-4 pb-20 pt-12">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <Reveal>
             <div className="text-sm font-semibold uppercase tracking-widest text-water">Built on open standards</div>
@@ -139,6 +140,8 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+
+      </div>
 
       <section className="relative overflow-hidden bg-gradient-to-br from-cyan-800 via-cyan-700 to-teal-600 py-24 text-white">
         <svg className="absolute bottom-0 left-0 w-full opacity-15" height="120" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">

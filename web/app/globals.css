@@ -42,7 +42,7 @@ body {
 .float { animation: float 4s ease-in-out infinite; }
 .cue { animation: cue 1.8s ease-in-out infinite; }
 .ping-soft { animation: ping-soft 1.8s ease-out infinite; }
-[data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+[data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
 [data-reveal][data-shown] { opacity: 1; transform: none; }
 [data-shown] .draw-line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.4s ease-out 0.3s forwards; }
 @media (prefers-reduced-motion: reduce) {

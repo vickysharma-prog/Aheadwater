@@ -6,7 +6,7 @@ export function Reveal({ children, delay = 0, className = "" }: { children: Reac
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
   useEffect(() => {
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && (setShown(true), io.disconnect()), { threshold: 0.15 });
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && (setShown(true), io.disconnect()), { rootMargin: "0px 0px 20% 0px" });
     if (ref.current) io.observe(ref.current);
     return () => io.disconnect();
   }, []);

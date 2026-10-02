@@ -53,7 +53,7 @@ export function Steps() {
 
   const s = STEPS[active];
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
+    <div className="grid items-start gap-6 lg:grid-cols-[1fr_1.2fr]">
       <ol className="space-y-2">
         {STEPS.map((step, i) => (
           <li key={step.title}>
