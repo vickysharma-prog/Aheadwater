@@ -157,6 +157,9 @@ export default function Home() {
             <Link href="/public" className="rounded-full border border-white/40 px-7 py-3.5 text-lg font-semibold transition-colors hover:bg-white/10">
               Open the public page
             </Link>
+            <a href="https://youtu.be/v87ago6cD8k" target="_blank" rel="noopener" className="rounded-full border border-white/40 px-7 py-3.5 text-lg font-semibold transition-colors hover:bg-white/10">
+              Watch the demo video
+            </a>
           </div>
         </Reveal>
       </section>

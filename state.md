@@ -28,7 +28,7 @@ deployed from `web/` with `npx vercel deploy --prod`).
 
 ## Next
 
-1. Vicky uploads `video/aheadwater-demo.mp4` (4:54, built on 3 Oct) to YouTube, pastes `docs/devpost.md` (local) into Devpost with the video link, and submits before 4 Oct, 9:00pm PDT (5 Oct, 9:30am IST). The rules ask for no AI-use disclosure (checked 29 Sep).
+1. The video is on YouTube: https://youtu.be/v87ago6cD8k. Vicky pastes `docs/devpost.md` (local) into Devpost with that link and submits before 4 Oct, 9:00pm PDT (5 Oct, 9:30am IST). The rules ask for no AI-use disclosure (checked 29 Sep).
 
 ## Model results (29 Sep)
 

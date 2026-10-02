@@ -14,7 +14,7 @@
 
 <p align="center">
   <a href="https://aheadwater.vercel.app"><img src="https://img.shields.io/badge/Live-aheadwater.vercel.app-0e6f86?style=for-the-badge" alt="Live site" /></a>
-  <a href="https://github.com/vickysharma-prog/Aheadwater/releases/download/demo-v1/aheadwater-demo.mp4"><img src="https://img.shields.io/badge/Demo_video-4%3A54-14b8a6?style=for-the-badge" alt="Demo video" /></a>
+  <a href="https://youtu.be/v87ago6cD8k"><img src="https://img.shields.io/badge/Demo_video-4%3A54-14b8a6?style=for-the-badge" alt="Demo video" /></a>
   <a href="https://aheadwater.vercel.app/fhir/metadata"><img src="https://img.shields.io/badge/HL7_FHIR-R4-7c3aed?style=for-the-badge" alt="HL7 FHIR R4" /></a>
 </p>
 
@@ -30,11 +30,11 @@
 ## Watch the demo
 
 <p align="center">
-  <a href="https://github.com/vickysharma-prog/Aheadwater/releases/download/demo-v1/aheadwater-demo.mp4">
+  <a href="https://youtu.be/v87ago6cD8k">
     <img src="docs/assets/video-thumb.jpg" alt="Play the Aheadwater demo video" width="820" />
   </a>
   <br />
-  <sub>Click to play the 4:54 demo: the problem, the six steps, every screen of the app, two real cities, and what comes next.</sub>
+  <sub>Click to watch the 4:54 demo on YouTube: the problem, the six steps, every screen of the app, two real cities, and what comes next.</sub>
 </p>
 
 ## Why it matters

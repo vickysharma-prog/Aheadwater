@@ -81,6 +81,11 @@ export function Hero() {
               Is my water safe today?
             </Link>
           </motion.span>
+          <motion.span whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.96 }}>
+            <a href="https://youtu.be/v87ago6cD8k" target="_blank" rel="noopener" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-lg font-semibold backdrop-blur hover:bg-white/20">
+              <span aria-hidden="true">▶</span> Watch the demo
+            </a>
+          </motion.span>
         </motion.div>
 
         <div className="mt-12 flex flex-wrap justify-center gap-3">
