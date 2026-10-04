@@ -25,7 +25,7 @@ export function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <section ref={ref} className="relative -mt-[64px] flex min-h-[100svh] items-center justify-center overflow-hidden bg-cyan-950 pb-32 pt-20 text-white">
+    <section ref={ref} className="relative -mt-[64px] flex min-h-[100svh] items-center justify-center overflow-hidden bg-cyan-950 pb-32 pt-28 text-white">
       <motion.video
         ref={video}
         onPlay={() => setPlaying(true)}

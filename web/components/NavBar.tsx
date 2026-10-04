@@ -26,7 +26,7 @@ export function NavBar() {
           Aheadwater
         </Link>
 
-        <div className="min-w-0 flex-1 overflow-x-auto xl:absolute xl:left-1/2 xl:flex-none xl:-translate-x-1/2">
+        <div className="min-w-0 flex-1 overflow-x-auto lg:absolute lg:left-1/2 lg:flex-none lg:-translate-x-1/2">
           <div className="mx-auto flex w-max gap-1 rounded-full border border-white/60 bg-white/55 p-1 shadow-lg shadow-cyan-950/10 backdrop-blur-xl">
             {TABS.map(([href, label]) => {
               const active = path.startsWith(href);
@@ -34,7 +34,7 @@ export function NavBar() {
                 <Link
                   key={href}
                   href={href}
-                  className={`relative whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${active ? "text-white" : "text-slate-700 hover:text-water"}`}
+                  className={`relative whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${active ? "text-white" : "text-slate-700 hover:text-water"}`}
                 >
                   {active && (
                     <motion.span
