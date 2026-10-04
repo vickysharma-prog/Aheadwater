@@ -55,6 +55,11 @@ export default function Home() {
         <Reveal>
           <Steps />
         </Reveal>
+        <Reveal className="mt-8 text-center">
+          <Link href="/how-it-works" className="font-semibold text-water hover:underline">
+            Read the full walkthrough <span aria-hidden="true">&rarr;</span>
+          </Link>
+        </Reveal>
       </section>
 
       <section className="py-12">
@@ -160,15 +165,13 @@ export default function Home() {
             <a href="https://youtu.be/v87ago6cD8k" target="_blank" rel="noopener" className="rounded-full border border-white/40 px-7 py-3.5 text-lg font-semibold transition-colors hover:bg-white/10">
               Watch the demo video
             </a>
+            <Link href="/how-it-works" className="rounded-full border border-white/40 px-7 py-3.5 text-lg font-semibold transition-colors hover:bg-white/10">
+              How it works
+            </Link>
           </div>
         </Reveal>
       </section>
 
-      <footer className="mx-auto max-w-6xl px-4 py-10 text-sm text-slate-500">
-        Built on real data: bathing-water samples from the European Environment Agency, E-OBS weather, monitoring from India&apos;s Central Pollution Control
-        Board, and health cohorts from the OneAquaHealth sandbox. People and messages written for the demo carry the HL7 test-data tag. The model is tuned
-        for the bathing season, when sites are sampled.
-      </footer>
     </SmoothScroll>
   );
 }

@@ -25,7 +25,7 @@ export function LiveRisk() {
   return (
     <div className="rounded-lg border border-slate-200 bg-white">
       <h2 className="flex items-center gap-2 border-b border-slate-100 px-4 py-2.5 text-sm font-semibold">
-        <span className="h-2 w-2 animate-pulse rounded-full bg-ok" aria-hidden="true" />
+        <span className="h-2 w-2 motion-safe:animate-pulse rounded-full bg-ok" aria-hidden="true" />
         Live: risk from today&apos;s weather forecast
       </h2>
       {failed ? (

@@ -2,7 +2,7 @@
 
 Where things stand now. Read this first after any break.
 
-**Last updated:** 2026-10-03
+**Last updated:** 2026-10-04
 
 ## Built
 
@@ -22,6 +22,8 @@ deployed from `web/` with `npx vercel deploy --prod`).
 | `/api/hazards` + panel | Algae, low oxygen and sewer-overflow rules on the Open-Meteo forecast, for both cities, plus Ghent's replay day. `lib/hazards.ts`, 4 tests |
 | Photo check | `/public` report form: light and focus measured in the browser, MobileNet for water in frame. Tested in Chrome with a real Blaarmeersen photo (passes) and a blurred copy (turned back) |
 | `/api/risk` + live panel | Today's Open-Meteo forecast scored for the four Ghent sites, shown on `/console` |
+| `/how-it-works`, `/accessibility` | The full walkthrough (numbers read from the same data files the app runs on) and the accessibility page. Linked from the landing page and from a footer on every page |
+| Accessibility | Animations, smooth scroll, the auto walkthrough and the hero video stop when the device asks for less motion; a pause button on the hero video; a skip link and a visible keyboard outline |
 | `/fhir/*` | Read-only FHIR R4: metadata, read, search by `_id` and `status`, the transaction Bundle, our CodeSystem |
 | Demo video | `video/`: narration (edge-tts), slow-motion takes of the live site in headless Chrome, motion cards, assembled with ffmpeg. `python tts.py`, `python build.py`. Output `video/aheadwater-demo.mp4` (not in git), 4:54, 1080p30 |
 | FHIR validation | HL7 validator against the OAH profiles (built with SUSHI), on three Bundles (Ghent resolved, Ghent mid-incident, Bengaluru): 0 errors, 48 warnings. `fhir/README.md` |

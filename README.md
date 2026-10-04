@@ -91,12 +91,14 @@ Open **[aheadwater.vercel.app](https://aheadwater.vercel.app)**. Put the console
 
 | Page | What you can do |
 |---|---|
+| [`/how-it-works`](https://aheadwater.vercel.app/how-it-works) | Read every step in plain words: the forecast, the escalation clock, the weather rules and the FHIR records |
 | [`/console`](https://aheadwater.vercel.app/console) | See tomorrow's risk on the map, the hazard rules and the Ghent backtest; confirm a case, run the escalation clock, dispatch a team, close and learn |
 | [`/public`](https://aheadwater.vercel.app/public) | Check whether the water is safe today and send a report with a photo |
 | [`/responder`](https://aheadwater.vercel.app/responder) | Claim a case near you, attach the lab result and close it |
 | [`/health`](https://aheadwater.vercel.app/health) | See the cohorts public health watches, and the same query on real Oslo data |
 | [`/fhir-explorer`](https://aheadwater.vercel.app/fhir-explorer) | Read every FHIR resource in the case |
 | [`/fhir/metadata`](https://aheadwater.vercel.app/fhir/metadata) | Query the read-only FHIR R4 endpoint from any FHIR tool |
+| [`/accessibility`](https://aheadwater.vercel.app/accessibility) | See how Aheadwater works for everyone: less motion on request, keyboard use, text beside every map and colour |
 
 **Two cities, two real days.** Pick a city in the clock bar:
 

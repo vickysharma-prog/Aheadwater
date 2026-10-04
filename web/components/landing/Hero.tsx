@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 
 const WORDS = ["Stop", "water", "crises", "before", "they", "start."];
@@ -14,6 +14,11 @@ const CHIPS = [
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const video = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(true);
+  useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) video.current?.pause();
+  }, []);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 160]);
@@ -22,6 +27,9 @@ export function Hero() {
   return (
     <section ref={ref} className="relative -mt-[64px] flex min-h-[100svh] items-center justify-center overflow-hidden bg-cyan-950 pb-32 pt-20 text-white">
       <motion.video
+        ref={video}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
         style={{ scale: videoScale }}
         className="absolute inset-0 h-full w-full object-cover"
         src="/video/ocean.mp4"
@@ -106,7 +114,7 @@ export function Hero() {
                 className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 text-left backdrop-blur-md transition-colors hover:bg-white/20"
               >
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${c.dot} opacity-60`} />
+                  <span className={`absolute inline-flex h-full w-full motion-safe:animate-ping rounded-full ${c.dot} opacity-60`} />
                   <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${c.dot}`} />
                 </span>
                 <span>
@@ -131,6 +139,16 @@ export function Hero() {
           <span className="h-2 w-1 rounded-full bg-white" />
         </span>
       </motion.a>
+      <button
+        type="button"
+        onClick={() => (playing ? video.current?.pause() : video.current?.play())}
+        aria-label={playing ? "Pause background video" : "Play background video"}
+        className="absolute bottom-6 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-white/20"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+          {playing ? <path d="M3 2h3v10H3zM8 2h3v10H8z" /> : <path d="M3 1.5v11l9-5.5z" />}
+        </svg>
+      </button>
       <p className="absolute bottom-2 right-3 z-10 text-[10px] text-white/50">Video: Pexels</p>
     </section>
   );

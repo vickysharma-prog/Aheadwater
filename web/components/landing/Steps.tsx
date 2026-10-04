@@ -46,7 +46,7 @@ export function Steps() {
   const [auto, setAuto] = useState(true);
 
   useEffect(() => {
-    if (!auto) return;
+    if (!auto || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = setInterval(() => setActive((a) => (a + 1) % STEPS.length), 4500);
     return () => clearInterval(t);
   }, [auto]);

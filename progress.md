@@ -3,6 +3,12 @@
 One entry per working session, newest at the top. Date, what got done, what
 broke, what is next.
 
+## 2026-10-04: How it works and accessibility pages
+
+Two pages were missing: a full walkthrough and an accessibility page. `/how-it-works` explains the six steps, the escalation clock, the forecast results, the weather rules, the FHIR records and what the demo replays; every number on it is read from the same files the app uses. `/accessibility` lists what the site does for everyone. Both are linked from the landing page and from a new footer on every page.
+
+To make the accessibility page true, the site now respects the device's reduce-motion setting everywhere (Motion animations, Lenis scrolling, the auto walkthrough, the hero video), the hero video has a pause button, and every page has a skip link and a visible keyboard outline. Nothing changes for anyone who has not asked for less motion.
+
 ## 2026-10-03: The demo video
 
 Built the demo film from the live site: a logo intro, what unsafe water costs

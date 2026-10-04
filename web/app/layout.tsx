@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 
+import { Footer } from "@/components/Footer";
 import { NavBar } from "@/components/NavBar";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -18,8 +19,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
+        <a href="#main" className="sr-only z-[1100] rounded-full bg-water px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-3 focus:top-3">
+          Skip to content
+        </a>
         <NavBar />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

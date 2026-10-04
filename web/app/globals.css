@@ -18,6 +18,9 @@ body {
   color: #0f172a;
 }
 
+/* Keyboard focus is always visible. */
+:focus-visible { outline: 2px solid var(--color-water); outline-offset: 2px; }
+
 /* Motion. Everything here switches off for people who ask their system for less motion. */
 @keyframes rise {
   from { opacity: 0; transform: translateY(24px); }
