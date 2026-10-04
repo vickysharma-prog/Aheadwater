@@ -11,6 +11,23 @@ import { CountUp, Reveal } from "@/components/landing/Reveal";
 import { SmoothScroll } from "@/components/landing/SmoothScroll";
 import { Steps } from "@/components/landing/Steps";
 
+const WHO = [
+  { to: 1400000, where: "worldwide" },
+  { to: 498000, where: "in India" },
+  { to: 33000, where: "across Europe" },
+];
+
+const TICKER = [
+  "Predict a day ahead",
+  "Detect every signal",
+  "Verify with two sources",
+  "Act together, on a clock",
+  "Resolve with evidence",
+  "Learn from every case",
+  "Water, animals and people, one picture",
+  "Built on HL7 FHIR",
+];
+
 const event = backtest.days.find((d) => d.date === backtest.event_day)!;
 
 function Heading({ kicker, title, text }: { kicker: string; title: string; text?: string }) {
@@ -50,7 +67,46 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="how" className="mx-auto max-w-6xl scroll-mt-20 px-4 pb-12 pt-20">
+      <section className="mx-auto max-w-6xl px-4 pt-20">
+        <Heading kicker="Why it matters" title="Every day of warning counts" text="Unsafe water, sanitation and hygiene, in one year:" />
+        <div className="grid gap-4 md:grid-cols-3">
+          {WHO.map((w, i) => (
+            <Reveal key={w.where} delay={i * 100} className="rounded-3xl bg-white p-6 text-center shadow-xl shadow-cyan-950/5">
+              <div className="text-5xl font-semibold text-water">
+                <CountUp to={w.to} />
+              </div>
+              <div className="mt-2 text-slate-600">lives lost {w.where}</div>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal className="mt-6 text-center">
+          <p className="text-lg text-slate-700">A warning that reaches people a day earlier is a chance to keep them safe. That is what Aheadwater is built for.</p>
+          <a
+            href="https://www.who.int/publications/i/item/9789240075610"
+            target="_blank"
+            rel="noopener"
+            className="mt-2 inline-block text-sm text-slate-500 underline-offset-2 hover:text-water hover:underline"
+          >
+            Source: WHO, burden of disease from unsafe water, sanitation and hygiene, 2019 figures ↗
+          </a>
+        </Reveal>
+      </section>
+
+      <div className="mt-16 overflow-hidden border-y border-cyan-900/10 bg-water py-3 text-white" aria-hidden="true">
+        <div className="marquee flex w-max gap-8 whitespace-nowrap text-sm font-semibold uppercase tracking-widest">
+          {[0, 1].map((k) => (
+            <span key={k} className="flex gap-8">
+              {TICKER.map((t) => (
+                <span key={t} className="flex gap-8">
+                  {t} <span className="text-cyan-200">✦</span>
+                </span>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <section id="how" className="mx-auto max-w-6xl scroll-mt-20 px-4 pb-12 pt-16">
         <Heading kicker="How it works" title="From forecast to all-clear" text="Six steps, one shared picture. Tap any step to see it." />
         <Reveal>
           <Steps />

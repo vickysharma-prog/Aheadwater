@@ -53,6 +53,11 @@ body {
   .float, .cue, .ping-soft { animation: none; }
   [data-shown] .draw-line { animation: none; stroke-dashoffset: 0; }
 }
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 40s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
 @keyframes grow {
   from { width: 0; }
   to { width: 100%; }

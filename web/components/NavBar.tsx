@@ -4,11 +4,13 @@ import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 
 const TABS = [
-  ["/console", "Officer console"],
+  ["/how-it-works", "How it works"],
+  ["/console", "Console"],
   ["/responder", "Responder"],
   ["/public", "Public page"],
   ["/health", "Health"],
   ["/fhir-explorer", "FHIR"],
+  ["/judges", "Judges"],
 ] as const;
 
 export function NavBar() {
@@ -24,7 +26,7 @@ export function NavBar() {
           Aheadwater
         </Link>
 
-        <div className="flex-1 overflow-x-auto md:absolute md:left-1/2 md:flex-none md:-translate-x-1/2">
+        <div className="min-w-0 flex-1 overflow-x-auto xl:absolute xl:left-1/2 xl:flex-none xl:-translate-x-1/2">
           <div className="mx-auto flex w-max gap-1 rounded-full border border-white/60 bg-white/55 p-1 shadow-lg shadow-cyan-950/10 backdrop-blur-xl">
             {TABS.map(([href, label]) => {
               const active = path.startsWith(href);
@@ -32,7 +34,7 @@ export function NavBar() {
                 <Link
                   key={href}
                   href={href}
-                  className={`relative rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${active ? "text-white" : "text-slate-700 hover:text-water"}`}
+                  className={`relative whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${active ? "text-white" : "text-slate-700 hover:text-water"}`}
                 >
                   {active && (
                     <motion.span
@@ -50,7 +52,7 @@ export function NavBar() {
 
         <Link
           href="/console"
-          className="ml-auto hidden shrink-0 rounded-full bg-water px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-cyan-950/20 transition-transform hover:scale-105 lg:inline-block"
+          className="ml-auto hidden shrink-0 rounded-full bg-water px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-cyan-950/20 transition-transform hover:scale-105 xl:inline-block"
         >
           Start the replay
         </Link>

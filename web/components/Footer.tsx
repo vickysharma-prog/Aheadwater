@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const LINKS = [
+  ["/judges", "Judges"],
   ["/how-it-works", "How it works"],
   ["/accessibility", "Accessibility"],
   ["/fhir/metadata", "FHIR endpoint"],

@@ -91,6 +91,7 @@ Open **[aheadwater.vercel.app](https://aheadwater.vercel.app)**. Put the console
 
 | Page | What you can do |
 |---|---|
+| [`/judges`](https://aheadwater.vercel.app/judges) | **Start here if you are judging:** a three-minute tour of what to click and what to run, with live service status |
 | [`/how-it-works`](https://aheadwater.vercel.app/how-it-works) | Read every step in plain words: the forecast, the escalation clock, the weather rules and the FHIR records |
 | [`/console`](https://aheadwater.vercel.app/console) | See tomorrow's risk on the map, the hazard rules and the Ghent backtest; confirm a case, run the escalation clock, dispatch a team, close and learn |
 | [`/public`](https://aheadwater.vercel.app/public) | Check whether the water is safe today and send a report with a photo |
